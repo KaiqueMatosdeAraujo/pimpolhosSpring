@@ -13,21 +13,22 @@ import org.hibernate.validator.constraints.Length;
 @Entity
 @Table(name="fornecedor")
 public class Fornecedor {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer cod_fornecedor;
+	
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	private Integer cod_fornecedor;
 	
 	@Column(nullable = false)
 	@Length(max = 20)
 	private String nome_fornecedor;
 
-	public Integer getCod_fornecedor() {
-		return cod_fornecedor;
-	}
-
-	public void setCod_fornecedor(Integer cod_fornecedor) {
-		this.cod_fornecedor = cod_fornecedor;
-	}
+//	public Integer getCod_fornecedor() {
+//		return cod_fornecedor;
+//	}
+//
+//	public void setCod_fornecedor(Integer cod_fornecedor) {
+//		this.cod_fornecedor = cod_fornecedor;
+//	}
 
 	public String getNome_fornecedor() {
 		return nome_fornecedor;
@@ -37,10 +38,7 @@ public class Fornecedor {
 		this.nome_fornecedor = nome_fornecedor;
 	}
 
-	@Override
-	public String toString() {
-		return "Fornecedor [cod_fornecedor=" + cod_fornecedor + ", nome_fornecedor=" + nome_fornecedor + "]";
-	}
+	
 	
 
 	

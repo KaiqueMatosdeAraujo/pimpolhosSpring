@@ -1,7 +1,7 @@
 package br.com.rd.pimpolhos.PimpolhosSpring.model;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -32,7 +32,7 @@ public class Cliente {
 	@Size(max=11)
 	private String cpf;
 	
-	
+	@Column(nullable = false)
 	private LocalDate dataNasc;
 	
 	@Size(max=50)
@@ -53,9 +53,9 @@ public class Cliente {
 	@ManyToMany
 	@JoinTable(
     name = "cliente_telefone",
-    joinColumns = @JoinColumn(name = "cod_telefone"),
-    inverseJoinColumns = @JoinColumn(name = "cod_cliente"))
-	Set<Telefone> telefone;
+    joinColumns = {@JoinColumn(name = "cod_telefone")},
+    inverseJoinColumns = {@JoinColumn(name = "cod_cliente")})
+	private Set<Telefone> telefone;
 	
 
 	

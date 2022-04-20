@@ -1,6 +1,7 @@
 package br.com.rd.pimpolhos.PimpolhosSpring.service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import org.springframework.stereotype.Service;
@@ -74,6 +75,8 @@ public class ClienteService {
 		Integer id;
 		String nomeCliente;
 		
+		
+		
 		System.out.println("Informe o Id do registro a ser atualizado");
 		id = sc.nextInt();
 		
@@ -92,16 +95,23 @@ public class ClienteService {
 
 	private void salvar(Scanner sc) {
 		System.out.println("Informe a Descrição do Cargo");
-		String nomeCliente = sc.next();
-		String cpf = sc.next();
-		String email = sc.next();
-		String senha = sc.next();
-		
-		
-		
+		String nomeCliente = sc.nextLine();
+		sc.nextLine();
+		System.out.println("Informe o CPF");
+		String cpf = sc.nextLine();
+		System.out.println("Informe a data");
+		String  data = sc.nextLine();	
+		String email = sc.nextLine();
+		String senha = sc.nextLine();
+	
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		LocalDate dataNasc = LocalDate.parse(data, formatter);
+
+	
 		Cliente cliente = new Cliente();
 		cliente.setNomeCliente(nomeCliente);
 		cliente.setCpf(cpf);
+		cliente.setDataNasc(dataNasc);
 		cliente.setEmail(email);
 		cliente.setSenha(senha);
 

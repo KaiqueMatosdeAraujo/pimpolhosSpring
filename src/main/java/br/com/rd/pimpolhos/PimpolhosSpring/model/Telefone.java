@@ -1,5 +1,6 @@
 package br.com.rd.pimpolhos.PimpolhosSpring.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -29,7 +30,7 @@ public class Telefone {
 	
 
 	@ManyToMany(mappedBy = "telefone")
-	Set<Cliente> cliente;
+	Set <Cliente> cliente;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "cod_tipoTelefone")

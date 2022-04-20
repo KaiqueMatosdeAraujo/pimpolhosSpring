@@ -15,6 +15,7 @@ import org.hibernate.validator.constraints.Length;
 @Table(name="bandeira")
 public class Bandeira {
 	
+
 //	@Id
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
 //	private Integer codBandeira;
@@ -39,7 +40,13 @@ public class Bandeira {
 		this.descricaoBandeira = descricao_bandeira;
 	}
 
+	@Override
+	public String toString() {
+		return "Bandeira [descricaoBandeira=" + descricaoBandeira + "]";
+	}
+
 	
+
 	
 	
 }

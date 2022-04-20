@@ -53,9 +53,4 @@ public class Frete {
 				+ "]";
 	}
 	
-
-
-	
-	
-	
 }

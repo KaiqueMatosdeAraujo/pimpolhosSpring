@@ -43,5 +43,6 @@ public class StatusPedido {
 		return "StatusPedido [codStatus=" + codStatus + ", descricaoStatusPedido=" + descricaoStatusPedido + "]";
 	}
 
+
 	
 }

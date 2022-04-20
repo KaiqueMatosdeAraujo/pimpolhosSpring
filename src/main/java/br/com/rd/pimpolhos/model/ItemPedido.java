@@ -8,47 +8,41 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="estoque")
-public class Estoque {
-
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	private Integer codProduto;
-
-
+@Table(name="itemPedido")
+public class ItemPedido {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer codItemPedido;
 	
 	@Column(nullable = false)
 	private Integer quantidade;
-
 	
-	
+//	private Integer codProduto;
 
-//	public Integer getCodProduto() {
-//		return codProduto;
-//	}
-//
-//	public void setCodProduto(Integer codProduto) {
-//		this.codProduto = codProduto;
-//
-//	}
+	public Integer getCodItemPedido() {
+		return codItemPedido;
+	}
+
 
 	public Integer getQuantidade() {
 		return quantidade;
 	}
 
+	public void setCodItemPedido(Integer codItemPedido) {
+		this.codItemPedido = codItemPedido;
+	}
+
+
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "Estoque [quantidade=" + quantidade + "]";
+		return "Item pedido [cod_item_pedido=" + codItemPedido
+				+  ", quanidade=" + quantidade +"]";
 	}
 
-	
-
-	
-
-
-	
 }

@@ -1,19 +1,26 @@
 package br.com.rd.pimpolhos.model;
 
 import java.util.Date;
+
 import java.util.List;
 import java.util.Set;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.persistence.JoinColumn;
+
+
+import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -43,6 +50,7 @@ public class Cliente {
 	@Column(nullable = false)
 	private String senha;
 	
+
 	@ManyToMany
 	@JoinTable(
     name = "favoritos",
@@ -50,7 +58,6 @@ public class Cliente {
 	inverseJoinColumns = @JoinColumn(name = "cod_Cliente"))
 	Set<Produto> produto;
 
-	
 	public Cliente() {
 		
 	}

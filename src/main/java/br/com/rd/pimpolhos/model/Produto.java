@@ -1,15 +1,19 @@
 package br.com.rd.pimpolhos.model;
 
 import java.math.BigDecimal;
+
 import java.util.List;
 import java.util.Set;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import javax.persistence.ManyToMany;
+
 import javax.persistence.Table;
 
 @Entity
@@ -38,17 +42,17 @@ public class Produto {
 	@Column(nullable = false)
 	private String conteudoProduto;
 	
-	@Column(nullable = false)
-	private Integer codFornecedor;
+//	@Column(nullable = false)
+//	private Integer codFornecedor;
 	
-	@Column(nullable = false)
-	private Integer codCategoria;
+//	@Column(nullable = false)
+//	private Integer codCategoria;
 	
 	@Column(nullable = false)
 	private String imgProduto;
 	
-	@Column(nullable = false)
-	private Integer codMarca;
+	//@Column(nullable = false)
+	//private Integer codMarca;
 
 	
 	@ManyToMany(mappedBy = "produto")
@@ -125,24 +129,24 @@ public class Produto {
 	}
 
 
-	public Integer getCodFornecedor() {
-		return codFornecedor;
-	}
-
-
-	public void setCodFornecedor(Integer codFornecedor) {
-		this.codFornecedor = codFornecedor;
-	}
-
-
-	public Integer getCodCategoria() {
-		return codCategoria;
-	}
-
-
-	public void setCodCategoria(Integer codCategoria) {
-		this.codCategoria = codCategoria;
-	}
+//	public Integer getCodFornecedor() {
+//		return codFornecedor;
+//	}
+//
+//
+//	public void setCodFornecedor(Integer codFornecedor) {
+//		this.codFornecedor = codFornecedor;
+//	}
+//
+//
+//	public Integer getCodCategoria() {
+//		return codCategoria;
+//	}
+//
+//
+//	public void setCodCategoria(Integer codCategoria) {
+//		this.codCategoria = codCategoria;
+//	}
 
 
 	public String getImgProduto() {
@@ -155,14 +159,14 @@ public class Produto {
 	}
 
 
-	public Integer getCodMarca() {
-		return codMarca;
-	}
-
-
-	public void setCodMarca(Integer codMarca) {
-		this.codMarca = codMarca;
-	}
+//	public Integer getCodMarca() {
+//		return codMarca;
+//	}
+//
+//
+//	public void setCodMarca(Integer codMarca) {
+//		this.codMarca = codMarca;
+//	}
 
 
 	public Set<Cliente> getCliente() {
@@ -178,12 +182,9 @@ public class Produto {
 	@Override
 	public String toString() {
 		return "Produto [codProduto=" + codProduto + ", nome=" + nome + ", preco=" + preco + ", dimensao=" + dimensao
-				+ ", material=" + material + ", peso=" + peso + ", conteudoProduto=" + conteudoProduto
-				+ ", codFornecedor=" + codFornecedor + ", codCategoria=" + codCategoria + ", imgProduto=" + imgProduto
-				+ ", codMarca=" + codMarca + ", cliente=" + cliente + "]";
+				+ ", material=" + material + ", peso=" + peso + ", conteudoProduto=" + conteudoProduto + ", imgProduto="
+				+ imgProduto + ", cliente=" + cliente + "]";
 	}
 
-	
-	
 	
 }

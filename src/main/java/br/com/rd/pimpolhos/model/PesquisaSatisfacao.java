@@ -12,22 +12,25 @@ import org.hibernate.validator.constraints.Length;
 @Entity
 @Table(name="pesquisa_satisfacao")
 public class PesquisaSatisfacao {
-	
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	private Integer cod_pesquisa;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer cod_pesquisa;
+
 	
 	@Column(nullable = false)
 	@Length(max = 20)
 	private String descricao_pesquisa_satisfacao;
 
-//	public Integer getCod_pesquisa() {
-//		return cod_pesquisa;
-//	}
-//
-//	public void setCod_pesquisa(Integer cod_pesquisa) {
-//		this.cod_pesquisa = cod_pesquisa;
-//	}
+
+	public Integer getCod_pesquisa() {
+		return cod_pesquisa;
+	}
+
+	public void setCod_pesquisa(Integer cod_pesquisa) {
+		this.cod_pesquisa = cod_pesquisa;
+	}
+
 
 	public String getDescricao_pesquisa_satisfacao() {
 		return descricao_pesquisa_satisfacao;
@@ -37,11 +40,10 @@ public class PesquisaSatisfacao {
 		this.descricao_pesquisa_satisfacao = descricao_pesquisa_satisfacao;
 	}
 
-	
-	
-
-	
-
-
+	@Override
+	public String toString() {
+		return "PesquisaSatisfacao [cod_pesquisa=" + cod_pesquisa + ", descricao_pesquisa_satisfacao="
+				+ descricao_pesquisa_satisfacao + "]";
+	}
 
 }

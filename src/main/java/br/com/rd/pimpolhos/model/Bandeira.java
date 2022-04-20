@@ -15,34 +15,31 @@ import org.hibernate.validator.constraints.Length;
 @Table(name="bandeira")
 public class Bandeira {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer cod_bandeira;
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	private Integer codBandeira;
 	
 	@Column(nullable = false)
 	@Length(max = 20)
-	private String descricao_bandeira;
+	private String descricaoBandeira;
 
-	public Integer getCod_bandeira() {
-		return cod_bandeira;
-	}
-
-	public void setCod_bandeira(Integer cod_bandeira) {
-		this.cod_bandeira = cod_bandeira;
-	}
+//	public Integer getCod_bandeira() {
+//		return codBandeira;
+//	}
+//
+//	public void setCod_bandeira(Integer cod_bandeira) {
+//		this.codBandeira = cod_bandeira;
+//	}
 
 	public String getDescricao_bandeira() {
-		return descricao_bandeira;
+		return descricaoBandeira;
 	}
 
 	public void setDescricao_bandeira(String descricao_bandeira) {
-		this.descricao_bandeira = descricao_bandeira;
+		this.descricaoBandeira = descricao_bandeira;
 	}
 
-	@Override
-	public String toString() {
-		return "Bandeira [cod_bandeira=" + cod_bandeira + ", descricao_bandeira=" + descricao_bandeira + "]";
-	}
+	
 	
 	
 }

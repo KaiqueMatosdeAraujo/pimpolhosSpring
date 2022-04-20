@@ -2,6 +2,7 @@ package br.com.rd.pimpolhos.model;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,42 +36,49 @@ public class Produto {
 	private BigDecimal peso;
 	
 	@Column(nullable = false)
-	private String conteudo_produto;
+	private String conteudoProduto;
 	
 	@Column(nullable = false)
-	private Integer cod_fornecedor;
+	private Integer codFornecedor;
 	
 	@Column(nullable = false)
-	private Integer cod_categoria;
+	private Integer codCategoria;
 	
 	@Column(nullable = false)
-	private String img_produto;
+	private String imgProduto;
 	
 	@Column(nullable = false)
-	private Integer cod_marca;
+	private Integer codMarca;
+
 	
 	@ManyToMany(mappedBy = "produto")
-	List<Cliente> cliente;
+	Set<Cliente> cliente;
+
 
 	public Integer getCodProduto() {
 		return codProduto;
 	}
 
-	public void setCod_produto(Integer codProduto) {
+
+	public void setCodProduto(Integer codProduto) {
 		this.codProduto = codProduto;
 	}
+
 
 	public String getNome() {
 		return nome;
 	}
 
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
+
 	public BigDecimal getPreco() {
 		return preco;
 	}
+
 
 	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
@@ -81,72 +89,101 @@ public class Produto {
 		return dimensao;
 	}
 
+
 	public void setDimensao(String dimensao) {
 		this.dimensao = dimensao;
 	}
+
 
 	public String getMaterial() {
 		return material;
 	}
 
+
 	public void setMaterial(String material) {
 		this.material = material;
 	}
+
 
 	public BigDecimal getPeso() {
 		return peso;
 	}
 
+
 	public void setPeso(BigDecimal peso) {
 		this.peso = peso;
 	}
 
-	public String getConteudo_produto() {
-		return conteudo_produto;
+
+	public String getConteudoProduto() {
+		return conteudoProduto;
 	}
 
-	public void setConteudo_produto(String conteudo_produto) {
-		this.conteudo_produto = conteudo_produto;
+
+	public void setConteudoProduto(String conteudoProduto) {
+		this.conteudoProduto = conteudoProduto;
 	}
 
-	public Integer getCod_fornecedor() {
-		return cod_fornecedor;
+
+	public Integer getCodFornecedor() {
+		return codFornecedor;
 	}
 
-	public void setCod_fornecedor(Integer cod_fornecedor) {
-		this.cod_fornecedor = cod_fornecedor;
+
+	public void setCodFornecedor(Integer codFornecedor) {
+		this.codFornecedor = codFornecedor;
 	}
 
-	public Integer getCod_categoria() {
-		return cod_categoria;
+
+	public Integer getCodCategoria() {
+		return codCategoria;
 	}
 
-	public void setCod_categoria(Integer cod_categoria) {
-		this.cod_categoria = cod_categoria;
+
+	public void setCodCategoria(Integer codCategoria) {
+		this.codCategoria = codCategoria;
 	}
 
-	public String getImg_produto() {
-		return img_produto;
+
+	public String getImgProduto() {
+		return imgProduto;
 	}
 
-	public void setImg_produto(String img_produto) {
-		this.img_produto = img_produto;
+
+	public void setImgProduto(String imgProduto) {
+		this.imgProduto = imgProduto;
 	}
 
-	public Integer getCod_marca() {
-		return cod_marca;
+
+	public Integer getCodMarca() {
+		return codMarca;
 	}
 
-	public void setCod_marca(Integer cod_marca) {
-		this.cod_marca = cod_marca;
+
+	public void setCodMarca(Integer codMarca) {
+		this.codMarca = codMarca;
 	}
+
+
+	public Set<Cliente> getCliente() {
+		return cliente;
+	}
+
+
+	public void setCliente(Set<Cliente> cliente) {
+		this.cliente = cliente;
+	}
+
 
 	@Override
 	public String toString() {
-		return "Produto [cod_produto=" + codProduto + ", nome=" + nome + ", preco=" + preco + ", dimensao=" + dimensao + ", material=" + material + ", peso=" + peso + ", conteudo_produto="
-				+ conteudo_produto + ", cod_fornecedor=" + cod_fornecedor + ", cod_categoria=" + cod_categoria
-				+ ", img_produto=" + img_produto + ", cod_marca=" + cod_marca + "]";
+		return "Produto [codProduto=" + codProduto + ", nome=" + nome + ", preco=" + preco + ", dimensao=" + dimensao
+				+ ", material=" + material + ", peso=" + peso + ", conteudoProduto=" + conteudoProduto
+				+ ", codFornecedor=" + codFornecedor + ", codCategoria=" + codCategoria + ", imgProduto=" + imgProduto
+				+ ", codMarca=" + codMarca + ", cliente=" + cliente + "]";
 	}
+
+	
 	
 	
 }

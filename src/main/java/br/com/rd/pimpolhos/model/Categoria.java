@@ -39,4 +39,6 @@ public class Categoria {
 		return "Categoria [cod_categoria=" + cod_categoria + ", nome_categoria=" + nome_categoria + "]";
 	}
 
+
 }
+

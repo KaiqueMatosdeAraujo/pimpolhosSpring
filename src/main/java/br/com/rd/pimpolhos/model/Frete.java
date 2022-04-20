@@ -15,44 +15,46 @@ public class Frete {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer cod_frete;
+	private Integer codFrete;
 	
 	@Column(nullable = false)
-	private String descricao_frete;
+	private String descricaoFrete;
 	
 	@Column(nullable = false)
-	private BigDecimal valor_frete;
-	
+	private BigDecimal valorFrete;
 
-	public Integer getCod_frete() {
-		return cod_frete;
+	public Integer getCodFrete() {
+		return codFrete;
 	}
 
-	public void setCod_frete(Integer cod_frete) {
-		this.cod_frete = cod_frete;
+	public void setCodFrete(Integer codFrete) {
+		this.codFrete = codFrete;
 	}
 
-	public String getDescricao_frete() {
-		return descricao_frete;
+	public String getDescricaoFrete() {
+		return descricaoFrete;
 	}
 
-	public void setDescricao_frete(String descricao_frete) {
-		this.descricao_frete = descricao_frete;
+	public void setDescricaoFrete(String descricaoFrete) {
+		this.descricaoFrete = descricaoFrete;
 	}
 
-	public BigDecimal getValor_frete() {
-		return valor_frete;
+	public BigDecimal getValorFrete() {
+		return valorFrete;
 	}
 
-	public void setValor_frete(BigDecimal valor_frete) {
-		this.valor_frete = valor_frete;
+	public void setValorFrete(BigDecimal valorFrete) {
+		this.valorFrete = valorFrete;
 	}
 
 	@Override
 	public String toString() {
-		return "Frete [cod_frete=" + cod_frete + ", descricao_frete=" + descricao_frete + ", valor_frete=" + valor_frete
+		return "Frete [codFrete=" + codFrete + ", descricaoFrete=" + descricaoFrete + ", valorFrete=" + valorFrete
 				+ "]";
 	}
+	
+
+
 	
 	
 	

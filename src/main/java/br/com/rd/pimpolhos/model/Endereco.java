@@ -13,46 +13,46 @@ public class Endereco {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer cod_endereco;
+	private Integer codEndereco;
 	
 	@Column(nullable = false)
-	private String nome_cidade;
+	private String nomeCidade;
 	
 	@Column(nullable = false)
 	private String cep;
 	
 	@Column(nullable = false)
-	private String nome_rua;
+	private String nomeRua;
 	
 	@Column(nullable = false)
-	private String numero_casa;
+	private String numeroCasa;
 	
 	@Column(nullable = true)
 	private String complemento;
 	
 	@Column(nullable = false)
-	private String bairo;
+	private String bairro;
 	
 	@Column(nullable = true)
-	private String ponto_referencia;
+	private String pontoReferencia;
 	//cod_estado
+
 	
 	
-
-	public Integer getCod_endereco() {
-		return cod_endereco;
+	public Integer getCodEndereco() {
+		return codEndereco;
 	}
 
-	public void setCod_endereco(Integer cod_endereco) {
-		this.cod_endereco = cod_endereco;
+	public void setCodEndereco(Integer codEndereco) {
+		this.codEndereco = codEndereco;
 	}
 
-	public String getNome_cidade() {
-		return nome_cidade;
+	public String getNomeCidade() {
+		return nomeCidade;
 	}
 
-	public void setNome_cidade(String nome_cidade) {
-		this.nome_cidade = nome_cidade;
+	public void setNomeCidade(String nomeCidade) {
+		this.nomeCidade = nomeCidade;
 	}
 
 	public String getCep() {
@@ -63,20 +63,20 @@ public class Endereco {
 		this.cep = cep;
 	}
 
-	public String getNome_rua() {
-		return nome_rua;
+	public String getNomeRua() {
+		return nomeRua;
 	}
 
-	public void setNome_rua(String nome_rua) {
-		this.nome_rua = nome_rua;
+	public void setNomeRua(String nomeRua) {
+		this.nomeRua = nomeRua;
 	}
 
-	public String getNumero_casa() {
-		return numero_casa;
+	public String getNumeroCasa() {
+		return numeroCasa;
 	}
 
-	public void setNumero_casa(String numero_casa) {
-		this.numero_casa = numero_casa;
+	public void setNumeroCasa(String numeroCasa) {
+		this.numeroCasa = numeroCasa;
 	}
 
 	public String getComplemento() {
@@ -87,31 +87,30 @@ public class Endereco {
 		this.complemento = complemento;
 	}
 
-	public String getBairo() {
-		return bairo;
+	public String getBairro() {
+		return bairro;
 	}
 
-	public void setBairo(String bairo) {
-		this.bairo = bairo;
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
 	}
 
-	public String getPonto_referencia() {
-		return ponto_referencia;
+	public String getPontoReferencia() {
+		return pontoReferencia;
 	}
 
-	public void setPonto_referencia(String ponto_referencia) {
-		this.ponto_referencia = ponto_referencia;
+	public void setPontoReferencia(String pontoReferencia) {
+		this.pontoReferencia = pontoReferencia;
 	}
 
-	
 	@Override
 	public String toString() {
-		return "Endereco [cod_endereco=" + cod_endereco + ", nome_cidade=" + nome_cidade + ", cep=" + cep
-				+ ", nome_rua=" + nome_rua + ", numero_casa=" + numero_casa + ", complemento=" + complemento
-				+ ", bairo=" + bairo + ", ponto_referencia=" + ponto_referencia + "]";
+		return "Endereco [codEndereco=" + codEndereco + ", nomeCidade=" + nomeCidade + ", cep=" + cep + ", nomeRua="
+				+ nomeRua + ", numeroCasa=" + numeroCasa + ", complemento=" + complemento + ", bairro=" + bairro
+				+ ", pontoReferencia=" + pontoReferencia + "]";
 	}
 	
 	
-	
+
 	
 }

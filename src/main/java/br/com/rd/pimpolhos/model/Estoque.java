@@ -13,19 +13,19 @@ public class Estoque {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer cod_produto;
+	private Integer codProduto;
 	
 	@Column(nullable = false)
 	private Integer quantidade;
 
 	
 	
-	public Integer getCod_produto() {
-		return cod_produto;
+	public Integer getCodProduto() {
+		return codProduto;
 	}
 
-	public void setCod_produto(Integer cod_produto) {
-		this.cod_produto = cod_produto;
+	public void setCodProduto(Integer codProduto) {
+		this.codProduto = codProduto;
 	}
 
 	public Integer getQuantidade() {
@@ -37,11 +37,11 @@ public class Estoque {
 	}
 
 	
+	
 	@Override
 	public String toString() {
-		return "Estoque [cod_produto=" + cod_produto + ", quantidade=" + quantidade + "]";
+		return "Estoque [codProduto=" + codProduto + ", quantidade=" + quantidade + "]";
 	}
-	
-	
+
 	
 }

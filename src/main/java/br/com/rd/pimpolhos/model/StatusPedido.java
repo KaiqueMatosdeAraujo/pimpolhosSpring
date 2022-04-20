@@ -13,35 +13,35 @@ public class StatusPedido {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer cod_status;
+	private Integer codStatus;
 	
 	@Column(nullable = false)
-	private String descricao_status_pedido;
+	private String descricaoStatusPedido;
 
 	
 	
-	public Integer getCod_status() {
-		return cod_status;
+	public Integer getCodStatus() {
+		return codStatus;
 	}
 
-	public void setCod_status(Integer cod_status) {
-		this.cod_status = cod_status;
+	public void setCodStatus(Integer codStatus) {
+		this.codStatus = codStatus;
 	}
 
-	public String getDescricao_status_pedido() {
-		return descricao_status_pedido;
+	public String getDescricaoStatusPedido() {
+		return descricaoStatusPedido;
 	}
 
-	public void setDescricao_status_pedido(String descricao_status_pedido) {
-		this.descricao_status_pedido = descricao_status_pedido;
+	public void setDescricaoStatusPedido(String descricaoStatusPedido) {
+		this.descricaoStatusPedido = descricaoStatusPedido;
 	}
 
+	
 	
 	@Override
 	public String toString() {
-		return "StatusPedido [cod_status=" + cod_status + ", descricao_status_pedido=" + descricao_status_pedido + "]";
+		return "StatusPedido [codStatus=" + codStatus + ", descricaoStatusPedido=" + descricaoStatusPedido + "]";
 	}
-	
 
 	
 }

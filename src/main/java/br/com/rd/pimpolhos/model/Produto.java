@@ -2,6 +2,7 @@ package br.com.rd.pimpolhos.model;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,7 +51,9 @@ public class Produto {
 	private Integer cod_marca;
 	
 	@ManyToMany(mappedBy = "produto")
-	List<Cliente> cliente;
+	Set<Cliente> cliente;
+	
+	
 
 	public Integer getCodProduto() {
 		return codProduto;

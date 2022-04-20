@@ -2,6 +2,7 @@ package br.com.rd.pimpolhos.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -47,7 +48,15 @@ public class Cliente {
     name = "favoritos",
 	joinColumns = @JoinColumn(name = "cod_Produto"),
 	inverseJoinColumns = @JoinColumn(name = "cod_Cliente"))
-	List <Produto> produto;
+	Set <Produto> produto;
+	
+	@ManyToMany
+	@JoinTable(
+    name = "cliente_telefone",
+    joinColumns = @JoinColumn(name = "cod_telefone"),
+    inverseJoinColumns = @JoinColumn(name = "cod_cliente"))
+	Set<Telefone> telefone;
+	
 
 	
 	public Cliente() {

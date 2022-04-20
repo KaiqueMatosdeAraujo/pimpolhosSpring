@@ -4,7 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-@EntityScan(basePackages = "br.com.rd.queroserdev.migracaolojaVirtual.model")
+
+@EntityScan(basePackages = "br.com.rd.pimpolhos.model")
 @SpringBootApplication
 public class PimpolhosSpringApplication {
 

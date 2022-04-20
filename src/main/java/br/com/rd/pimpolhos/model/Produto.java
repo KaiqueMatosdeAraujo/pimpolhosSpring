@@ -1,12 +1,14 @@
 package br.com.rd.pimpolhos.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,7 +17,7 @@ public class Produto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer cod_produto;
+	private Integer codProduto;
 
 	@Column(nullable = false)
 	private String nome;
@@ -46,13 +48,16 @@ public class Produto {
 	
 	@Column(nullable = false)
 	private Integer cod_marca;
+	
+	@ManyToMany(mappedBy = "produto")
+	List<Cliente> cliente;
 
-	public Integer getCod_produto() {
-		return cod_produto;
+	public Integer getCodProduto() {
+		return codProduto;
 	}
 
-	public void setCod_produto(Integer cod_produto) {
-		this.cod_produto = cod_produto;
+	public void setCod_produto(Integer codProduto) {
+		this.codProduto = codProduto;
 	}
 
 	public String getNome() {
@@ -138,7 +143,7 @@ public class Produto {
 
 	@Override
 	public String toString() {
-		return "Produto [cod_produto=" + cod_produto + ", nome=" + nome + ", preco=" + preco + ", dimensao=" + dimensao + ", material=" + material + ", peso=" + peso + ", conteudo_produto="
+		return "Produto [cod_produto=" + codProduto + ", nome=" + nome + ", preco=" + preco + ", dimensao=" + dimensao + ", material=" + material + ", peso=" + peso + ", conteudo_produto="
 				+ conteudo_produto + ", cod_fornecedor=" + cod_fornecedor + ", cod_categoria=" + cod_categoria
 				+ ", img_produto=" + img_produto + ", cod_marca=" + cod_marca + "]";
 	}

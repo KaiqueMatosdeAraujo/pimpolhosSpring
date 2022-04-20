@@ -18,6 +18,7 @@ public class ProdutosRelacionados {
 	@Column(nullable = false)
 	private Integer cod_produto;
 
+	@Column(nullable = false)
 	public Integer getCod_relacionados() {
 		return cod_relacionados;
 	}

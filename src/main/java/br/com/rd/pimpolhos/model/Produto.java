@@ -22,10 +22,7 @@ public class Produto {
 
 	@Column(nullable = false)
 	private BigDecimal preco;
-	
-	@Column(nullable = true)
-	private String sexo;
-	
+		
 	@Column(nullable = true)
 	private String dimensao;
 	
@@ -74,13 +71,6 @@ public class Produto {
 		this.preco = preco;
 	}
 
-	public String getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
 
 	public String getDimensao() {
 		return dimensao;
@@ -148,8 +138,7 @@ public class Produto {
 
 	@Override
 	public String toString() {
-		return "Produto [cod_produto=" + cod_produto + ", nome=" + nome + ", preco=" + preco + ", sexo=" + sexo
-				+ ", dimensao=" + dimensao + ", material=" + material + ", peso=" + peso + ", conteudo_produto="
+		return "Produto [cod_produto=" + cod_produto + ", nome=" + nome + ", preco=" + preco + ", dimensao=" + dimensao + ", material=" + material + ", peso=" + peso + ", conteudo_produto="
 				+ conteudo_produto + ", cod_fornecedor=" + cod_fornecedor + ", cod_categoria=" + cod_categoria
 				+ ", img_produto=" + img_produto + ", cod_marca=" + cod_marca + "]";
 	}

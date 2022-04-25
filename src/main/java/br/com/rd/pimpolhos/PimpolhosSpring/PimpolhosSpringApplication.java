@@ -8,20 +8,25 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import br.com.rd.pimpolhos.PimpolhosSpring.service.ClienteService;
+import br.com.rd.pimpolhos.PimpolhosSpring.service.TelefoneService;
 
 
 @EntityScan(basePackages = "br.com.rd.pimpolhos.PimpolhosSpring.model")
 @SpringBootApplication
 public class PimpolhosSpringApplication implements CommandLineRunner {
 	
+	private TelefoneService telefoneService;
 	private ClienteService clienteService;
 	private Boolean sistema = true;
 	
-	public PimpolhosSpringApplication(ClienteService clienteService) {
-		this.clienteService = clienteService;
-       
-	}
 	
+	
+	public PimpolhosSpringApplication(TelefoneService telefoneService, ClienteService clienteService) {
+		super();
+		this.telefoneService = telefoneService;
+		this.clienteService = clienteService;
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(PimpolhosSpringApplication.class, args);
 	}
@@ -40,8 +45,8 @@ public class PimpolhosSpringApplication implements CommandLineRunner {
 			acao = sc.nextInt();
 			if(acao == 1) {
 				clienteService.iniciar(sc);
-			}else {
-				sistema = false;
+			}else{
+				telefoneService.iniciar(sc);
 			}
 		}
 		sc.close();

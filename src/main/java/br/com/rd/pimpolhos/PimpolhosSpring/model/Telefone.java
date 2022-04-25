@@ -32,10 +32,45 @@ public class Telefone {
 	@ManyToMany(mappedBy = "telefone")
 	Set <Cliente> cliente;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "cod_tipoTelefone")
 	private TipoTelefone tipoTelefone;
 	
+	
+	
+	
+	public Telefone() {
+		super();
+	}
+
+
+
+
+	public Telefone( String ddd, String numero_telefone,
+			TipoTelefone tipoTelefone) {
+		super();
+		this.ddd = ddd;
+		this.numero_telefone = numero_telefone;
+		this.tipoTelefone = tipoTelefone;
+	}
+
+	
+	
+	
+	public TipoTelefone getTipoTelefone() {
+		return tipoTelefone;
+	}
+
+
+
+
+	public void setTipoTelefone(TipoTelefone tipoTelefone) {
+		this.tipoTelefone = tipoTelefone;
+	}
+
+
+
+
 	public Integer getCod_telefone() {
 		return cod_telefone;
 	}
@@ -62,12 +97,15 @@ public class Telefone {
 		this.numero_telefone = numero_telefone;
 	}
 
-	
-
 	@Override
 	public String toString() {
-		return "Telefone [cod_telefone" + cod_telefone + ", ddd=" + ddd + 
-				", numero_telefone" + numero_telefone + "]";
+		return  " ddd=" + ddd + ", numero_telefone=" + numero_telefone
+				 +", tipoTelefone=" + tipoTelefone + "]";
 	}
+
+	
+	
+
+	
 	
 }

@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -43,6 +44,8 @@ public class Cliente {
 	@Column(nullable = false)
 	private String senha;
 	
+	private Boolean ativo;
+	
 	@ManyToMany
 	@JoinTable(
     name = "favoritos",
@@ -50,7 +53,8 @@ public class Cliente {
 	inverseJoinColumns = @JoinColumn(name = "cod_Cliente"))
 	Set <Produto> produto;
 	
-	@ManyToMany
+	
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
     name = "cliente_telefone",
     joinColumns = {@JoinColumn(name = "cod_telefone")},
@@ -65,6 +69,23 @@ public class Cliente {
 
 	
 	
+	
+	
+	public Cliente(@Size(max = 50) String nomeCliente, @Size(max = 11) String cpf, LocalDate dataNasc,
+			@Size(max = 50) String email, @Size(max = 50) String senha, Set<Telefone> telefone) {
+		super();
+		this.nomeCliente = nomeCliente;
+		this.cpf = cpf;
+		this.dataNasc = dataNasc;
+		this.email = email;
+		this.senha = senha;
+		this.telefone = telefone;
+	}
+
+
+
+
+
 	public Integer getCodCliente() {
 		return codCliente;
 	}
@@ -126,12 +147,33 @@ public class Cliente {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	
+	
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
+
+
+
 
 	@Override
 	public String toString() {
 		return "Cliente [codCliente=" + codCliente + ", nomeCliente=" + nomeCliente + ", cpf=" + cpf + ", dataNasc="
-				+ dataNasc + ", email=" + email + ", senha=" + senha + "]";
+				+ dataNasc + ", email=" + email + ", senha=" + senha + ", ativo=" + ativo + ", telefone=" + telefone
+				+ "]";
 	}
+
+
+
+
 	
 
 	

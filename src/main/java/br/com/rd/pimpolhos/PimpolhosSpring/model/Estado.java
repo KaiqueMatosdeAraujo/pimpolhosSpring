@@ -35,7 +35,7 @@ public class Estado {
 
 	@Override
 	public String toString() {
-		return "Estado [cod_estado=" + cod_estado + ", descricao_estado=" + descricao_estado + "]";
+		return "UF =" + descricao_estado;
 	}
 
 }

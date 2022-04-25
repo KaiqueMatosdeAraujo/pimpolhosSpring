@@ -36,7 +36,7 @@ public class Bandeira {
 	}
 
 	public void setDescricao_bandeira(String descricao_bandeira) {
-		this.descricaoBandeira = descricao_bandeira;
+		this.descricaoBandeira = descricaoBandeira;
 	}
 
 	

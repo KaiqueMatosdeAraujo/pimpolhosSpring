@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -19,7 +20,7 @@ public class FormaPagamento {
 	private Integer cod_forma_pagamento;
 	
 	@Column(nullable = false)
-	@Length(max = 20)
+	@Size(max = 20)
 	private String descricao_forma_pagamento;
 
 

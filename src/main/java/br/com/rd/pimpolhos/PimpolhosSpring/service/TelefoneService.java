@@ -5,6 +5,7 @@ import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.rd.pimpolhos.PimpolhosSpring.model.Cliente;
 import br.com.rd.pimpolhos.PimpolhosSpring.model.Telefone;
 //import br.com.rd.pimpolhos.PimpolhosSpring.model.TipoTelefone;
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.TelefoneRepository;
@@ -72,6 +73,9 @@ public class TelefoneService {
 	private void atualizar(Scanner sc) {
 		System.out.println("Informe o novo Id do telefone a ser atualizado");
 		Integer codTelefone = sc.nextInt();
+		
+		Telefone telefone = telefoneRepository.findById(codTelefone).get();
+		
 		System.out.println("Informe o novo tipo de telefone");
 		String descricaoTelefone = sc.next();
 		System.out.println("Informe o novo DDD");
@@ -79,10 +83,13 @@ public class TelefoneService {
 		System.out.println("Informe o novo numero de telefone");
 		String numeroTelefone = sc.next();
 		
-		Telefone telefone = new Telefone();
+		
+		
 		telefone.setDescricao_telefone(descricaoTelefone);
 		telefone.setDdd(ddd);
 		telefone.setNumero_telefone(numeroTelefone);
+		
+		telefoneRepository.save(telefone);
 	}
 	
 	private void salvar(Scanner sc) {

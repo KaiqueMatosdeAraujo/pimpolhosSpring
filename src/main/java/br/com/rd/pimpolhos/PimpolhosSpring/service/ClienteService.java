@@ -85,28 +85,43 @@ public class ClienteService {
 	private void atualizar(Scanner sc) {
 		System.out.println("Informe o Id do cliente a ser atualizado");
 		Integer id = sc.nextInt();
+		
+		Cliente cliente = clienteRepository.findById(id).get();
 		System.out.println("Informe o novo nome do Cliente");
 		String nomeCliente = sc.next();
-		System.out.println("Informe o novo CPF do Cliente");
-		String cpf = sc.next();
-		System.out.println("Informe a nova data de nascimento do Cliente");
-		String data = sc.nextLine();	
-		System.out.println("Informe o novo email do Cliente");
-		String email = sc.next();
+//		System.out.println("Informe o novo CPF do Cliente");
+//		String cpf = sc.next();
+//		System.out.println("Informe a nova data de nascimento do Cliente");
+//		String data = sc.next();	
+//		System.out.println("Informe o novo email do Cliente");
+//		String email = sc.next();
 		System.out.println("Informe a nova senha do Cliente");
 		String senha = sc.next();
 		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate dataNasc = LocalDate.parse(data, formatter);
+//		Telefone  telefone = telefoneRepository.findById(id).get();
+//		System.out.println("Informe o novo telefone do Cliente");
+//		String telefoneCliente = sc.next();
+//		System.out.println("Informe o novo DDD do telefone do Cliente");
+//		String dddTelefoneCliente = sc.next();
+//		System.out.println("Informe o novo tipo de telefone [Celular/Telefone Fixo]");
+//		String descricaoTelefone = sc.next();
+		
+		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		//LocalDate dataNasc = LocalDate.parse(data, formatter);
 
-		Cliente cliente = new Cliente();
+		
+		
 		cliente.setNomeCliente(nomeCliente);
-		cliente.setCpf(cpf);
-		cliente.setDataNasc(dataNasc);
-		cliente.setEmail(email);
+		//cliente.setCpf(cpf);
+		//cliente.setDataNasc(dataNasc);
+		//cliente.setEmail(email);
 		cliente.setSenha(senha);
+//		telefone.setNumero_telefone(telefoneCliente);
+//		telefone.setDdd(dddTelefoneCliente);
+//		telefone.setDescricao_telefone(descricaoTelefone);
 		
 		clienteRepository.save(cliente);
+		//telefoneRepository.save(telefone);
 		
 		System.out.println("Cliente Atualizado com Sucesso");
 

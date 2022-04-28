@@ -72,15 +72,15 @@ public class TelefoneService {
 	private void atualizar(Scanner sc) {
 		System.out.println("Informe o novo Id do telefone a ser atualizado");
 		Integer codTelefone = sc.nextInt();
-		//System.out.println("Informe o novo tipo de telefone");
-		//TipoTelefone codTipoTelefone = sc.next();
+		System.out.println("Informe o novo tipo de telefone");
+		String descricaoTelefone = sc.next();
 		System.out.println("Informe o novo DDD");
 		String ddd = sc.next();
 		System.out.println("Informe o novo numero de telefone");
 		String numeroTelefone = sc.next();
 		
 		Telefone telefone = new Telefone();
-		//telefone.setTipoTelefone(codTipoTelefone);
+		telefone.setDescricao_telefone(descricaoTelefone);
 		telefone.setDdd(ddd);
 		telefone.setNumero_telefone(numeroTelefone);
 	}

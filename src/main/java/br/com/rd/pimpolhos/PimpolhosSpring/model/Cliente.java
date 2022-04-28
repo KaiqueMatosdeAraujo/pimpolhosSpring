@@ -9,6 +9,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +18,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.JoinColumn;
 
 
@@ -59,33 +64,59 @@ public class Cliente {
 	inverseJoinColumns = @JoinColumn(name = "cod_Cliente"))
 	Set<Produto> produto;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
     name = "cliente_telefone",
     joinColumns = {@JoinColumn(name = "cod_telefone")},
     inverseJoinColumns = {@JoinColumn(name = "cod_cliente")})
 	private Set<Telefone> telefone;
 	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+    name = "endereco_cliente",
+    joinColumns = {@JoinColumn(name = "cod_cliente")},
+    inverseJoinColumns = {@JoinColumn(name = "cod_endereco")})
+	private Set<Endereco> endereco;
 	
-	public Set<Produto> getProduto() {
-		return produto;
-	}
-
-	public void setProduto(Set<Produto> produto) {
-		this.produto = produto;
-	}
-
-	public Set<Telefone> getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(Set<Telefone> telefone) {
-		this.telefone = telefone;
-	}
-
+	
 	public Cliente() {
 		
 	}
+	
+
+	public Cliente(Integer codCliente, @Size(max = 50) String nomeCliente, @Size(max = 11) String cpf,
+			LocalDate dataNasc, @Size(max = 50) String email, @Size(max = 50) String senha,
+			Set<Telefone> telefone, Set<Endereco> endereco) {
+		super();
+		this.codCliente = codCliente;
+		this.nomeCliente = nomeCliente;
+		this.cpf = cpf;
+		this.dataNasc = dataNasc;
+		this.email = email;
+		this.senha = senha;
+		this.telefone = telefone;
+		this.endereco = endereco;
+	}
+
+
+
+
+//	public Set<Produto> getProduto() {
+//		return produto;
+//	}
+//
+//	public void setProduto(Set<Produto> produto) {
+//		this.produto = produto;
+//	}
+
+//	public Set<Telefone> getTelefone() {
+//		return telefone;
+//	}
+//
+//	public void setTelefone(Set<Telefone> telefone) {
+//		this.telefone = telefone;
+//	}
+
 
 	public Integer getCodCliente() {
 		return codCliente;
@@ -135,11 +166,16 @@ public class Cliente {
 		this.senha = senha;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Cliente [codCliente=" + codCliente + ", nomeCliente=" + nomeCliente + ", cpf=" + cpf + ", dataNasc="
-				+ dataNasc + ", email=" + email + ", senha=" + senha + "]";
+				+ dataNasc + ", email=" + email + ", senha=" + senha + ", telefone=" + telefone + ", endereco="
+				+ endereco + "]";
 	}
+	
+
+
 	
 
 	

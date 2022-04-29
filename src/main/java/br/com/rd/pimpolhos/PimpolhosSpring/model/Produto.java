@@ -5,15 +5,17 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +25,9 @@ public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer codProduto;
+	
+	
+
 
 	@Column(nullable = false)
 	private String nome;
@@ -60,12 +65,12 @@ public class Produto {
 
 
 	public Integer getCodProduto() {
-		return codProduto;
+		return cod_produto;
 	}
 
 
 	public void setCodProduto(Integer codProduto) {
-		this.codProduto = codProduto;
+		this.cod_produto = codProduto;
 	}
 
 
@@ -181,7 +186,7 @@ public class Produto {
 
 	@Override
 	public String toString() {
-		return "Produto [codProduto=" + codProduto + ", nome=" + nome + ", preco=" + preco + ", dimensao=" + dimensao
+		return "Produto [codProduto=" + cod_produto + ", nome=" + nome + ", preco=" + preco + ", dimensao=" + dimensao
 				+ ", material=" + material + ", peso=" + peso + ", conteudoProduto=" + conteudoProduto + ", imgProduto="
 				+ imgProduto + ", cliente=" + cliente + "]";
 	}

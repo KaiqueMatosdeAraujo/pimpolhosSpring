@@ -64,15 +64,14 @@ public class Cliente {
 	inverseJoinColumns = @JoinColumn(name = "cod_Cliente"))
 	Set<Produto> produto;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
     name = "cliente_telefone",
     joinColumns = {@JoinColumn(name = "cod_telefone")},
     inverseJoinColumns = {@JoinColumn(name = "cod_cliente")})
-//	private Set<Telefone> telefone;
 	private List<Telefone> telefone;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
     name = "endereco_cliente",
     joinColumns = {@JoinColumn(name = "cod_cliente")},

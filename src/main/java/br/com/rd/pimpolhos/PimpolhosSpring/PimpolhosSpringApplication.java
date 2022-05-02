@@ -33,28 +33,28 @@ public class PimpolhosSpringApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Scanner sc = new Scanner(System.in);
-		int acao;
-		
-		while(sistema) {
-			System.out.println("Qual a ação que será executada?");
-			System.out.println("0 - Sair");
-			System.out.println("1 - Gestão de Cliente");
-			System.out.println("2 - Gestão de Telefone");
-			System.out.println("3 - Gestão de Endereço");
-			
-			acao = sc.nextInt();
-			if(acao == 1) {
-				clienteService.iniciar(sc);
-			}else if(acao == 2) {
-				telefoneService.iniciar(sc);
-			}else if(acao == 3) {
-				enderecoService.iniciar(sc);
-			}else {
-				sistema = false;
-			}
-		}
-		sc.close();
+//		Scanner sc = new Scanner(System.in);
+//		int acao;
+//		
+//		while(sistema) {
+//			System.out.println("Qual a ação que será executada?");
+//			System.out.println("0 - Sair");
+//			System.out.println("1 - Gestão de Cliente");
+//			System.out.println("2 - Gestão de Telefone");
+//			System.out.println("3 - Gestão de Endereço");
+//			
+//			acao = sc.nextInt();
+//			if(acao == 1) {
+//				clienteService.iniciar(sc);
+//			}else if(acao == 2) {
+//				telefoneService.iniciar(sc);
+//			}else if(acao == 3) {
+//				enderecoService.iniciar(sc);
+//			}else {
+//				sistema = false;
+//			}
+//		}
+//		sc.close();
 	}
 	
 	

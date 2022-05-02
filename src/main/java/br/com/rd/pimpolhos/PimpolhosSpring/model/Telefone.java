@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="telefone")
 public class Telefone {
@@ -29,18 +31,15 @@ public class Telefone {
 	@Column(nullable = false)
 	private String numero_telefone;
 
-//	@ManyToMany(mappedBy = "telefone", fetch = FetchType.EAGER)
-//	Set<Cliente> cliente;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "telefone", fetch = FetchType.EAGER,cascade = CascadeType.ALL) 
 	List<Cliente> cliente; 
 	
+	
 	@Column(nullable = false)
 	private String descricao_telefone;
-	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "cod_tipo_telefone")
-//	private TipoTelefone tipoTelefone;
+
 	
 	public Integer getCod_telefone() {
 		return cod_telefone;
@@ -89,16 +88,5 @@ public class Telefone {
 				+  ", descricao_telefone=" + descricao_telefone + "]";
 	}
 
-	
-
-//	public TipoTelefone getTipoTelefone() {
-//		return tipoTelefone;
-//	}
-//
-//	public void setTipoTelefone(TipoTelefone tipoTelefone) {
-//		this.tipoTelefone = tipoTelefone;
-//	}
-
-	
 
 }

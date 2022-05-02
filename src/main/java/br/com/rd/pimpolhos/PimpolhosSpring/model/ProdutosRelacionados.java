@@ -20,9 +20,9 @@ public class ProdutosRelacionados {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer cod_relacionados;
 
-	@OneToMany(fetch = FetchType.EAGER) 
-	@JoinColumn(name="codProduto") 
-	private List<Produto> produto; 
+//	@OneToMany(fetch = FetchType.EAGER) 
+//	@JoinColumn(name="codProduto") 
+//	private List<Produto> produto; 
 
 	@Column(nullable = false)
 	public Integer getCod_relacionados() {
@@ -33,17 +33,17 @@ public class ProdutosRelacionados {
 		this.cod_relacionados = cod_relacionados;
 	}
 
-	public List<Produto> getProduto() {
-		return produto;
-	}
-
-	public void setProduto(List<Produto> produto) {
-		this.produto = produto;
-	}
-
-	@Override
-	public String toString() {
-		return "ProdutosRelacionados [cod_relacionados=" + cod_relacionados + ", produto=" + produto + "]";
-	}
+//	public List<Produto> getProduto() {
+//		return produto;
+//	}
+//
+//	public void setProduto(List<Produto> produto) {
+//		this.produto = produto;
+//	}
+//
+//	@Override
+//	public String toString() {
+//		return "ProdutosRelacionados [cod_relacionados=" + cod_relacionados + ", produto=" + produto + "]";
+//	}
 
 }

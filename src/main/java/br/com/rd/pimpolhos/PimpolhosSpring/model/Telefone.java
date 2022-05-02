@@ -1,5 +1,6 @@
 package br.com.rd.pimpolhos.PimpolhosSpring.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -28,8 +29,11 @@ public class Telefone {
 	@Column(nullable = false)
 	private String numero_telefone;
 
-	@ManyToMany(mappedBy = "telefone")
-	Set<Cliente> cliente;
+//	@ManyToMany(mappedBy = "telefone", fetch = FetchType.EAGER)
+//	Set<Cliente> cliente;
+	
+	@ManyToMany(mappedBy = "telefone", fetch = FetchType.EAGER,cascade = CascadeType.ALL) 
+	List<Cliente> cliente; 
 	
 	@Column(nullable = false)
 	private String descricao_telefone;
@@ -63,11 +67,11 @@ public class Telefone {
 		this.numero_telefone = numero_telefone;
 	}
 
-	public Set<Cliente> getCliente() {
+	public List<Cliente> getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Set<Cliente> cliente) {
+	public void setCliente(List<Cliente> cliente) {
 		this.cliente = cliente;
 	}
 

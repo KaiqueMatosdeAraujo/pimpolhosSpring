@@ -65,7 +65,7 @@ public class EnderecoService {
 	
 	private void deletar(Scanner sc) {
 		int id;
-		System.out.println("Informe o ID do cliente a ser deletado");
+		System.out.println("Informe o ID do endereco a ser deletado");
 		
 		id = sc.nextInt();
 		

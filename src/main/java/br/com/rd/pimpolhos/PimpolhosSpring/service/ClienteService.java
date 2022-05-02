@@ -12,10 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.rd.pimpolhos.PimpolhosSpring.model.Cliente;
+import br.com.rd.pimpolhos.PimpolhosSpring.model.Endereco;
+import br.com.rd.pimpolhos.PimpolhosSpring.model.Estado;
 import br.com.rd.pimpolhos.PimpolhosSpring.model.Telefone;
 //import br.com.rd.pimpolhos.PimpolhosSpring.model.TipoTelefone;
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.ClienteRepository;
+//import br.com.rd.pimpolhos.PimpolhosSpring.repository.EnderecoClienteRepository;
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.EnderecoRepository;
+import br.com.rd.pimpolhos.PimpolhosSpring.repository.EstadoRepository;
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.TelefoneRepository;
 //import br.com.rd.pimpolhos.PimpolhosSpring.repository.TipoTelefoneRepository;
 //import br.com.rd.pimpolhos.PimpolhosSpring.repository.TipoTelefoneRepository;
@@ -27,12 +31,18 @@ public class ClienteService {
 	@Autowired
 	private final ClienteRepository clienteRepository;
 	private final TelefoneRepository telefoneRepository;
+	private final EnderecoRepository enderecoRepository;
+	//private final EnderecoClienteRepository enderecoClienteRepository;
+	private final EstadoRepository estadoRepository;
 	//private final TipoTelefoneRepository tipoTelefoneRepository;
 	private Boolean sistema = true;
 	
-	public ClienteService(ClienteRepository clienteRepository, TelefoneRepository telefoneRepository) {
+	public ClienteService(ClienteRepository clienteRepository, TelefoneRepository telefoneRepository, EnderecoRepository enderecoRepository, EstadoRepository estadoRepository) {
 		this.clienteRepository = clienteRepository;
 		this.telefoneRepository = telefoneRepository;
+		this.enderecoRepository = enderecoRepository;
+		//this.enderecoClienteRepository = enderecoClienteRepository;
+		this.estadoRepository = estadoRepository;
 		//this.tipoTelefoneRepository = tipoTelefoneRepository;
 	}
 
@@ -137,6 +147,21 @@ public class ClienteService {
 			telefones.add(atualizarTelefone(sc, tel.get()));
 			cliente.setTelefone(telefones);
 		}
+		
+		System.out.println("deseja alterar o telefone do cliente [s/n] ? ");
+		String resposta2 = sc.next();
+		if (resposta.equals("s")) {
+			List<Endereco> enderecos = cliente.getEndereco();
+			enderecos.forEach(endereco -> System.out.println(endereco));
+			System.out.println("informe o Id do endereco que deseja alterar:");
+			Integer enderecoId = Integer.parseInt(sc.next());
+			
+			Optional<Endereco> end = enderecoRepository.findById(enderecoId);
+			enderecos.add(atualizarEndereco(sc, end.get()));
+			cliente.setEndereco(enderecos);
+		}
+		
+		
 		clienteRepository.save(cliente);
 		//telefoneRepository.save(telefone);
 		
@@ -165,7 +190,35 @@ public class ClienteService {
 //		String descricaoTelefone = sc.next();
 		//Integer codTelefoneCliente = Integer.parseInt(sc.next());
 	//	Optional<TipoTelefone> tiposTelefone = tipoTelefoneRepository.findById(codTelefoneCliente);
-
+ 
+//		System.out.println("Informe o nome da cidade do cliente:");
+//		String nomeCidade = sc.next();
+//		System.out.println("Informe o cep ");
+//		String cep = sc.next();
+//		System.out.println("Informe o nome da rua");
+//		String nomeRua = sc.next();	
+//		System.out.println("Informe o numero da casa");
+//		String numeroCasa = sc.next();
+//		System.out.println("Informe o complemento");
+//		String complemento = sc.next();
+//		System.out.println("Informe o bairro");
+//		String bairro = sc.next();
+//		System.out.println("Informe o Ponto de referencia");
+//		String pontoReferencia = sc.next();
+//		System.out.println("Informe o codigo do estado");
+//		Integer codEstado = sc.nextInt();
+//		
+//		
+//		Optional<Estado> optional = estadoRepository.findById(codEstado);
+//		//if(optional.isPresent()) {
+//			Estado estado = optional.get();
+//			Endereco endereco = (new Endereco(nomeCidade, cep, nomeRua, numeroCasa, complemento, bairro, pontoReferencia, estado));
+//			enderecoRepository.save(endereco);
+//		//	enderecoClienteRepository.save(endereco);
+//			System.out.println("Endereco Cadastrado");
+//		//}else {
+//			//System.out.println("Erro ao Cadastrar");
+//		//}
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		LocalDate dataNasc = LocalDate.parse(data, formatter);
@@ -180,6 +233,7 @@ public class ClienteService {
 		cliente.setSenha(senha);
 		
 		cliente.setTelefone(salvarTelefone(sc));
+		cliente.setEndereco(salvarEndereco(sc));
 		
 //		telefone.setNumero_telefone(telefoneCliente);
 //		telefone.setDdd(dddTelefoneCliente);
@@ -222,7 +276,7 @@ public class ClienteService {
 	
 	
 	private List<Telefone> salvarTelefone(Scanner sc) {
-		List<Telefone> telefones = new ArrayList<Telefone>();
+		List<Telefone> telefones =new ArrayList<Telefone>();
 		System.out.println("Informe o DDD do telefone");
 		String ddd = sc.next();
 		System.out.println("Informe o número do telefone");
@@ -240,6 +294,104 @@ public class ClienteService {
 		return telefones;
 		
 //		System.out.println("Telefone salvo com sucesso");
+	}
+	
+	private List<Endereco> salvarEndereco(Scanner sc){
+		List<Endereco> enderecos = new ArrayList<Endereco>();
+		System.out.println("Informe o nome da Cidade");
+		String nomeCidade = sc.next();
+		System.out.println("Informe o cep ");
+		String cep = sc.next();
+		System.out.println("Informe o nome da rua");
+		String nomeRua = sc.next();	
+		System.out.println("Informe o numero da casa");
+		String numeroCasa = sc.next();
+		System.out.println("Informe o complemento");
+		String complemento = sc.next();
+		System.out.println("Informe o bairro");
+		String bairro = sc.next();
+		System.out.println("Informe o Ponto de referencia");
+		String pontoReferencia = sc.next();
+		System.out.println("Informe o codigo do estado");
+		Integer codEstado = sc.nextInt();
+		
+		Optional<Estado> optional = estadoRepository.findById(codEstado);
+		//if(optional.isPresent()) {
+			Estado estado = optional.get();
+			Endereco endereco = new Endereco();
+			endereco.setNomeCidade(nomeCidade);
+			endereco.setCep(cep);
+			endereco.setNomeRua(nomeRua);
+			endereco.setNumeroCasa(numeroCasa);
+			endereco.setComplemento(complemento);
+			endereco.setBairro(bairro);
+			endereco.setPontoReferencia(pontoReferencia);
+			endereco.setEstado(estado);
+			enderecoRepository.save(endereco);
+			enderecos.add(endereco);
+			//System.out.println("Endereco Cadastrado");
+			return enderecos;
+			
+		//}
+	}
+	
+	
+	private Endereco atualizarEndereco(Scanner sc, Endereco endereco) {
+		System.out.println("Informe o Id do Endereco a ser atualizado");
+		Integer codEndereco = sc.nextInt();
+		
+		Endereco endereco1 = enderecoRepository.findById(codEndereco).get();
+		
+		
+//		System.out.println("Informe o novo nome da Cidade");
+//		String nomeCidade = sc.next();
+		System.out.println("Informe o novo cep ");
+		String cep = sc.next();
+		System.out.println("Informe o novo nome da rua");
+		String nomeRua = sc.next();	
+		System.out.println("Informe o novo numero da casa");
+		String numeroCasa = sc.next();
+		System.out.println("Informe o novo complemento");
+		String complemento = sc.next();
+		System.out.println("Informe o novo bairro");
+		String bairro = sc.next();
+		System.out.println("Informe o novo Ponto de referencia");
+		String pontoReferencia = sc.next();
+		
+		
+//		System.out.println("Informe o novo codigo do estado");
+//		Integer codEstado = sc.nextInt();
+//		
+//		Optional<Estado> estado = estadoRepository.findById(codEstado);
+//		Optional<Endereco> enderecos = enderecoRepository.findById(codEndereco);
+		
+		//endereco.setNomeCidade(nomeCidade);
+		endereco1.setCep(cep);
+		endereco1.setNomeRua(nomeRua);
+		endereco1.setNumeroCasa(numeroCasa);
+		endereco1.setComplemento(complemento);
+		endereco1.setBairro(bairro);
+		endereco1.setPontoReferencia(pontoReferencia);
+		//endereco.setEstado(estado.get());
+		
+		//enderecoRepository.save(endereco1);
+		
+		
+//		System.out.println("deseja alterar o estado do endereco [s/n] ? ");
+//		String resposta = sc.next();
+//		if (resposta.equals("s")) {
+//			List<Estado> estados = endereco.getEstado();
+//			estados.forEach(estado -> System.out.println(estado));
+//			System.out.println("informe o Id do Estado que deseja alterar:");
+//			Integer estadoId = Integer.parseInt(sc.next());
+//			
+//			Optional<Estado> estado = estadoRepository.findById(estadoId);
+//			//estados.add(atualizarEstado(sc, estado.get()));
+//			endereco.setEstado(estados);
+//		}
+		enderecoRepository.save(endereco1);
+		System.out.println("Endereco Atualizado com Sucesso");
+		return endereco1;
 	}
 
 }

@@ -49,7 +49,7 @@ public class Endereco {
 	
 
 	@ManyToMany(mappedBy = "endereco")
-	Set<Cliente> cliente;
+	List<Cliente> cliente;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "cod_estado")
@@ -137,11 +137,11 @@ public class Endereco {
 		this.pontoReferencia = pontoReferencia;
 	}
 
-//	public Set<Cliente> getCliente() {
+//	public List<Cliente> getCliente() {
 //		return cliente;
 //	}
 //
-//	public void setCliente(Set<Cliente> cliente) {
+//	public void setCliente(List<Cliente> cliente) {
 //		this.cliente = cliente;
 //	}
 

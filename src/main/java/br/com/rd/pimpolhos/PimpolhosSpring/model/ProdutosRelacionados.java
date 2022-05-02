@@ -1,10 +1,15 @@
 package br.com.rd.pimpolhos.PimpolhosSpring.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,8 +20,9 @@ public class ProdutosRelacionados {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer cod_relacionados;
 
-	@Column(nullable = false)
-	private Integer cod_produto;
+	@OneToMany(fetch = FetchType.EAGER) 
+	@JoinColumn(name="codProduto") 
+	private List<Produto> produto; 
 
 	@Column(nullable = false)
 	public Integer getCod_relacionados() {
@@ -27,17 +33,17 @@ public class ProdutosRelacionados {
 		this.cod_relacionados = cod_relacionados;
 	}
 
-	public Integer getCod_produto() {
-		return cod_produto;
+	public List<Produto> getProduto() {
+		return produto;
 	}
 
-	public void setCod_produto(Integer cod_produto) {
-		this.cod_produto = cod_produto;
+	public void setProduto(List<Produto> produto) {
+		this.produto = produto;
 	}
 
 	@Override
 	public String toString() {
-		return "ProdutosRelacionados [cod_relacionados=" + cod_relacionados + ", cod_produto=" + cod_produto + "]";
+		return "ProdutosRelacionados [cod_relacionados=" + cod_relacionados + ", produto=" + produto + "]";
 	}
-	
+
 }

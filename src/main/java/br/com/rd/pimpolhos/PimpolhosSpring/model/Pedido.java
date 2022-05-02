@@ -4,9 +4,13 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,16 +21,32 @@ public class Pedido {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer codPedido;
 	
-	//codFrete
-	//codEndereco
-	//codCliente
-	//codStatus
-	//codOperacao
-	//codFormaPagamento
 	@Column(nullable = false)
 	private LocalDate dataPedido;
-
+	
+	//codFrete OK
+	//codEndereco
+	//codCliente
+	//codStatus OK
+	//codOperacao OK
+	//codFormaPagamento
 	//codItemPedido
+	
+
+	@ManyToOne(fetch = FetchType.EAGER) 
+	@JoinColumn(name = "codFrete") 
+	private Frete frete; 
+	
+	@ManyToOne (fetch = FetchType.EAGER) 
+	@JoinColumn(name = "codStatus") 
+	private StatusPedido statusPedido; 
+
+//	@ManyToOne(fetch = FetchType.EAGER) 
+//	@JoinColumns(value ={  
+//	@JoinColumn(name="codOperacao", insertable = false, updatable = false),
+//	@JoinColumn(name="cod_forma_pagamento", insertable = false, updatable = false)})
+//	private TipoPagamento tipoPagamento;
+	
 	
 	public Integer getCodPedido() {
 		return codPedido;

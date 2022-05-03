@@ -57,16 +57,22 @@ public class ClienteService {
 	public Iterable<Cliente> visualizar() {
 		return clienteRepository.findAll();
 	}
+	
+	
+	public Optional<Cliente> visualizarPorId(Integer id) {
+		return clienteRepository.findById(id);
+		
+	}
 
 	
 	@Transactional
-	public void atualizar(Integer id, Cliente clienteAtualizado) {
+	public Cliente atualizar(Integer id, Cliente clienteAtualizado) {
 		Cliente cliente = clienteRepository.findById(id).get();
 		
 		cliente.setNomeCliente(clienteAtualizado.getNomeCliente());
 		cliente.setSenha(clienteAtualizado.getSenha());
 		
-		clienteRepository.save(cliente);
+		return clienteRepository.save(cliente);
 	}
 	
 	

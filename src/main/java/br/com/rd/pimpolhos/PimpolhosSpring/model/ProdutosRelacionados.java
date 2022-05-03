@@ -20,7 +20,7 @@ public class ProdutosRelacionados {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer cod_relacionados;
 
-//	@OneToMany(fetch = FetchType.EAGER) 
+//	@OneToMany
 //	@JoinColumn(name="codProduto") 
 //	private List<Produto> produto; 
 

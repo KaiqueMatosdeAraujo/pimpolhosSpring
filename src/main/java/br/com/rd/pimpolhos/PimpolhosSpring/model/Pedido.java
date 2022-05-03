@@ -1,6 +1,7 @@
 package br.com.rd.pimpolhos.PimpolhosSpring.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,7 +30,7 @@ public class Pedido {
 	//codEndereco
 	//codCliente
 	//codStatus OK
-	//codOperacao OK
+	//codOperacao 
 	//codFormaPagamento
 	//codItemPedido
 	
@@ -46,6 +48,10 @@ public class Pedido {
 //	@JoinColumn(name="codOperacao", insertable = false, updatable = false),
 //	@JoinColumn(name="cod_forma_pagamento", insertable = false, updatable = false)})
 //	private TipoPagamento tipoPagamento;
+	
+	@OneToMany
+	@JoinColumn(name="codItemPedido")
+	private List<ItemPedido> itemPedido;
 	
 	
 	public Integer getCodPedido() {

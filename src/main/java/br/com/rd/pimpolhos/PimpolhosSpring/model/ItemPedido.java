@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -20,6 +21,10 @@ public class ItemPedido {
 
 	@EmbeddedId
 	private ItemPedidoID itemPedidoId;
+	
+	@ManyToOne
+	@JoinColumn(name="codProduto", insertable=false, updatable=false)
+	private Produto produto;
 	
 	@Column(nullable = false)
 	private Integer quantidade;

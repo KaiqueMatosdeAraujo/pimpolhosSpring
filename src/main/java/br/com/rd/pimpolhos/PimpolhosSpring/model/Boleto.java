@@ -15,8 +15,9 @@ import javax.validation.constraints.Size;
 @Table(name="boleto")
 public class Boleto {
 
-	@EmbeddedId
-	private FormaPagamentoID formaPagamentoID;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer idBoleto;
 	
 	@Column(nullable = false)
 	private BigDecimal valor;

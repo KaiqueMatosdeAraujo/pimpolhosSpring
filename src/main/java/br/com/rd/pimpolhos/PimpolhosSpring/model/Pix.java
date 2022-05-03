@@ -3,14 +3,18 @@ package br.com.rd.pimpolhos.PimpolhosSpring.model;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="pix")
 public class Pix {
 
-	@EmbeddedId
-	private FormaPagamentoID formaPagamentoID;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer idPix;
 	
 	@Column(nullable = false)
 	 private String linkQr;

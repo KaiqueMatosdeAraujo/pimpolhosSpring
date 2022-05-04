@@ -16,15 +16,13 @@ public class Pagamento {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer codPagamento;
-
-	
 	
 	@ManyToOne
 	@JoinColumn(name = "codPedido")
 	private Pedido pedido;
 	
 	
-	@ManyToOne()
+	@ManyToOne
 	@JoinColumn(name = "codFormaPagamento")
 	private FormaPagamento formaPagamento;
 	
@@ -41,6 +39,9 @@ public class Pagamento {
 	@JoinColumn(name = "codPix")
 	private Pix pix;
 	
+	public void Pagamento() {
+		
+	}
 	
 	public Integer getCodPagamento() {
 		return codPagamento;

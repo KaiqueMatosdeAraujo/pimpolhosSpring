@@ -27,6 +27,9 @@ public class Boleto {
 	private String codBarras;
 	
 	@Column(nullable = false)
+	private LocalDate dataEmissao = LocalDate.now(); 
+	
+	@Column(nullable = false)
 	private LocalDate dataVencimento;
 	
 	@Size(max=50)

@@ -30,9 +30,8 @@ public class Pedido {
 	//codEndereco
 	//codCliente
 	//codStatus OK
-	//codOperacao 
 	//codFormaPagamento
-	//codItemPedido
+	//codItemPedido OK
 	
 
 	@ManyToOne(fetch = FetchType.EAGER) 
@@ -42,12 +41,6 @@ public class Pedido {
 	@ManyToOne (fetch = FetchType.EAGER) 
 	@JoinColumn(name = "codStatus") 
 	private StatusPedido statusPedido; 
-
-//	@ManyToOne(fetch = FetchType.EAGER) 
-//	@JoinColumns(value ={  
-//	@JoinColumn(name="codOperacao", insertable = false, updatable = false),
-//	@JoinColumn(name="cod_forma_pagamento", insertable = false, updatable = false)})
-//	private TipoPagamento tipoPagamento;
 	
 	@OneToMany
 	@JoinColumn(name="codItemPedido")

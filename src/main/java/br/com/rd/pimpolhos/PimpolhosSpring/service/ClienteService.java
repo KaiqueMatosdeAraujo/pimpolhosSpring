@@ -70,7 +70,7 @@ public class ClienteService {
 		Cliente cliente = clienteRepository.findById(id).get();
 		
 		cliente.setNomeCliente(clienteAtualizado.getNomeCliente());
-		cliente.setSenha(clienteAtualizado.getSenha());
+		//cliente.setSenha(clienteAtualizado.getSenha());
 		
 		return clienteRepository.save(cliente);
 	}

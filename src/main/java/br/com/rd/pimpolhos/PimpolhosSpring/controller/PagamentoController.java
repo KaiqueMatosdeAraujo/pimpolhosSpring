@@ -4,8 +4,11 @@ import java.net.URI;
 
 import javax.validation.Valid;
 
+import org.apache.catalina.connector.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +25,9 @@ import br.com.rd.pimpolhos.PimpolhosSpring.service.PagamentoService;
 @RequestMapping("/pagamento")
 public class PagamentoController {
 
+	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	@Autowired
 	private PagamentoService pagamentoService;
 	
 	@GetMapping
@@ -39,4 +44,18 @@ public class PagamentoController {
 		return ResponseEntity.created(uri).body(pagamento);
 		
 	}
+	
+	
+//	public ResponseEntity<Pagamento> cadastrar(@Valid @RequestBody Pagamento pagamento, UriComponentsBuilder uriBuilder) {
+//		Pagamento pagamento1 = new Pagamento();
+//
+//
+//		Pagamento pagamentoSalvo = this.pagamentoService.salvar(pagamento);
+//		URI uri = uriBuilder.path("/pagamento/{id}").buildAndExpand(pagamento.getCodPagamento()).toUri();
+//		pagamento1.se(pagamentoSalvo);
+//		return ResponseEntity.created(uri).body(pagamento1);
+//	}
+	
+	
+	
 }

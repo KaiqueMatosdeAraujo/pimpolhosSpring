@@ -1,5 +1,6 @@
 package br.com.rd.pimpolhos.PimpolhosSpring.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,32 +18,44 @@ public class Pagamento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer codPagamento;
 	
-	@ManyToOne
-	@JoinColumn(name = "codPedido")
-	private Pedido pedido;
+//	@ManyToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "codPedido")
+//	private Pedido pedido;
 	
-	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "codFormaPagamento")
 	private FormaPagamento formaPagamento;
 	
-	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "codCartao")
 	private Cartao cartao;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "codBoleto")
 	private Boleto boleto;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "codPix")
 	private Pix pix;
 	
-	public void Pagamento() {
-		
+
+	public Pagamento() {
+
 	}
-	
+
+
+	public Pagamento(Integer codPagamento, FormaPagamento formaPagamento, Cartao cartao, Boleto boleto,
+			Pix pix) {
+		super();
+		this.codPagamento = codPagamento;
+		this.formaPagamento = formaPagamento;
+		this.cartao = cartao;
+		this.boleto = boleto;
+		this.pix = pix;
+	}
+
+
+
 	public Integer getCodPagamento() {
 		return codPagamento;
 	}
@@ -52,13 +65,7 @@ public class Pagamento {
 	}
 	
 
-	public Pedido getPedido() {
-		return pedido;
-	}
-
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
-	}
+	
 
 	public FormaPagamento getFormaPagamento() {
 		return formaPagamento;

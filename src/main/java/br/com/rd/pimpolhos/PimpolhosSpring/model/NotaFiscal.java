@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 	@Entity
@@ -16,10 +20,7 @@ import javax.persistence.Table;
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private Integer codNf;
-		
-//		@Column(nullable = false)
-//		private Integer codPedido;
-		
+
 		@Column(nullable = false)
 		private Integer numeroNf;
 		
@@ -42,19 +43,10 @@ import javax.persistence.Table;
 		private Integer valorFrete;
 		
 		@Column(nullable = false)
-		private String inscricaEstadual;
+		private String inscricaoEstadual;
 		
 		@Column(nullable = false)
 		private Integer valorIcmsTotal;
-		
-//		@Column(nullable = false)
-//		private Integer codProduto;
-		
-//		@Column(nullable = false)
-//		private Integer codItemNota;
-		
-//		@Column(nullable = false)
-//		private Integer codNaturezaOperacao;
 		
 		@Column(nullable = false)
 		private String cnpjPimpolhos;
@@ -62,6 +54,20 @@ import javax.persistence.Table;
 		@Column(nullable = false)
 		private String razaoSocial;
 
+		@ManyToOne
+		@JoinColumns(value ={
+				@JoinColumn(name = "codItemNota"),
+				@JoinColumn(name = "codProduto")})
+		private ItemNf itemNf; 
+		
+		@ManyToOne
+		@JoinColumn(name="cod_natureza_operacao")
+		private NaturezaOperacao naturezaOperacao;
+		
+		@OneToOne
+		@JoinColumn(name="codPedido")
+		private Pedido pedido;
+		
 		public Integer getNumeroNf() {
 			return numeroNf;
 		}
@@ -118,12 +124,12 @@ import javax.persistence.Table;
 			this.valorFrete = valorFrete;
 		}
 
-		public String getInscricaEstadual() {
-			return inscricaEstadual;
+		public String getInscricaoEstadual() {
+			return inscricaoEstadual;
 		}
 
-		public void setInscricaEstadual(String inscricaEstadual) {
-			this.inscricaEstadual = inscricaEstadual;
+		public void setInscricaoEstadual(String inscricaEstadual) {
+			this.inscricaoEstadual = inscricaEstadual;
 		}
 
 		public Integer getValorIcmsTotal() {
@@ -149,5 +155,51 @@ import javax.persistence.Table;
 		public void setRazaoSocial(String razaoSocial) {
 			this.razaoSocial = razaoSocial;
 		}
+		
+		
+
+		public Integer getCodNf() {
+			return codNf;
+		}
+
+		public void setCodNf(Integer codNf) {
+			this.codNf = codNf;
+		}
+
+		public ItemNf getItemNf() {
+			return itemNf;
+		}
+
+		public void setItemNf(ItemNf itemNf) {
+			this.itemNf = itemNf;
+		}
+
+		public NaturezaOperacao getNaturezaOperacao() {
+			return naturezaOperacao;
+		}
+
+		public void setNaturezaOperacao(NaturezaOperacao naturezaOperacao) {
+			this.naturezaOperacao = naturezaOperacao;
+		}
+
+		public Pedido getPedido() {
+			return pedido;
+		}
+
+		public void setPedido(Pedido pedido) {
+			this.pedido = pedido;
+		}
+
+		@Override
+		public String toString() {
+			return "NotaFiscal [codNf=" + codNf + ", numeroNf=" + numeroNf + ", chaveAcesso=" + chaveAcesso
+					+ ", dataEmissao=" + dataEmissao + ", valorTotalNf=" + valorTotalNf + ", valorTotalProdutos="
+					+ valorTotalProdutos + ", cooNota=" + cooNota + ", valorFrete=" + valorFrete
+					+ ", inscricaoEstadual=" + inscricaoEstadual + ", valorIcmsTotal=" + valorIcmsTotal
+					+ ", cnpjPimpolhos=" + cnpjPimpolhos + ", razaoSocial=" + razaoSocial + ", itemNf=" + itemNf
+					+ ", naturezaOperacao=" + naturezaOperacao + ", pedido=" + pedido + "]";
+		}
+		
+		
 		
 }

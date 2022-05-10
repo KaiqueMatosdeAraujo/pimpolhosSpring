@@ -3,6 +3,7 @@ package br.com.rd.pimpolhos.PimpolhosSpring.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,7 +31,7 @@ public class Pedido {
 	//codEndereco
 	//codCliente
 	//codStatus OK
-	//codFormaPagamento
+	//codFormaPagamento OK
 	//codItemPedido OK
 	
 
@@ -46,6 +47,9 @@ public class Pedido {
 	@JoinColumn(name="codItemPedido")
 	private List<ItemPedido> itemPedido;
 	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "codPagamento")
+	private Pagamento pagamento;
 	
 	public Integer getCodPedido() {
 		return codPedido;
@@ -61,6 +65,31 @@ public class Pedido {
 
 	public void setDataPedido(LocalDate dataPedido) {
 		this.dataPedido = dataPedido;
+	}
+
+
+	public Frete getFrete() {
+		return frete;
+	}
+
+	public void setFrete(Frete frete) {
+		this.frete = frete;
+	}
+
+	public StatusPedido getStatusPedido() {
+		return statusPedido;
+	}
+
+	public void setStatusPedido(StatusPedido statusPedido) {
+		this.statusPedido = statusPedido;
+	}
+
+	public List<ItemPedido> getItemPedido() {
+		return itemPedido;
+	}
+
+	public void setItemPedido(List<ItemPedido> itemPedido) {
+		this.itemPedido = itemPedido;
 	}
 
 	@Override

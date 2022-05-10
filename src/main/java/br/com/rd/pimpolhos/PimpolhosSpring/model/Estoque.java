@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,26 +18,31 @@ import javax.persistence.Table;
 public class Estoque {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@OneToMany(fetch = FetchType.EAGER) 
-//	@JoinColumn(name="codProduto") 
-//	private List<Produto> produto;
-	private Integer codProduto;
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
+    private Integer idEstoque;
 
-
+    @ManyToOne
+    @JoinColumn(name = "codProduto",unique=true,nullable=false)
+    private Produto produtos;
 	
 	@Column(nullable = false)
 	private Integer quantidade;
 
-	
+	public Integer getIdEstoque() {
+		return idEstoque;
+	}
 
-//	public List<Produto> getProduto() {
-//		return produto;
-//	}
-//
-//	public void setProduto(List<Produto> produto) {
-//		this.produto = produto;
-//	}
+	public void setIdEstoque(Integer idEstoque) {
+		this.idEstoque = idEstoque;
+	}
+
+	public Produto getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(Produto produtos) {
+		this.produtos = produtos;
+	}
 
 	public Integer getQuantidade() {
 		return quantidade;
@@ -48,10 +54,12 @@ public class Estoque {
 
 	@Override
 	public String toString() {
-		return "Estoque [quantidade=" + quantidade + "]";
+		return "Estoque [idEstoque=" + idEstoque + ", produtos=" + produtos + ", quantidade=" + quantidade + "]";
 	}
 
 	
+
+
 
 	
 

@@ -150,6 +150,47 @@ public class Produto {
 		this.imgProduto = imgProduto;
 	}
 
+	
+
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
+
+
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+
+
+	public Marca getMarca() {
+		return marca;
+	}
+
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
+
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+
+//	public List<Cliente> getCliente() {
+//		return cliente;
+//	}
+//
+//
+//	public void setCliente(List<Cliente> cliente) {
+//		this.cliente = cliente;
+//	}
+
 
 	@Override
 	public String toString() {

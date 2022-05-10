@@ -23,6 +23,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.com.rd.pimpolhos.PimpolhosSpring.dto.ClienteDTO;
 import br.com.rd.pimpolhos.PimpolhosSpring.model.Cliente;
 import br.com.rd.pimpolhos.PimpolhosSpring.model.Endereco;
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.ClienteRepository;
@@ -40,11 +41,17 @@ public class ClienteController {
 	private ClienteRepository clienteRepository;
 	
 	@GetMapping
-	public Iterable<Cliente> Listar() {
+	public Iterable<Cliente> listar() {
 
 		Iterable<Cliente> clientes = clienteService.visualizar();
 
 		return clientes;
+	}
+	
+	@GetMapping("listar")
+	public List<ClienteDTO> listarClientes(){
+		List<Cliente> cliente = clienteRepository.findAll();
+		return ClienteDTO.converter(cliente);
 	}
 	
 	

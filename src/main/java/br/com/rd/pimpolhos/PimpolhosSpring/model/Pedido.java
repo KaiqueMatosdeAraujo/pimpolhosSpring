@@ -27,13 +27,6 @@ public class Pedido {
 	@Column(nullable = false)
 	private LocalDate dataPedido;
 	
-	//codFrete OK
-	//codEndereco
-	//codCliente
-	//codStatus OK
-	//codFormaPagamento OK
-	//codItemPedido OK
-	
 
 	@ManyToOne(fetch = FetchType.EAGER) 
 	@JoinColumn(name = "codFrete") 
@@ -43,7 +36,7 @@ public class Pedido {
 	@JoinColumn(name = "codStatus") 
 	private StatusPedido statusPedido; 
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="codItemPedido")
 	private List<ItemPedido> itemPedido;
 	

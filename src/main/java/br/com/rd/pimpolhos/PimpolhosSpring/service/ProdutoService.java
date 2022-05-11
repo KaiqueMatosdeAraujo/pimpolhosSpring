@@ -1,5 +1,8 @@
 package br.com.rd.pimpolhos.PimpolhosSpring.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +21,12 @@ public class ProdutoService {
 	}
 
 	
-	public Iterable<Produto> visualizar() {
+	public List<Produto> visualizar() {
 		return produtoRepository.findAll();
+	}
+	
+	
+	public Optional<Produto> visualizarPorId(Integer id){
+		return produtoRepository.findById(id);
 	}
 }

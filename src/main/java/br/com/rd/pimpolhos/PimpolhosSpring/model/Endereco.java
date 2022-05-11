@@ -1,7 +1,9 @@
 package br.com.rd.pimpolhos.PimpolhosSpring.model;
 
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -47,7 +49,7 @@ public class Endereco {
 	
 
 	@ManyToMany(mappedBy = "endereco")
-	Set<Cliente> cliente;
+	List<Cliente> cliente;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "cod_estado")
@@ -56,9 +58,9 @@ public class Endereco {
 	public Endereco() {
 		
 	}
-	
-	public Endereco(String nomeCidade, String cep, String nomeRua, String numeroCasa, String complemento, String bairro,
-			String pontoReferencia, Estado estado) {
+
+	public Endereco(String nomeCidade, String cep, String nomeRua, String numeroCasa,
+			String complemento, String bairro, String pontoReferencia, Estado estado) {
 		super();
 		this.nomeCidade = nomeCidade;
 		this.cep = cep;
@@ -70,8 +72,7 @@ public class Endereco {
 		this.estado = estado;
 	}
 
-	
-	
+
 	public Integer getCodEndereco() {
 		return codEndereco;
 	}
@@ -136,11 +137,11 @@ public class Endereco {
 		this.pontoReferencia = pontoReferencia;
 	}
 
-//	public Set<Cliente> getCliente() {
+//	public List<Cliente> getCliente() {
 //		return cliente;
 //	}
 //
-//	public void setCliente(Set<Cliente> cliente) {
+//	public void setCliente(List<Cliente> cliente) {
 //		this.cliente = cliente;
 //	}
 
@@ -158,6 +159,8 @@ public class Endereco {
 				+ nomeRua + ", numeroCasa=" + numeroCasa + ", complemento=" + complemento + ", bairro=" + bairro
 				+ ", pontoReferencia=" + pontoReferencia + ", estado=" + estado + "]";
 	}
+
+	
 
 	
 

@@ -1,5 +1,6 @@
 package br.com.rd.pimpolhos.PimpolhosSpring.service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -29,9 +30,10 @@ public class EnderecoService {
 	
 	public void iniciar(Scanner sc) {
 		int acao;
+	
 
 		while (sistema) {
-			System.out.println("Qual a ação que será realizada no Cliente");
+			System.out.println("Qual a ação que será realizada no Endereco");
 			System.out.println("0 - Sair");
 			System.out.println("1 - Salvar");
 			System.out.println("2 - Atualizar");
@@ -63,7 +65,7 @@ public class EnderecoService {
 	
 	private void deletar(Scanner sc) {
 		int id;
-		System.out.println("Informe o ID do cliente a ser deletado");
+		System.out.println("Informe o ID do endereco a ser deletado");
 		
 		id = sc.nextInt();
 		
@@ -98,9 +100,13 @@ public class EnderecoService {
 		String bairro = sc.next();
 		System.out.println("Informe o novo Ponto de referencia");
 		String pontoReferencia = sc.next();
-		System.out.println("Informe o novo codigo do estado");
+		
+		
+	System.out.println("Informe o novo codigo do estado");
 		Integer codEstado = sc.nextInt();
 		
+		Optional<Estado> estado = estadoRepository.findById(codEstado);
+		Optional<Endereco> enderecos = enderecoRepository.findById(codEndereco);
 		
 		endereco.setNomeCidade(nomeCidade);
 		endereco.setCep(cep);
@@ -109,9 +115,24 @@ public class EnderecoService {
 		endereco.setComplemento(complemento);
 		endereco.setBairro(bairro);
 		endereco.setPontoReferencia(pontoReferencia);
+		endereco.setEstado(estado.get());
 		
 		enderecoRepository.save(endereco);
 		
+		
+//		System.out.println("deseja alterar o estado do endereco [s/n] ? ");
+//		String resposta = sc.next();
+//		if (resposta.equals("s")) {
+//			List<Estado> estados = endereco.getEstado();
+//			estados.forEach(estado -> System.out.println(estado));
+//			System.out.println("informe o Id do Estado que deseja alterar:");
+//			Integer estadoId = Integer.parseInt(sc.next());
+//			
+//			Optional<Estado> estado = estadoRepository.findById(estadoId);
+//			//estados.add(atualizarEstado(sc, estado.get()));
+//			endereco.setEstado(estados);
+//		}
+//		enderecoRepository.save(endereco);
 		System.out.println("Endereco Atualizado com Sucesso");
 
 	}

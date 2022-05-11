@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -64,19 +64,19 @@ public class Cliente {
 	inverseJoinColumns = @JoinColumn(name = "cod_Cliente"))
 	Set<Produto> produto;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
     name = "cliente_telefone",
     joinColumns = {@JoinColumn(name = "cod_telefone")},
     inverseJoinColumns = {@JoinColumn(name = "cod_cliente")})
-	private Set<Telefone> telefone;
+	private List<Telefone> telefone;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
     name = "endereco_cliente",
     joinColumns = {@JoinColumn(name = "cod_cliente")},
     inverseJoinColumns = {@JoinColumn(name = "cod_endereco")})
-	private Set<Endereco> endereco;
+	private List<Endereco> endereco;
 	
 	
 	public Cliente() {
@@ -86,7 +86,7 @@ public class Cliente {
 
 	public Cliente(Integer codCliente, @Size(max = 50) String nomeCliente, @Size(max = 11) String cpf,
 			LocalDate dataNasc, @Size(max = 50) String email, @Size(max = 50) String senha,
-			Set<Telefone> telefone, Set<Endereco> endereco) {
+			List<Telefone> telefone, List<Endereco> endereco) {
 		super();
 		this.codCliente = codCliente;
 		this.nomeCliente = nomeCliente;
@@ -101,6 +101,7 @@ public class Cliente {
 
 
 
+
 //	public Set<Produto> getProduto() {
 //		return produto;
 //	}
@@ -109,13 +110,13 @@ public class Cliente {
 //		this.produto = produto;
 //	}
 
-//	public Set<Telefone> getTelefone() {
-//		return telefone;
-//	}
-//
-//	public void setTelefone(Set<Telefone> telefone) {
-//		this.telefone = telefone;
-//	}
+	public List<Telefone> getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(List<Telefone> telefone) {
+		this.telefone = telefone;
+	}
 
 
 	public Integer getCodCliente() {
@@ -167,16 +168,23 @@ public class Cliente {
 	}
 
 
+	public List<Endereco> getEndereco() {
+		return endereco;
+	}
+
+
+	public void setEndereco(List<Endereco> endereco) {
+		this.endereco = endereco;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Cliente [codCliente=" + codCliente + ", nomeCliente=" + nomeCliente + ", cpf=" + cpf + ", dataNasc="
 				+ dataNasc + ", email=" + email + ", senha=" + senha + ", telefone=" + telefone + ", endereco="
 				+ endereco + "]";
 	}
-	
 
-
-	
 
 	
 }

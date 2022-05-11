@@ -1,7 +1,9 @@
 package br.com.rd.pimpolhos.PimpolhosSpring.model;
 
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="telefone")
@@ -27,15 +31,15 @@ public class Telefone {
 	@Column(nullable = false)
 	private String numero_telefone;
 
-	@ManyToMany(mappedBy = "telefone")
-	Set<Cliente> cliente;
+	
+	@JsonIgnore
+	@ManyToMany(mappedBy = "telefone", fetch = FetchType.EAGER,cascade = CascadeType.ALL) 
+	List<Cliente> cliente; 
+	
 	
 	@Column(nullable = false)
 	private String descricao_telefone;
-	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "cod_tipo_telefone")
-//	private TipoTelefone tipoTelefone;
+
 	
 	public Integer getCod_telefone() {
 		return cod_telefone;
@@ -62,11 +66,11 @@ public class Telefone {
 		this.numero_telefone = numero_telefone;
 	}
 
-	public Set<Cliente> getCliente() {
+	public List<Cliente> getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Set<Cliente> cliente) {
+	public void setCliente(List<Cliente> cliente) {
 		this.cliente = cliente;
 	}
 
@@ -84,16 +88,5 @@ public class Telefone {
 				+  ", descricao_telefone=" + descricao_telefone + "]";
 	}
 
-	
-
-//	public TipoTelefone getTipoTelefone() {
-//		return tipoTelefone;
-//	}
-//
-//	public void setTipoTelefone(TipoTelefone tipoTelefone) {
-//		this.tipoTelefone = tipoTelefone;
-//	}
-
-	
 
 }

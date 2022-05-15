@@ -16,13 +16,13 @@ public class FormaPagamento {
 	private String descricao;
 	
 	
-	public Integer getCodFormaPagamento() {
-		return codFormaPagamento;
-	}
-	
-	public void setCodFormaPagamento(Integer codFormaPagamento) {
-		this.codFormaPagamento = codFormaPagamento;
-	}
+//	public Integer getCodFormaPagamento() {
+//		return codFormaPagamento;
+//	}
+//	
+//	public void setCodFormaPagamento(Integer codFormaPagamento) {
+//		this.codFormaPagamento = codFormaPagamento;
+//	}
 	
 	public String getDescricao() {
 		return descricao;

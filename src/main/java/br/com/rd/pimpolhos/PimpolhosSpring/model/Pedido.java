@@ -44,6 +44,22 @@ public class Pedido {
 	@JoinColumn(name = "codPagamento")
 	private Pagamento pagamento;
 	
+	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	@JoinColumn(name="codCliente", nullable=false)
+	private Cliente cliente;
+	
+	public Pedido() {}
+	
+	public Pedido(LocalDate dataPedido, Frete frete, StatusPedido statusPedido,
+			List<ItemPedido> itemPedido, Pagamento pagamento, Cliente cliente) {
+		this.dataPedido = dataPedido;
+		this.frete = frete;
+		this.statusPedido = statusPedido;
+		this.itemPedido = itemPedido;
+		this.pagamento = pagamento;
+		this.cliente = cliente;
+	}
+
 	public Integer getCodPedido() {
 		return codPedido;
 	}
@@ -84,14 +100,28 @@ public class Pedido {
 	public void setItemPedido(List<ItemPedido> itemPedido) {
 		this.itemPedido = itemPedido;
 	}
+	
+
+	public Pagamento getPagamento() {
+		return pagamento;
+	}
+
+	public void setPagamento(Pagamento pagamento) {
+		this.pagamento = pagamento;
+	}
+	
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 
 	@Override
 	public String toString() {
 		return "Pedido [codPedido=" + codPedido + ", dataPedido=" + dataPedido + "]";
 	}
-	
 
-	
-	
-	
 }

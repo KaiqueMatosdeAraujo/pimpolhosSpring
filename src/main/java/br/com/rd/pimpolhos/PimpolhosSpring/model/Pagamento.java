@@ -55,14 +55,14 @@ public class Pagamento {
 	}
 
 
-//
-//	public Integer getCodPagamento() {
-//		return codPagamento;
-//	}
-//	
-//	public void setCodPagamento(Integer codPagamento) {
-//		this.codPagamento = codPagamento;
-//	}
+
+	public Integer getCodPagamento() {
+		return codPagamento;
+	}
+	
+	public void setCodPagamento(Integer codPagamento) {
+		this.codPagamento = codPagamento;
+	}
 	
 
 	

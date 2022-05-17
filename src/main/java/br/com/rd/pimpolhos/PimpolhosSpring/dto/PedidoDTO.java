@@ -3,6 +3,7 @@ package br.com.rd.pimpolhos.PimpolhosSpring.dto;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import br.com.rd.pimpolhos.PimpolhosSpring.model.Cliente;
@@ -13,6 +14,11 @@ import br.com.rd.pimpolhos.PimpolhosSpring.model.Pagamento;
 import br.com.rd.pimpolhos.PimpolhosSpring.model.Pedido;
 import br.com.rd.pimpolhos.PimpolhosSpring.model.StatusPedido;
 import br.com.rd.pimpolhos.PimpolhosSpring.model.Telefone;
+import br.com.rd.pimpolhos.PimpolhosSpring.repository.ClienteRepository;
+import br.com.rd.pimpolhos.PimpolhosSpring.repository.FreteRepository;
+import br.com.rd.pimpolhos.PimpolhosSpring.repository.PagamentoRepository;
+import br.com.rd.pimpolhos.PimpolhosSpring.repository.PedidoRepository;
+import br.com.rd.pimpolhos.PimpolhosSpring.repository.StatusPedidoRepository;
 
 public class PedidoDTO {
 
@@ -147,4 +153,5 @@ public class PedidoDTO {
 	public static List<PedidoDTO> converter(List<Pedido> pedidos) {
 		return pedidos.stream().map(PedidoDTO::new).collect(Collectors.toList());
 	}
+	
 }

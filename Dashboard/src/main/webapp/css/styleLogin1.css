@@ -1,0 +1,168 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
+
+*{
+    padding: 0px;
+    margin: 0px;
+    max-width: 100%;
+
+}
+
+
+.display {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    font-family: 'Comfortaa', cursive;
+}
+
+display2{
+	display: flex;
+    justify-content: center;
+}
+
+.blocos{
+    box-shadow: 0px 0px 2em 0px rgb(50 50 50 / 53%);
+    padding: 0px;
+    border-radius: 10px;
+}
+
+.bloco1{
+    background-color: rgb(230, 136, 154);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 490px;
+    color: #fff;
+    border-radius: 10px 0px 0px 10px;
+
+}
+
+.bloco2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 430px;
+    margin-top: 4%;
+}
+
+.bloco2 input{
+    background-color: rgba(50, 50, 50, 0.11);
+    border: none;
+    border-radius: 3px;
+    height: 35px;
+}
+
+
+.bloco2 button{
+ 	width: 45%;
+    height: 11%;
+    margin-left: 66px;
+    margin-top: 4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #45f562;
+    border: none;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 20px;
+
+}
+
+.bloco2 button:hover{
+    background-color: #3ace53;
+}
+
+.bloco2 p a{
+	color: grey;
+	text-decoration: underline;
+}
+
+
+
+@media (max-width: 1198px){
+	.bloco1{
+		height: 20%;
+	    border-radius: 10px 10px 0px 0px;
+	    box-shadow: none;
+	}
+	
+	.bloco1 img{
+		display: none;
+	}
+	
+	.bloco1 h3{
+		font-weight: bold;
+		font-size: 31px;
+	}
+	
+	.bloco2{
+		box-shadow: none;
+    	border-radius: 0px 0px 10px 10px;
+	}
+	
+	.blocos{
+		box-shadow: 0px 0px 2em 0px rgb(50 50 50 / 53%);
+		border-radius: 10px;
+		height: 748px;
+	}
+	
+	.bloco2 h2{
+		margin-right: 21px;
+		font-size: 38px;
+	}
+	
+	.bloco2 button{
+		margin-left: 139px;
+		font-weight: bold;
+		font-size: 22px;
+		height: 12%;
+    	margin-top: 9%;
+	}
+	
+	.formCadastrar{
+		font-size: 19px;
+		margin-left: 9%;
+	}
+	
+	.formCadastrar input{
+		font-size: 18px;
+		height: 47px;
+		width: 90%
+	}
+	
+	.display {
+	    margin-top: 7%;
+	}
+}
+
+@media (max-width: 425px){
+	
+	.bloco2 button {
+	   margin-left: 79px;
+    	width: 55%;
+    	height: 11%;
+	}
+	
+	.bloco1 h3 {
+    	font-weight: bold;
+    	font-size: 25px;
+	}
+	
+	.formCadastrar input {
+   		width: 100%;
+	}
+	
+	.formCadastrar {
+		font-size: 18px;
+    	margin-left: 0px;
+	}
+	
+	.display {
+	    margin-top: 3%;
+	}
+}
+

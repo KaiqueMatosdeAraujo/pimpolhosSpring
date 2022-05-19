@@ -15,6 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="endereco")
 public class Endereco {
@@ -47,7 +49,7 @@ public class Endereco {
 	//cod_estado
 	
 	
-
+	@JsonIgnore
 	@ManyToMany(mappedBy = "endereco")
 	List<Cliente> cliente;
 	
@@ -73,13 +75,13 @@ public class Endereco {
 	}
 
 
-	public Integer getCodEndereco() {
-		return codEndereco;
-	}
-
-	public void setCodEndereco(Integer codEndereco) {
-		this.codEndereco = codEndereco;
-	}
+//	public Integer getCodEndereco() {
+//		return codEndereco;
+//	}
+//
+//	public void setCodEndereco(Integer codEndereco) {
+//		this.codEndereco = codEndereco;
+//	}
 
 	public String getNomeCidade() {
 		return nomeCidade;
@@ -137,13 +139,13 @@ public class Endereco {
 		this.pontoReferencia = pontoReferencia;
 	}
 
-//	public List<Cliente> getCliente() {
-//		return cliente;
-//	}
-//
-//	public void setCliente(List<Cliente> cliente) {
-//		this.cliente = cliente;
-//	}
+	public List<Cliente> getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(List<Cliente> cliente) {
+		this.cliente = cliente;
+	}
 
 	public Estado getEstado() {
 		return estado;

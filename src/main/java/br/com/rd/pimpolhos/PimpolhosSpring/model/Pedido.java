@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.ClienteRepository;
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.FreteRepository;
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.ItemPedidoRepository;
@@ -43,15 +45,16 @@ public class Pedido {
 	@JoinColumn(name = "codStatus") 
 	private StatusPedido statusPedido; 
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name="codItemPedido")
+	
+	@OneToMany(mappedBy="codPedido")
 	private List<ItemPedido> itemPedido;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "codPagamento")
 	private Pagamento pagamento;
 	
-	@ManyToOne(fetch=FetchType.EAGER , cascade = CascadeType.ALL)
+	
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="codCliente")
 	private Cliente cliente;
 	

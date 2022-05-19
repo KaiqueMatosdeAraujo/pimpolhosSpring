@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="itemPedido")
 public class ItemPedido {
@@ -17,14 +19,17 @@ public class ItemPedido {
 	@EmbeddedId
 	private ItemPedidoID itemPedidoId;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="codProduto", insertable=false, updatable=false)
-	private Produto produto;
+	private Produto codProduto;
 	
 	@Column(nullable = false)
 	private Integer quantidade;
 	
-
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="codPedido", insertable=false, updatable=false)
+	private Pedido codPedido;
 	
 
 	public Integer getQuantidade() {
@@ -39,12 +44,25 @@ public class ItemPedido {
 	
 
 
-	public Produto getProduto() {
-		return produto;
+	
+
+	public Produto getCodProduto() {
+		return codProduto;
 	}
 
-	public void setProduto(Produto produto) {
-		this.produto = produto;
+
+	public void setCodProduto(Produto codProduto) {
+		this.codProduto = codProduto;
+	}
+
+
+	public Pedido getCodPedido() {
+		return codPedido;
+	}
+
+
+	public void setCodPedido(Pedido codPedido) {
+		this.codPedido = codPedido;
 	}
 
 

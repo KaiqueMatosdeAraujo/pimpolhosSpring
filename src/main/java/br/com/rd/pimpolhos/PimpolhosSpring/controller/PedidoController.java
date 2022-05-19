@@ -70,13 +70,6 @@ public class PedidoController {
 	
 	@PostMapping("{id}/cadastrar")
 	@Transactional
-//	public ResponseEntity<Pedido> cadastrar(@RequestBody @Valid Pedido pedido, UriComponentsBuilder uriBuilder){
-//		pedidoRepository.save(pedido);
-//		URI uri = uriBuilder.path("/pagamento/{id}").buildAndExpand(pedido.getCodPedido()).toUri();
-//		return ResponseEntity.created(uri).body(pedido);
-//		
-//	}
-	
 //	CADASTRAR PEDIDO ASSOCIANDO A UM CLIENTE)
 	public ResponseEntity<PedidoDTO> cadastrar(@PathVariable("id") Integer id , @RequestBody @Valid PedidoForm pedidoForm , 
 			UriComponentsBuilder uriBuilder){
@@ -90,7 +83,12 @@ public class PedidoController {
 
 }
 
-	
+//	public ResponseEntity<Pedido> cadastrar(@RequestBody @Valid Pedido pedido, UriComponentsBuilder uriBuilder){
+//	pedidoRepository.save(pedido);
+//	URI uri = uriBuilder.path("/pagamento/{id}").buildAndExpand(pedido.getCodPedido()).toUri();
+//	return ResponseEntity.created(uri).body(pedido);
+//	
+//}
 	
 	
 

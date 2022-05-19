@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="cartao")
 public class Cartao {
@@ -32,6 +34,7 @@ public class Cartao {
 	@JoinColumn(name = "codBandeira") 
 	private Bandeira bandeira;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER) 
 	@JoinColumn(name = "codCliente") 
 	private Cliente cliente;
@@ -62,6 +65,32 @@ public class Cartao {
 
 	public void setValidade(String validade) {
 		this.validade = validade;
+	}
+
+	
+	
+	public Integer getIdCartao() {
+		return idCartao;
+	}
+
+	public void setIdCartao(Integer idCartao) {
+		this.idCartao = idCartao;
+	}
+
+	public Bandeira getBandeira() {
+		return bandeira;
+	}
+
+	public void setBandeira(Bandeira bandeira) {
+		this.bandeira = bandeira;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	@Override

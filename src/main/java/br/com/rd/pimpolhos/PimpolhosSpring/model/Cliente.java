@@ -63,9 +63,10 @@ public class Cliente {
 	@ManyToMany
 	@JoinTable(
     name = "favoritos",
-	joinColumns = @JoinColumn(name = "cod_Produto"),
-	inverseJoinColumns = @JoinColumn(name = "cod_Cliente"))
+	joinColumns = @JoinColumn(name = "cod_cliente"),
+	inverseJoinColumns = @JoinColumn(name = "cod_produto"))
 	Set<Produto> produto;
+
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
@@ -73,6 +74,7 @@ public class Cliente {
     joinColumns = {@JoinColumn(name = "cod_telefone")},
     inverseJoinColumns = {@JoinColumn(name = "cod_cliente")})
 	private List<Telefone> telefone;
+	
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
@@ -84,6 +86,8 @@ public class Cliente {
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Pedido> pedidos;
+	
+
 	
 	public Cliente() {
 		
@@ -186,6 +190,19 @@ public class Cliente {
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
+
+	
+	
+
+	public Set<Produto> getProduto() {
+		return produto;
+	}
+
+
+	public void setProduto(Set<Produto> produto) {
+		this.produto = produto;
+	}
+
 
 
 	@Override

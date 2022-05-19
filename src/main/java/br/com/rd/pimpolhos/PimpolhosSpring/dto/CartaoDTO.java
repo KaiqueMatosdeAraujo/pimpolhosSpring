@@ -1,18 +1,26 @@
 package br.com.rd.pimpolhos.PimpolhosSpring.dto;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import br.com.rd.pimpolhos.PimpolhosSpring.model.Cartao;
+import br.com.rd.pimpolhos.PimpolhosSpring.model.Cliente;
 
 public class CartaoDTO {
 
 	private String numeroCartao;
 	private String nomeTitular;
+	private String nomeCliente;
 	
 	
-	public CartaoDTO(String numeroCartao, String nomeTitular) {
-		super();
-		this.numeroCartao = numeroCartao;
-		this.nomeTitular = nomeTitular;
+	public CartaoDTO(Cartao cartao) {
+		this.numeroCartao = cartao.getNumeroCartao();
+		this.nomeTitular = cartao.getNomeTitular();
+		this.nomeCliente = cartao.getCliente().getNomeCliente();
 	}
 
+	
+	public CartaoDTO() {}
 
 	public String getNumeroCartao() {
 		return numeroCartao;
@@ -35,5 +43,19 @@ public class CartaoDTO {
 	
 	
 	
+	
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
+
+
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
+	}
+
+
+	public static List<CartaoDTO> converter(List<Cartao> cartoes){
+		return cartoes.stream().map(CartaoDTO::new).collect(Collectors.toList());
+	}
 	
 }

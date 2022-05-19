@@ -25,9 +25,9 @@ public class Bandeira {
 	private String descricaoBandeira;
 
 	
-	public Integer getCodBandeira() {
-		return codBandeira;
-	}
+//	public Integer getCodBandeira() {
+//		return codBandeira;
+//	}
 
 	public void setCodBandeira(Integer codBandeira) {
 		this.codBandeira = codBandeira;

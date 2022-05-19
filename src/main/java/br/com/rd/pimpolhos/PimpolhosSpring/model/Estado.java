@@ -17,9 +17,9 @@ public class Estado {
 	@Column(nullable = false)
 	private String descricao_estado;
 
-	public Integer getCod_estado() {
-		return cod_estado;
-	}
+//	public Integer getCod_estado() {
+//		return cod_estado;
+//	}
 
 	public void setCod_estado(Integer cod_estado) {
 		this.cod_estado = cod_estado;

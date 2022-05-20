@@ -16,11 +16,14 @@ import javax.persistence.Id;
 
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.JoinColumn;
 
@@ -60,9 +63,10 @@ public class Cliente {
 	@ManyToMany
 	@JoinTable(
     name = "favoritos",
-	joinColumns = @JoinColumn(name = "cod_Produto"),
-	inverseJoinColumns = @JoinColumn(name = "cod_Cliente"))
+	joinColumns = @JoinColumn(name = "cod_cliente"),
+	inverseJoinColumns = @JoinColumn(name = "cod_produto"))
 	Set<Produto> produto;
+
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
@@ -71,6 +75,7 @@ public class Cliente {
     inverseJoinColumns = {@JoinColumn(name = "cod_cliente")})
 	private List<Telefone> telefone;
 	
+	
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(
     name = "endereco_cliente",
@@ -78,6 +83,11 @@ public class Cliente {
     inverseJoinColumns = {@JoinColumn(name = "cod_endereco")})
 	private List<Endereco> endereco;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "cliente")
+	private List<Pedido> pedidos;
+	
+
 	
 	public Cliente() {
 		
@@ -86,7 +96,7 @@ public class Cliente {
 
 	public Cliente(Integer codCliente, @Size(max = 50) String nomeCliente, @Size(max = 11) String cpf,
 			LocalDate dataNasc, @Size(max = 50) String email, @Size(max = 50) String senha,
-			List<Telefone> telefone, List<Endereco> endereco) {
+			List<Telefone> telefone, List<Endereco> endereco, Pedido pedido) {
 		super();
 		this.codCliente = codCliente;
 		this.nomeCliente = nomeCliente;
@@ -96,19 +106,12 @@ public class Cliente {
 		this.senha = senha;
 		this.telefone = telefone;
 		this.endereco = endereco;
+		this.pedidos = pedidos;
 	}
 
 
 
 
-
-//	public Set<Produto> getProduto() {
-//		return produto;
-//	}
-//
-//	public void setProduto(Set<Produto> produto) {
-//		this.produto = produto;
-//	}
 
 	public List<Telefone> getTelefone() {
 		return telefone;
@@ -176,6 +179,30 @@ public class Cliente {
 	public void setEndereco(List<Endereco> endereco) {
 		this.endereco = endereco;
 	}
+
+	
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
+	
+	
+
+	public Set<Produto> getProduto() {
+		return produto;
+	}
+
+
+	public void setProduto(Set<Produto> produto) {
+		this.produto = produto;
+	}
+
 
 
 	@Override

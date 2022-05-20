@@ -3,6 +3,7 @@ package br.com.rd.pimpolhos.PimpolhosSpring.dto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +32,7 @@ public class NotaFiscalDTO implements Serializable{
 	private String naturezaOperacao;
 	//pedido
 	private Integer pedido;
-	private LocalDate dataPedido;
+	private Date dataPedido;
 	private String descricaoFrete;
 	private BigDecimal valorFretePedido;
 	//status pedido
@@ -250,12 +251,12 @@ public class NotaFiscalDTO implements Serializable{
 	}
 
 
-	public LocalDate getDataPedido() {
+	public Date getDataPedido() {
 		return dataPedido;
 	}
 
 
-	public void setDataPedido(LocalDate dataPedido) {
+	public void setDataPedido(Date dataPedido) {
 		this.dataPedido = dataPedido;
 	}
 

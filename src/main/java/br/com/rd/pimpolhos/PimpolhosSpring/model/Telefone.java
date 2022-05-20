@@ -41,9 +41,9 @@ public class Telefone {
 	private String descricao_telefone;
 
 	
-	public Integer getCod_telefone() {
-		return cod_telefone;
-	}
+//	public Integer getCod_telefone() {
+//		return cod_telefone;
+//	}
 
 	public String getDdd() {
 		return ddd;

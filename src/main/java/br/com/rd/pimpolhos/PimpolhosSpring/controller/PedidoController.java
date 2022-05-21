@@ -28,6 +28,7 @@ import br.com.rd.pimpolhos.PimpolhosSpring.form.PedidoForm;
 import br.com.rd.pimpolhos.PimpolhosSpring.model.Cliente;
 import br.com.rd.pimpolhos.PimpolhosSpring.model.Pedido;
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.ClienteRepository;
+import br.com.rd.pimpolhos.PimpolhosSpring.repository.EnderecoRepository;
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.FreteRepository;
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.ItemPedidoRepository;
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.PagamentoRepository;
@@ -53,6 +54,8 @@ public class PedidoController {
 	private ItemPedidoRepository itemPedidoRepository;
 	@Autowired
 	private ItemPedidoService itemPedidoService;
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 
 
 	//RETORNA PEDIDO POR CLIENTE
@@ -70,6 +73,7 @@ public class PedidoController {
 		return ResponseEntity.notFound().build(); 
 	}
 	
+	
 	@PostMapping("/novo")
 	public ResponseEntity <ItemPedidoDTO> insert (@RequestBody ItemPedidoForm dto){
 	    try { 
@@ -83,15 +87,16 @@ public class PedidoController {
 	}
 
 	
-//	CADASTRAR PEDIDO ASSOCIANDO A UM CLIENTE)
+//	CADASTRAR ENDEREÇO ASSOCIANDO A UM CLIENTE)
 	@PostMapping("{id}/cadastrar")
 	@Transactional
 	public ResponseEntity<PedidoDTO> cadastrar(@PathVariable("id") Integer id , @RequestBody @Valid PedidoForm pedidoForm , 
 			UriComponentsBuilder uriBuilder) throws ParseException{
 	Optional<Cliente> cliente = clienteRepository.findById(id);
-	Pedido pedido = pedidoForm.converter(clienteRepository , freteRepository, statusPedidoRepository, pagamentoRepository);
+	Optional<Cliente> endereço = clienteRepository.findById(id);
+	Pedido pedido = pedidoForm.converter(clienteRepository , freteRepository, statusPedidoRepository, pagamentoRepository , enderecoRepository);
 	pedidoRepository.save(pedido);
-	pedidoForm.cadastrar(pedido, cliente.get() , pedidoRepository);
+	pedidoForm.cadastrar(pedido, cliente.get() , pedidoRepository );
 	
 	URI uri = uriBuilder.path("/pedido/{id}").buildAndExpand(pedido.getCodPedido()).toUri();
 	return ResponseEntity.created(uri).body(new PedidoDTO(pedido));

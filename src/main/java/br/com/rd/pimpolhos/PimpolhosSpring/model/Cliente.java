@@ -1,8 +1,8 @@
 package br.com.rd.pimpolhos.PimpolhosSpring.model;
 
 import java.time.LocalDate;
-import java.util.Date;
-
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -13,28 +13,21 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.JoinColumn;
-
-
-import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 
 @Entity
 @Table(name="clientes")
-public class Cliente {
+public class Cliente{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -109,13 +102,35 @@ public class Cliente {
 		this.pedidos = pedidos;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codCliente == null) ? 0 : codCliente.hashCode());
+		return result;
+	}
 
-
-
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		if (codCliente == null) {
+			if (other.codCliente != null)
+				return false;
+		} else if (!codCliente.equals(other.codCliente))
+			return false;
+		return true;
+	}
 
 	public List<Telefone> getTelefone() {
 		return telefone;
 	}
+	
 
 	public void setTelefone(List<Telefone> telefone) {
 		this.telefone = telefone;
@@ -203,7 +218,43 @@ public class Cliente {
 		this.produto = produto;
 	}
 
+//	public Collection<? extends GrantedAuthority> getAuthorities() {
+//		return this.perfis;
+//	}
 
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return this.senha;
+	}
+
+
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return this.email;
+	}
+
+	
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 
 	@Override
 	public String toString() {
@@ -211,6 +262,8 @@ public class Cliente {
 				+ dataNasc + ", email=" + email + ", senha=" + senha + ", telefone=" + telefone + ", endereco="
 				+ endereco + "]";
 	}
+
+	
 
 
 	

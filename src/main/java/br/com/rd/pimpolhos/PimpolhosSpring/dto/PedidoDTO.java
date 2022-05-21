@@ -1,6 +1,7 @@
 package br.com.rd.pimpolhos.PimpolhosSpring.dto;
 
 import java.math.BigDecimal;
+
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -19,11 +20,11 @@ public class PedidoDTO {
 	private BigDecimal valorFrete;
 	private String statusPedido;
 	private List<ItemPedido> itemPedido;
-	//private String descricaoFormaPagamento;
+	//private String descricaoFormaPagamento; 
 	private Pagamento pagamento;
 	//private Cliente cliente;
-	private List<Endereco> endereco;
-	private List<Telefone> telefone;
+	private Endereco endereco;
+//	private List<Telefone> telefone;
 	private String nomeCliente;
 	private String cpfCliente;
 	private String numeroTelefoneCliente;
@@ -45,8 +46,8 @@ public class PedidoDTO {
 		this.pagamento = pedido.getPagamento();
 		this.nomeCliente = pedido.getCliente().getNomeCliente();
 		this.cpfCliente = pedido.getCliente().getCpf();
-		this.endereco = pedido.getCliente().getEndereco();
-		this.telefone = pedido.getCliente().getTelefone();
+		this.endereco = pedido.getEndereco();
+//		this.telefone = pedido.getCliente().getTelefone();
 //		this.numeroTelefoneCliente = pedido.getCliente().getTelefone().
 //		this.dddCliente
 //		this.nomeCidadeCliente = pedido.getCliente().getEndereco()
@@ -108,11 +109,11 @@ public class PedidoDTO {
 
 	
 
-	public List<Endereco> getEndereco() {
+	public Endereco getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(List<Endereco> endereco) {
+	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
 
@@ -133,14 +134,6 @@ public class PedidoDTO {
 	}
 	
 	
-
-	public List<Telefone> getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(List<Telefone> telefone) {
-		this.telefone = telefone;
-	}
 
 	public static List<PedidoDTO> converter(List<Pedido> pedidos) {
 		return pedidos.stream().map(PedidoDTO::new).collect(Collectors.toList());

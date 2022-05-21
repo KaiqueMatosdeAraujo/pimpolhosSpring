@@ -12,14 +12,14 @@ public class ClienteDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private String nomeCliente;
-	private String cpf;
+//	private String cpf;
 	private LocalDate dataNasc;
 	private String email;
 	
 	
 	public ClienteDTO(Cliente cliente) {
 		this.nomeCliente = cliente.getNomeCliente();
-		this.cpf = cliente.getCpf();
+//		this.cpf = cliente.getCpf();
 		this.dataNasc = cliente.getDataNasc();
 		this.email = cliente.getEmail();
 	
@@ -32,9 +32,9 @@ public class ClienteDTO implements Serializable{
 		return nomeCliente;
 	}
 
-	public String getCpf() {
-		return cpf;
-	}
+//	public String getCpf() {
+//		return cpf;
+//	}
 
 	public LocalDate getDataNasc() {
 		return dataNasc;
@@ -48,9 +48,9 @@ public class ClienteDTO implements Serializable{
 		this.nomeCliente = nomeCliente;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
+//	public void setCpf(String cpf) {
+//		this.cpf = cpf;
+//	}
 
 	public void setDataNasc(LocalDate dataNasc) {
 		this.dataNasc = dataNasc;

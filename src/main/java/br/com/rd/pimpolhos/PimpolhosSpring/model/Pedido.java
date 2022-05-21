@@ -52,6 +52,15 @@ public class Pedido {
 	@JoinColumn(name="codCliente")
 	private Cliente cliente;
 	
+	//alteração
+	@ManyToOne(fetch=FetchType.EAGER )
+	@JoinColumn(name="codEndereco")
+	private Endereco endereco;
+	
+	@ManyToOne(fetch=FetchType.EAGER )
+	@JoinColumn(name="codTelefone")
+	private Telefone telefone;
+	
 	public Pedido() {}
 	
 //	public Pedido(LocalDate dataPedido, Frete frete, StatusPedido statusPedido,
@@ -63,13 +72,36 @@ public class Pedido {
 //		this.pagamento = pagamento;
 //		this.cliente = cliente;
 //	}
-
-	public Pedido(Date dataPedido ,Cliente cliente , Frete frete, Pagamento pagamento ,StatusPedido statusPedido) throws ParseException {
+// funcional
+//	public Pedido(Date dataPedido ,Cliente cliente , Frete frete, Pagamento pagamento ,StatusPedido statusPedido) throws ParseException {
+//		this.dataPedido = dataPedido;
+//		this.cliente = cliente;
+//		this.frete = frete;
+//		this.statusPedido = statusPedido;
+//		this.pagamento = pagamento;
+//	}
+	
+	//alteração
+	public Pedido(Date dataPedido, Frete frete, StatusPedido statusPedido, Pagamento pagamento, Cliente cliente,
+			Endereco endereco) {
+		super();
 		this.dataPedido = dataPedido;
-		this.cliente = cliente;
 		this.frete = frete;
 		this.statusPedido = statusPedido;
 		this.pagamento = pagamento;
+		this.cliente = cliente;
+		this.endereco = endereco;
+	}
+
+	
+	
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 	public Integer getCodPedido() {

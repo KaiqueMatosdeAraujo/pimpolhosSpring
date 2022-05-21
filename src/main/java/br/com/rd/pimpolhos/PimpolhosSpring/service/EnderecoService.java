@@ -6,9 +6,14 @@ import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import br.com.rd.pimpolhos.PimpolhosSpring.dto.ItemPedidoDTO;
+import br.com.rd.pimpolhos.PimpolhosSpring.form.ItemPedidoForm;
 import br.com.rd.pimpolhos.PimpolhosSpring.model.Endereco;
 import br.com.rd.pimpolhos.PimpolhosSpring.model.Estado;
+import br.com.rd.pimpolhos.PimpolhosSpring.model.ItemPedido;
+import br.com.rd.pimpolhos.PimpolhosSpring.model.ItemPedidoID;
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.ClienteRepository;
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.EnderecoRepository;
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.EstadoRepository;

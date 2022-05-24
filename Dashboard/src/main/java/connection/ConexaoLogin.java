@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class ConexaoLogin {
       
     Connection con;
-    String url="jdbc:mysql://localhost:3306/pimpolhos";
+    String url="jdbc:mysql://localhost:3306/pimpolhosSpring";
     String user="mateus";
     String pass="M.teus2512";
     public Connection ConectaMySql(String banco) throws SQLException {

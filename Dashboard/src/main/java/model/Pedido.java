@@ -1,12 +1,12 @@
 package model;
 
-
+import java.util.Date;
 
 public class Pedido {
 
 	private Integer cod_pedido;
 	private String nome_cliente;
-	private String data_pedido;
+	private Date data_pedido;
 	private Integer quantidade;
 	private String descricao_frete;
 	private String valor_frete;
@@ -32,7 +32,7 @@ public class Pedido {
 	
 	
 	//Pedido
-	public Pedido(String nome_cliente, String data_pedido, String descricao_status_pedido, Double valor_total) {
+	public Pedido(String nome_cliente, Date data_pedido, String descricao_status_pedido, Double valor_total) {
 		this.nome_cliente = nome_cliente;
 		this.data_pedido = data_pedido;
 		this.descricao_status_pedido = descricao_status_pedido;
@@ -44,7 +44,7 @@ public class Pedido {
 
 	
 	
-	public Pedido(Integer cod_cliente ,String nome_cliente, String data_pedido, String descricao_frete,
+	public Pedido(Integer cod_cliente ,String nome_cliente, Date data_pedido, String descricao_frete,
 			String descricao_status_pedido, String nome_cidade, String cep, String nome_rua, Integer numero_casa,
 			String complemento, String bairro, String ponto_referencia, String descricao_estado,
 			String descricao_forma_pagamento, Integer quantidade, Double total) {
@@ -149,13 +149,13 @@ public class Pedido {
 
 
 
-	public String getData_pedido() {
+	public Date getData_pedido() {
 		return data_pedido;
 	}
 
 
 
-	public void setData_pedido(String data_pedido) {
+	public void setData_pedido(Date data_pedido) {
 		this.data_pedido = data_pedido;
 	}
 

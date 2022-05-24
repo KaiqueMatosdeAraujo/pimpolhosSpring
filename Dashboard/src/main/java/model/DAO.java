@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DAO {
@@ -265,21 +266,22 @@ public class DAO {
 			Connection con = c.getConnection();
 			ArrayList<Pedido> listaPedido = new ArrayList<Pedido>();
 			try {
-				PreparedStatement p = con.prepareStatement("select pedido.cod_pedido, c.nome_cliente, pedido.data_pedido, sp.descricao_status_pedido, sum(ip.quantidade * p.preco + f.valor_frete) as valor_total  from pedido\r\n"
-						+ "inner join cliente c on c.cod_cliente = pedido.cod_cliente\r\n"
-						+ "inner join item_pedido ip on ip.cod_item_pedido = pedido.cod_item_pedido\r\n"
-						+ "inner join frete f on f.cod_frete = pedido.cod_frete\r\n"
-						+ "inner join status_pedido sp on sp.cod_status = pedido.cod_status\r\n"
-						+ "inner join produto p on p.cod_produto = ip.cod_produto \r\n"
-						+ "group by pedido.cod_pedido, c.nome_cliente, pedido.data_pedido, sp.descricao_status_pedido\r\n"
-						+ "ORDER BY cod_pedido ASC"
+				PreparedStatement p = con.prepareStatement("select pedido.cod_pedido, c2.nome_cliente, pedido.data_pedido, sp.descricao_status_pedido,\n"
+						+ "		sum(ip.quantidade * p.preco + f.valor_frete) as valor_total from pedido \n"
+						+ "		inner join cliente c2 on c2.cod_cliente = pedido.cod_cliente \n"
+						+ "		inner join item_pedido ip on ip.cod_pedido  = pedido.cod_pedido \n"
+						+ "		inner join frete f on f.cod_frete = pedido.cod_frete \n"
+						+ "		inner join status_pedido sp on sp.cod_status = pedido.cod_status \n"
+						+ "		inner join produto p on p.cod_produto = ip.cod_produto \n"
+						+ "		group by pedido.cod_pedido, c2.nome_cliente, pedido.data_pedido, sp.descricao_status_pedido \n"
+						+ "		ORDER BY cod_pedido ASC;"
 						+ "");
 				ResultSet r = p.executeQuery();			
 				
 				while (r.next()) {
 					Integer id = r.getInt("cod_pedido");
 					String nomeCliente = r.getString("nome_cliente");
-					String data_pedido = r.getString("data_pedido");
+					Date data_pedido = r.getDate("data_pedido");
 					String status= r.getString("descricao_status_pedido");
 					Double valor_total = r.getDouble("valor_total");
 					
@@ -372,7 +374,7 @@ public class DAO {
 					Integer id1 = r.getInt("cod_pedido");
 					Integer idCliente = r.getInt("cod_cliente");
 					String nomeCliente = r.getString("nome_cliente");
-					String data_pedido = r.getString("data_pedido");
+					Date data_pedido = r.getDate("data_pedido");
 		
 					String nome_cidade = r.getString("nome_cidade");
 					String cep = r.getString("cep");
@@ -415,12 +417,12 @@ public class DAO {
 			Pedido pedido = null;
 			ArrayList<Pedido> listaItemPedido = new ArrayList<Pedido>();
 			try {
-				PreparedStatement p = con.prepareStatement("select pedido.cod_pedido,  p.nome, p.preco, m.nome_marca, ip.quantidade,"
-						+ "(ip.quantidade * p.preco) as valor_total_item, p.cod_produto from pedido\r\n"
-						+ "inner join item_pedido ip on ip.cod_item_pedido = pedido.cod_item_pedido\r\n"
-						+ "inner join produto p on p.cod_produto = ip.cod_produto\r\n"
-						+ "inner join marca m on m.cod_marca = p.cod_marca\r\n"
-						+ "where pedido.cod_pedido = ?");
+				PreparedStatement p = con.prepareStatement("select pedido.cod_pedido,  p.nome, p.preco, m.nome_marca, ip.quantidade,\n"
+						+ "(ip.quantidade * p.preco) as valor_total_item, p.cod_produto from pedido\n"
+						+ "		inner join item_pedido ip on ip.cod_pedido = pedido.cod_pedido\n"
+						+ "		inner join produto p on p.cod_produto = ip.cod_produto\n"
+						+ "		inner join marca m on m.cod_marca = p.cod_marca\n"
+						+ "		where pedido.cod_pedido = ?");
 				p.setInt(1, id);
 				ResultSet r = p.executeQuery();			
 				while (r.next()) {
@@ -490,10 +492,11 @@ public class DAO {
 				Connection con = c.getConnection();
 				ArrayList<Pedido> listaPedidosRecentes = new ArrayList<Pedido>();
 				try {
-					PreparedStatement p = con.prepareStatement("select p.cod_pedido, fp.descricao_forma_pagamento, sp.descricao_status_pedido from pedido p \r\n"
-							+ "inner join forma_pagamento fp on fp.cod_forma_pagamento = p.cod_forma_pagamento \r\n"
-							+ "inner join status_pedido sp on sp.cod_status = p.cod_status \r\n"
-							+ "where data_pedido between ('10012022') and ('16012023')"
+					PreparedStatement p = con.prepareStatement("select p.cod_pedido, fp.descricao , sp.descricao_status_pedido from pedido p \n"
+							+ "		inner join status_pedido sp on sp.cod_status = p.cod_status\n"
+							+ "		inner join pagamento p2 on p2.cod_pagamento = p.cod_pagamento \n"
+							+ "	    inner join forma_pagamento fp on fp.cod_forma_pagamento = p2.cod_forma_pagamento \n"
+							+ "		where data_pedido between (\"2022-01-01\") and (\"2023-01-01\")"
 							+ "");
 					ResultSet r = p.executeQuery();			
 					

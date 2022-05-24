@@ -136,10 +136,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<br>
-				<a href="ServletPimpolhos?page=1">1</a>
-				<a href="ServletPimpolhos?page=2">2</a>
-				<a href="ServletPimpolhos?page=3">3</a>
+				
 			</div>
 		</div>
 	</div>

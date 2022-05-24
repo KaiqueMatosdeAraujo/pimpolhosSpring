@@ -111,7 +111,7 @@ public class PedidoController {
 	public ResponseEntity<DetalhePedidoDTO> cadastrar(@PathVariable("id") Integer id , @RequestBody @Valid PedidoForm pedidoForm , 
 			UriComponentsBuilder uriBuilder) throws ParseException{
 	Optional<Cliente> cliente = clienteRepository.findById(id);
-	//Optional<Cliente> endereço = clienteRepository.findById(id);
+	Optional<Cliente> endereço = clienteRepository.findById(id);
 	Pedido pedido = pedidoForm.converter(clienteRepository , freteRepository, statusPedidoRepository, pagamentoRepository , enderecoRepository);
 	pedidoRepository.save(pedido);
 	pedidoForm.cadastrar(pedido, cliente.get() , pedidoRepository );

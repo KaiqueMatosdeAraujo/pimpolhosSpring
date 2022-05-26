@@ -13,8 +13,10 @@ public class ClienteDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String nomeCliente;
 	private String cpf;
-	private LocalDate dataNasc;
+	private String dataNasc;
 	private String email;
+	private String ddd;
+	private String telefone;
 	
 	
 	public ClienteDTO(Cliente cliente) {
@@ -22,6 +24,8 @@ public class ClienteDTO implements Serializable{
 		this.cpf = cliente.getCpf();
 		this.dataNasc = cliente.getDataNasc();
 		this.email = cliente.getEmail();
+		this.ddd = cliente.getDdd();
+		this.telefone = cliente.getNumeroTelefone();
 	
 	}
 	
@@ -36,7 +40,7 @@ public class ClienteDTO implements Serializable{
 		return cpf;
 	}
 
-	public LocalDate getDataNasc() {
+	public String getDataNasc() {
 		return dataNasc;
 	}
 
@@ -52,13 +56,35 @@ public class ClienteDTO implements Serializable{
 		this.cpf = cpf;
 	}
 
-	public void setDataNasc(LocalDate dataNasc) {
+	public void setDataNasc(String dataNasc) {
 		this.dataNasc = dataNasc;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	
+
+	public String getDdd() {
+		return ddd;
+	}
+
+
+	public void setDdd(String ddd) {
+		this.ddd = ddd;
+	}
+
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
 
 	public static List<ClienteDTO> converter(List<Cliente> clientes){
 		return clientes.stream().map(ClienteDTO::new).collect(Collectors.toList());

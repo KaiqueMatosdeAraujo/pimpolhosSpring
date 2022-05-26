@@ -22,7 +22,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.rd.pimpolhos.PimpolhosSpring.dto.ClienteDTO;
 import br.com.rd.pimpolhos.PimpolhosSpring.dto.DetalhePedidoDTO;
-import br.com.rd.pimpolhos.PimpolhosSpring.dto.TelefoneDTO;
 import br.com.rd.pimpolhos.PimpolhosSpring.model.Cliente;
 import br.com.rd.pimpolhos.PimpolhosSpring.model.Endereco;
 import br.com.rd.pimpolhos.PimpolhosSpring.model.Pedido;
@@ -54,19 +53,19 @@ public class ClienteController {
 	}
 	
 	//RETORNA TELEFONE POR CLIENTE
-	@GetMapping("/{id}/telefone")
-	public ResponseEntity<TelefoneDTO> listar(@PathVariable("id") Integer id ,  Integer idtelefone) {
-		Optional<Telefone> telefone = telefoneRepository.findById(idtelefone);
-		Optional<Cliente> cliente = clienteRepository.findById(id);
-		List<Telefone>telefones = new ArrayList<>();
-		telefones = cliente.get().getTelefone();
-		
-		if (cliente.isPresent() && telefones.contains(telefone.get())) {
-			return ResponseEntity.ok().body(new TelefoneDTO(telefone.get()));
-		}
-		
-		return ResponseEntity.notFound().build(); 
-	}
+//	@GetMapping("/{id}/telefone")
+//	public ResponseEntity<TelefoneDTO> listar(@PathVariable("id") Integer id ,  Integer idtelefone) {
+//		Optional<Telefone> telefone = telefoneRepository.findById(idtelefone);
+//		Optional<Cliente> cliente = clienteRepository.findById(id);
+//		List<Telefone>telefones = new ArrayList<>();
+//		telefones = cliente.get().getTelefone();
+//		
+//		if (cliente.isPresent() && telefones.contains(telefone.get())) {
+//			return ResponseEntity.ok().body(new TelefoneDTO(telefone.get()));
+//		}
+//		
+//		return ResponseEntity.notFound().build(); 
+//	}
 	
 	
 	//RETORNA O CLIENTE DTO

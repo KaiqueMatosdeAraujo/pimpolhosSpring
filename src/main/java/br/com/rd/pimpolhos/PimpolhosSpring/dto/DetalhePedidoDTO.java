@@ -15,7 +15,8 @@ import br.com.rd.pimpolhos.PimpolhosSpring.model.Telefone;
 
 public class DetalhePedidoDTO {
 
-	private Date dataPedido;
+	private Integer codPedido;
+	private LocalDate dataPedido;
 	private String descricaoFrete;
 	private BigDecimal valorFrete;
 	private String statusPedido;
@@ -49,6 +50,7 @@ public class DetalhePedidoDTO {
 		this.nomeCliente = pedido.getCliente().getNomeCliente();
 		this.cpfCliente = pedido.getCliente().getCpf();
 		this.endereco = pedido.getEndereco();
+		this.codPedido = pedido.getCodPedido();
 //		this.telefone = pedido.getCliente().getTelefone();
 //		this.numeroTelefoneCliente = pedido.getCliente().getTelefone().
 //		this.dddCliente
@@ -59,11 +61,19 @@ public class DetalhePedidoDTO {
 //		this.estadoCliente
 	}
 
-	public Date getDataPedido() {
+	public Integer getCodPedido() {
+		return codPedido;
+	}
+
+	public void setCodPedido(Integer codPedido) {
+		this.codPedido = codPedido;
+	}
+
+	public LocalDate getDataPedido() {
 		return dataPedido;
 	}
 
-	public void setDataPedido(Date dataPedido) {
+	public void setDataPedido(LocalDate dataPedido) {
 		this.dataPedido = dataPedido;
 	}
 
@@ -91,13 +101,13 @@ public class DetalhePedidoDTO {
 		this.statusPedido = statusPedido;
 	}
 
-	public List<ItemPedidoDTO> getItemPedido() {
-		List<ItemPedidoDTO> itemPedidoConvertido = ItemPedidoDTO.converter(itemPedido);
-		return itemPedidoConvertido;
-	}
-//	public List<ItemPedido> getItemPedido(){
-//		return itemPedido;
+//	public List<ItemPedidoDTO> getItemPedido() {
+//		List<ItemPedidoDTO> itemPedidoConvertido = ItemPedidoDTO.converter(itemPedido);
+//		return itemPedidoConvertido;
 //	}
+	public List<ItemPedido> getItemPedido(){
+		return itemPedido;
+	}
 
 	public void setItemPedido(List<ItemPedido> itemPedido) {
 		this.itemPedido = itemPedido;

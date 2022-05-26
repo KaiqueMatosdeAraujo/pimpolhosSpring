@@ -9,6 +9,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,19 +32,25 @@ public class ClienteService {
 	
 	@Autowired
 	private final ClienteRepository clienteRepository;
+	@Autowired
 	private final TelefoneRepository telefoneRepository;
+	@Autowired
 	private final EnderecoRepository enderecoRepository;
 	//private final EnderecoClienteRepository enderecoClienteRepository;
+	@Autowired
 	private final EstadoRepository estadoRepository;
 	//private final TipoTelefoneRepository tipoTelefoneRepository;
 	private Boolean sistema = true;
 	
-	public ClienteService(ClienteRepository clienteRepository, TelefoneRepository telefoneRepository, EnderecoRepository enderecoRepository, EstadoRepository estadoRepository) {
+	PasswordEncoder passwordEncoder;
+	
+	public ClienteService(ClienteRepository clienteRepository, TelefoneRepository telefoneRepository, EnderecoRepository enderecoRepository, EstadoRepository estadoRepository , PasswordEncoder passwordEncoder) {
 		this.clienteRepository = clienteRepository;
 		this.telefoneRepository = telefoneRepository;
 		this.enderecoRepository = enderecoRepository;
 		//this.enderecoClienteRepository = enderecoClienteRepository;
 		this.estadoRepository = estadoRepository;
+		this.passwordEncoder = passwordEncoder;
 		//this.tipoTelefoneRepository = tipoTelefoneRepository;
 	}
 
@@ -77,6 +84,9 @@ public class ClienteService {
 	
 	
 	public void salvar(Cliente cliente) {
+		cliente.setSenha(this.passwordEncoder.encode(cliente.getSenha()));
+		cliente.setCpf(cliente.getCpf().replace(".", "").replace("-", ""));
+
 		clienteRepository.save(cliente);
 	}
 	

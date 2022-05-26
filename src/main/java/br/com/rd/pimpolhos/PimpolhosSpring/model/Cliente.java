@@ -20,14 +20,19 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
 @Table(name="clientes")
-public class Cliente{
+public class Cliente implements UserDetails{
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,20 +43,28 @@ public class Cliente{
 	private String nomeCliente;
 	
 	@Column(nullable = false)
-	@Size(max=11)
 	private String cpf;
 	
 	@Column(nullable = false)
-	private LocalDate dataNasc;
+	private String dataNasc;
+	
 	
 	@Size(max=50)
 	@Column(nullable = false)
 	private String email;
 	
-	@Size(max=50)
+	
 	@Column(nullable = false)
 	private String senha;
 	
+	
+	@Size(max=3)
+	@Column(nullable = false)
+	private String ddd;
+	
+	@Size(max=9)
+	@Column(nullable = false)
+	private String numeroTelefone;
 
 	@ManyToMany
 	@JoinTable(
@@ -61,12 +74,12 @@ public class Cliente{
 	Set<Produto> produto;
 
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(
-    name = "cliente_telefone",
-    joinColumns = {@JoinColumn(name = "cod_telefone")},
-    inverseJoinColumns = {@JoinColumn(name = "cod_cliente")})
-	private List<Telefone> telefone;
+//	@ManyToMany(cascade = CascadeType.ALL)
+//	@JoinTable(
+//    name = "cliente_telefone",
+//    joinColumns = {@JoinColumn(name = "cod_telefone")},
+//    inverseJoinColumns = {@JoinColumn(name = "cod_cliente")})
+//	private List<Telefone> telefone;
 	
 	
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -75,6 +88,10 @@ public class Cliente{
     joinColumns = {@JoinColumn(name = "cod_cliente")},
     inverseJoinColumns = {@JoinColumn(name = "cod_endereco")})
 	private List<Endereco> endereco;
+	
+	@Fetch(FetchMode.SELECT)
+	@ManyToMany(fetch = FetchType.EAGER)
+	private List<Perfil> perfis = new ArrayList<>();
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
@@ -89,9 +106,9 @@ public class Cliente{
 	}
 	
 
-	public Cliente(Integer codCliente, @Size(max = 50) String nomeCliente, @Size(max = 11) String cpf,
-			LocalDate dataNasc, @Size(max = 50) String email, @Size(max = 50) String senha,
-			List<Telefone> telefone, List<Endereco> endereco, Pedido pedido) {
+	public Cliente(Integer codCliente, @Size(max = 50) String nomeCliente, String cpf,
+			String dataNasc, @Size(max = 50) String email,  String senha, @Size(max = 3) String ddd,
+			@Size(max = 9) String numeroTelefone, List<Endereco> endereco) {
 		super();
 		this.codCliente = codCliente;
 		this.nomeCliente = nomeCliente;
@@ -99,9 +116,9 @@ public class Cliente{
 		this.dataNasc = dataNasc;
 		this.email = email;
 		this.senha = senha;
-		this.telefone = telefone;
+		this.ddd = ddd;
+		this.numeroTelefone = numeroTelefone;
 		this.endereco = endereco;
-		this.pedidos = pedidos;
 	}
 
 	@Override
@@ -129,62 +146,96 @@ public class Cliente{
 		return true;
 	}
 
-	public List<Telefone> getTelefone() {
-		return telefone;
-	}
 	
-
-	public void setTelefone(List<Telefone> telefone) {
-		this.telefone = telefone;
-	}
 
 
 	public Integer getCodCliente() {
 		return codCliente;
 	}
 
+
 	public void setCodCliente(Integer codCliente) {
 		this.codCliente = codCliente;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	public String getNomeCliente() {
 		return nomeCliente;
 	}
 
+
 	public void setNomeCliente(String nomeCliente) {
 		this.nomeCliente = nomeCliente;
 	}
+
 
 	public String getCpf() {
 		return cpf;
 	}
 
+
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
-	public LocalDate getDataNasc() {
+
+	public String getDataNasc() {
 		return dataNasc;
 	}
 
-	public void setDataNasc(LocalDate dataNasc) {
+
+	public void setDataNasc(String dataNasc) {
 		this.dataNasc = dataNasc;
 	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 
 	public String getSenha() {
 		return senha;
 	}
 
+
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+
+	public String getDdd() {
+		return ddd;
+	}
+
+
+	public void setDdd(String ddd) {
+		this.ddd = ddd;
+	}
+
+
+	public String getNumeroTelefone() {
+		return numeroTelefone;
+	}
+
+
+	public void setNumeroTelefone(String numeroTelefone) {
+		this.numeroTelefone = numeroTelefone;
+	}
+
+
+	public Set<Produto> getProduto() {
+		return produto;
+	}
+
+
+	public void setProduto(Set<Produto> produto) {
+		this.produto = produto;
 	}
 
 
@@ -197,7 +248,16 @@ public class Cliente{
 		this.endereco = endereco;
 	}
 
-	
+
+	public List<Perfil> getPerfis() {
+		return perfis;
+	}
+
+
+	public void setPerfis(List<Perfil> perfis) {
+		this.perfis = perfis;
+	}
+
 
 	public List<Pedido> getPedidos() {
 		return pedidos;
@@ -208,23 +268,6 @@ public class Cliente{
 		this.pedidos = pedidos;
 	}
 
-	
-	
-
-//	public Set<Produto> getProduto() {
-//		return produto;
-//	}
-
-
-	public void setProduto(Set<Produto> produto) {
-		this.produto = produto;
-	}
-	
-	
-
-//	public Collection<? extends GrantedAuthority> getAuthorities() {
-//		return this.perfis;
-//	}
 
 	public List<Cartao> getCartao() {
 		return cartao;
@@ -235,6 +278,9 @@ public class Cliente{
 		this.cartao = cartao;
 	}
 
+	@Override public Collection<? extends GrantedAuthority> getAuthorities() { 
+		return this.perfis; 
+	} 
 
 	public String getPassword() {
 		// TODO Auto-generated method stub
@@ -270,15 +316,6 @@ public class Cliente{
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Cliente [codCliente=" + codCliente + ", nomeCliente=" + nomeCliente + ", cpf=" + cpf + ", dataNasc="
-				+ dataNasc + ", email=" + email + ", senha=" + senha + ", telefone=" + telefone + ", endereco="
-				+ endereco + "]";
-	}
-
 	
-
-
 	
 }

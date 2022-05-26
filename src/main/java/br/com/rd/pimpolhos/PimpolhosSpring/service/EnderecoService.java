@@ -39,70 +39,8 @@ public class EnderecoService {
 	}
 	
 	
-	private void deletar(Integer id) {
-		enderecoRepository.deleteById(id);
-	}
-	
-	private Iterable<Endereco> visualizar() {
-		 return enderecoRepository.findAll();
-	}
-	
-	private void atualizar(Scanner sc) {
-		System.out.println("Informe o Id do Endereco a ser atualizado");
-		Integer codEndereco = sc.nextInt();
-		
-		Endereco endereco = enderecoRepository.findById(codEndereco).get();
-		
-		
-		System.out.println("Informe o novo nome da Cidade");
-		String nomeCidade = sc.next();
-		System.out.println("Informe o novo cep ");
-		String cep = sc.next();
-		System.out.println("Informe o novo nome da rua");
-		String nomeRua = sc.next();	
-		System.out.println("Informe o novo numero da casa");
-		String numeroCasa = sc.next();
-		System.out.println("Informe o novo complemento");
-		String complemento = sc.next();
-		System.out.println("Informe o novo bairro");
-		String bairro = sc.next();
-		System.out.println("Informe o novo Ponto de referencia");
-		String pontoReferencia = sc.next();
-		
-		
-	System.out.println("Informe o novo codigo do estado");
-		Integer codEstado = sc.nextInt();
-		
-		Optional<Estado> estado = estadoRepository.findById(codEstado);
-		Optional<Endereco> enderecos = enderecoRepository.findById(codEndereco);
-		
-		endereco.setNomeCidade(nomeCidade);
-		endereco.setCep(cep);
-		endereco.setNomeRua(nomeRua);
-		endereco.setNumeroCasa(numeroCasa);
-		endereco.setComplemento(complemento);
-		endereco.setBairro(bairro);
-		endereco.setPontoReferencia(pontoReferencia);
-		endereco.setEstado(estado.get());
-		
-		enderecoRepository.save(endereco);
-		
-		
-//		System.out.println("deseja alterar o estado do endereco [s/n] ? ");
-//		String resposta = sc.next();
-//		if (resposta.equals("s")) {
-//			List<Estado> estados = endereco.getEstado();
-//			estados.forEach(estado -> System.out.println(estado));
-//			System.out.println("informe o Id do Estado que deseja alterar:");
-//			Integer estadoId = Integer.parseInt(sc.next());
-//			
-//			Optional<Estado> estado = estadoRepository.findById(estadoId);
-//			//estados.add(atualizarEstado(sc, estado.get()));
-//			endereco.setEstado(estados);
-//		}
-//		enderecoRepository.save(endereco);
-		System.out.println("Endereco Atualizado com Sucesso");
-
+	public void deletar(Integer cod_endereco) {
+		enderecoRepository.deletarEndereco(cod_endereco);
 	}
 
 	public Endereco salvar(Endereco endereco, Integer codCliente) {

@@ -16,6 +16,7 @@ public class EnderecoDTO {
 	private String complemento;
 	private String bairro;
 	private String pontoReferencia;
+	private String estado;
 	
 	//private List<Cliente> cliente;
 	
@@ -29,6 +30,7 @@ public class EnderecoDTO {
 		this.complemento = endereco.getComplemento();
 		this.bairro = endereco.getBairro();
 		this.pontoReferencia = endereco.getPontoReferencia();
+		this.estado = endereco.getEstado().getDescricao_estado();
 		//this.cliente = endereco.getCliente();
 	}
 	
@@ -125,6 +127,14 @@ public class EnderecoDTO {
 //	}
 	
 	
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
 	public static List<EnderecoDTO> converter(List<Endereco> enderecos){
 		return enderecos.stream().map(EnderecoDTO::new).collect(Collectors.toList());
 	}

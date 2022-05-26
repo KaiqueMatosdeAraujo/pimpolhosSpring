@@ -23,6 +23,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.rd.pimpolhos.PimpolhosSpring.dto.ItemPedidoDTO;
 import br.com.rd.pimpolhos.PimpolhosSpring.dto.PedidoDTO;
+import br.com.rd.pimpolhos.PimpolhosSpring.dto.DTOPedido;
 import br.com.rd.pimpolhos.PimpolhosSpring.dto.DetalhePedidoDTO;
 import br.com.rd.pimpolhos.PimpolhosSpring.form.ItemPedidoForm;
 import br.com.rd.pimpolhos.PimpolhosSpring.form.PedidoForm;
@@ -36,6 +37,7 @@ import br.com.rd.pimpolhos.PimpolhosSpring.repository.PagamentoRepository;
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.PedidoRepository;
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.StatusPedidoRepository;
 import br.com.rd.pimpolhos.PimpolhosSpring.service.ItemPedidoService;
+import br.com.rd.pimpolhos.PimpolhosSpring.service.PedidoService;
 
 @RestController
 @RequestMapping("/pedido")
@@ -57,6 +59,8 @@ public class PedidoController {
 	private ItemPedidoService itemPedidoService;
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	@Autowired
+	private PedidoService pedidoService;
 
 
 	//RETORNA PEDIDO POR CLIENTE
@@ -89,37 +93,76 @@ public class PedidoController {
 		return ResponseEntity.notFound().build(); 
 	}
 	
-	
+	//RETORNA PEDIDO POR CLIENTE
+	@GetMapping("/{id}/{idpedido}/meusPedidos")
+	public ResponseEntity<DTOPedido> listarMeusPedidos(@PathVariable("id") Integer id ,@PathVariable("idpedido")  Integer idpedido) {
+		Optional<Pedido> pedido = pedidoRepository.findById(idpedido);
+		Optional<Cliente> cliente = clienteRepository.findById(id);
+		List<Pedido>pedidos = new ArrayList<>();
+		pedidos = cliente.get().getPedidos();
+		
+		if (cliente.isPresent() && pedidos.contains(pedido.get())) {
+			return ResponseEntity.ok().body(new DTOPedido(pedido.get()));
+		}
+		
+		return ResponseEntity.notFound().build(); 
+	}
 	
 	//CADASTRAR ITEM AO PEDIDO
+//	@PostMapping("/novo")
+//	public ResponseEntity <ItemPedidoDTO> insert (@RequestBody ItemPedidoForm dto){
+//	    try { 
+//	    	ItemPedidoDTO entity = itemPedidoService.insert(dto);
+//	        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(entity.getItemPedidoId()).toUri();
+//	        
+//	        return ResponseEntity.created(uri).body(entity);
+//	     } catch (ServiceException e) {
+//	           return ResponseEntity.unprocessableEntity().build();
+//	     }
+//	}
+
+	
 	@PostMapping("/novo")
-	public ResponseEntity <ItemPedidoDTO> insert (@RequestBody ItemPedidoForm dto){
+	public ResponseEntity <ItemPedidoDTO> insert (@RequestBody List<ItemPedidoForm> dto){
+		
+		for(int i = 0; i < dto.size(); i++) {	
+			ItemPedidoDTO entity = itemPedidoService.insert(dto.get(i));	
+		}
+		
+		return null;
+	}
+
+	
+	
+	@PostMapping("/cadastrar")
+	public ResponseEntity <DetalhePedidoDTO> insert (@RequestBody PedidoForm dto){
 	    try { 
-	    	ItemPedidoDTO entity = itemPedidoService.insert(dto);
-	        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(entity.getItemPedidoId()).toUri();
-	        
-	        return ResponseEntity.created(uri).body(entity);
+	    	DetalhePedidoDTO obj = pedidoService.cadastrar(dto);
+	        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getCodPedido()).toUri();
+	        return ResponseEntity.created(uri).body(obj);
 	     } catch (ServiceException e) {
 	           return ResponseEntity.unprocessableEntity().build();
 	     }
 	}
-
+	
+	
+	
 	
 //	CADASTRAR PEDIDO ASSOCIANDO A UM CLIENTE
-	@PostMapping("{id}/cadastrar")
-	@Transactional
-	public ResponseEntity<DetalhePedidoDTO> cadastrar(@PathVariable("id") Integer id , @RequestBody @Valid PedidoForm pedidoForm , 
-			UriComponentsBuilder uriBuilder) throws ParseException{
-	Optional<Cliente> cliente = clienteRepository.findById(id);
-	Optional<Cliente> endereço = clienteRepository.findById(id);
-	Pedido pedido = pedidoForm.converter(clienteRepository , freteRepository, statusPedidoRepository, pagamentoRepository , enderecoRepository);
-	pedidoRepository.save(pedido);
-	pedidoForm.cadastrar(pedido, cliente.get() , pedidoRepository );
-	
-	URI uri = uriBuilder.path("/pedido/{id}").buildAndExpand(pedido.getCodPedido()).toUri();
-	return ResponseEntity.created(uri).body(new DetalhePedidoDTO(pedido));
-
-}
+//	@PostMapping("{id}/cadastrar")
+//	@Transactional
+//	public ResponseEntity<DetalhePedidoDTO> cadastrar(@PathVariable("id") Integer id , @RequestBody @Valid PedidoForm pedidoForm , 
+//			UriComponentsBuilder uriBuilder) throws ParseException{
+//	Optional<Cliente> cliente = clienteRepository.findById(id);
+//	Optional<Cliente> endereço = clienteRepository.findById(id);
+//	Pedido pedido = pedidoForm.converter(clienteRepository , freteRepository, statusPedidoRepository, pagamentoRepository , enderecoRepository);
+//	pedidoRepository.save(pedido);
+//	pedidoForm.cadastrar(pedido, cliente.get() , pedidoRepository );
+//	
+//	URI uri = uriBuilder.path("/pedido/{id}").buildAndExpand(pedido.getCodPedido()).toUri();
+//	return ResponseEntity.created(uri).body(new DetalhePedidoDTO(pedido));
+//
+//}
 
 //	public ResponseEntity<Pedido> cadastrar(@RequestBody @Valid Pedido pedido, UriComponentsBuilder uriBuilder){
 //	pedidoRepository.save(pedido);

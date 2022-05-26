@@ -32,9 +32,9 @@ public class Telefone {
 	private String numero_telefone;
 
 	
-	@JsonIgnore
-	@ManyToMany(mappedBy = "telefone", fetch = FetchType.EAGER,cascade = CascadeType.ALL) 
-	List<Cliente> cliente; 
+//	@JsonIgnore
+//	@ManyToMany(mappedBy = "telefone", fetch = FetchType.EAGER,cascade = CascadeType.ALL) 
+//	List<Cliente> cliente; 
 	
 	
 	@Column(nullable = false)
@@ -66,13 +66,13 @@ public class Telefone {
 		this.numero_telefone = numero_telefone;
 	}
 
-	public List<Cliente> getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(List<Cliente> cliente) {
-		this.cliente = cliente;
-	}
+//	public List<Cliente> getCliente() {
+//		return cliente;
+//	}
+//
+//	public void setCliente(List<Cliente> cliente) {
+//		this.cliente = cliente;
+//	}
 
 	public String getDescricao_telefone() {
 		return descricao_telefone;

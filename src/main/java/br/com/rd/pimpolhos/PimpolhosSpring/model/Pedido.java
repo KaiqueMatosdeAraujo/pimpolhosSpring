@@ -28,7 +28,7 @@ public class Pedido {
 	private Integer codPedido;
 	
 	@Column(nullable = false)
-	private Date dataPedido;
+	private LocalDate dataPedido;
 //	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 	
 
@@ -41,7 +41,7 @@ public class Pedido {
 	private StatusPedido statusPedido; 
 	
 	
-	@OneToMany(mappedBy="codPedido")
+	@OneToMany(mappedBy="codPedido", cascade = CascadeType.ALL)
 	private List<ItemPedido> itemPedido;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -57,10 +57,6 @@ public class Pedido {
 	@ManyToOne(fetch=FetchType.EAGER )
 	@JoinColumn(name="codEndereco")
 	private Endereco endereco;
-	
-	@ManyToOne(fetch=FetchType.EAGER )
-	@JoinColumn(name="codTelefone")
-	private Telefone telefone;
 	
 	
 	@OneToOne(mappedBy = "pedido")
@@ -87,7 +83,7 @@ public class Pedido {
 //	}
 	
 	//alteração
-	public Pedido(Date dataPedido, Frete frete, StatusPedido statusPedido, Pagamento pagamento, Cliente cliente,
+	public Pedido(LocalDate dataPedido, Frete frete, StatusPedido statusPedido, Pagamento pagamento, Cliente cliente,
 			Endereco endereco) {
 		super();
 		this.dataPedido = dataPedido;
@@ -117,11 +113,11 @@ public class Pedido {
 		this.codPedido = codPedido;
 	}
 
-	public Date getDataPedido() {
+	public LocalDate getDataPedido() {
 		return dataPedido;
 	}
 
-	public void setDataPedido(Date dataPedido) {
+	public void setDataPedido(LocalDate dataPedido) {
 		this.dataPedido = dataPedido;
 	}
 
@@ -171,13 +167,13 @@ public class Pedido {
 	
 	
 
-	public Telefone getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(Telefone telefone) {
-		this.telefone = telefone;
-	}
+//	public Telefone getTelefone() {
+//		return telefone;
+//	}
+//
+//	public void setTelefone(Telefone telefone) {
+//		this.telefone = telefone;
+//	}
 
 	public NotaFiscal getNotaFiscal() {
 		return notaFiscal;

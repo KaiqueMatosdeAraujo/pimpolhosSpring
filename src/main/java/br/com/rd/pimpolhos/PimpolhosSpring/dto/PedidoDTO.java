@@ -1,21 +1,19 @@
 package br.com.rd.pimpolhos.PimpolhosSpring.dto;
 
 import java.math.BigDecimal;
-
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import br.com.rd.pimpolhos.PimpolhosSpring.model.Cliente;
 import br.com.rd.pimpolhos.PimpolhosSpring.model.Endereco;
 import br.com.rd.pimpolhos.PimpolhosSpring.model.ItemPedido;
 import br.com.rd.pimpolhos.PimpolhosSpring.model.Pagamento;
 import br.com.rd.pimpolhos.PimpolhosSpring.model.Pedido;
-import br.com.rd.pimpolhos.PimpolhosSpring.model.Telefone;
 
 public class PedidoDTO {
-
-	private Date dataPedido;
+	private Integer codPedido;
+	private LocalDate dataPedido;
 	private String descricaoFrete;
 	private BigDecimal valorFrete;
 	private String statusPedido;
@@ -36,6 +34,7 @@ public class PedidoDTO {
 	private String estadoCliente;
 	
 	public PedidoDTO(Pedido pedido) {
+		this.codPedido = pedido.getCodPedido();
 		this.dataPedido = pedido.getDataPedido();
 		this.descricaoFrete = pedido.getFrete().getDescricaoFrete();
 		this.valorFrete = pedido.getFrete().getValorFrete();
@@ -57,11 +56,19 @@ public class PedidoDTO {
 //		this.estadoCliente
 	}
 
-	public Date getDataPedido() {
+	public Integer getCodPedido() {
+		return codPedido;
+	}
+
+	public void setCodPedido(Integer codPedido) {
+		this.codPedido = codPedido;
+	}
+
+	public LocalDate getDataPedido() {
 		return dataPedido;
 	}
 
-	public void setDataPedido(Date dataPedido) {
+	public void setDataPedido(LocalDate dataPedido) {
 		this.dataPedido = dataPedido;
 	}
 

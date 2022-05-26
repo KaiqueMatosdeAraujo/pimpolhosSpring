@@ -1,6 +1,7 @@
 package br.com.rd.pimpolhos.PimpolhosSpring.model;
 
-import java.time.LocalDate;
+
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -43,19 +44,21 @@ public class Cliente implements UserDetails{
 	private String nomeCliente;
 	
 	@Column(nullable = false)
-	@Size(max=11)
 	private String cpf;
 	
 	@Column(nullable = false)
-	private LocalDate dataNasc;
+	private String dataNasc;
+	
 	
 	@Size(max=50)
 	@Column(nullable = false)
 	private String email;
 	
-	@Size(max=50)
+	
 	@Column(nullable = false)
 	private String senha;
+	
+	
 	
 
 	@ManyToMany
@@ -66,12 +69,21 @@ public class Cliente implements UserDetails{
 	Set<Produto> produto;
 
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(
-    name = "cliente_telefone",
-    joinColumns = {@JoinColumn(name = "cod_telefone")},
-    inverseJoinColumns = {@JoinColumn(name = "cod_cliente")})
-	private List<Telefone> telefone;
+	
+	@Size(max=3)
+	@Column(nullable = false)
+	private String ddd;
+	
+	@Size(max=9)
+	@Column(nullable = false)
+	private String numeroTelefone;
+	
+//	@ManyToMany(cascade = CascadeType.ALL)
+//	@JoinTable(
+//    name = "cliente_telefone",
+//    joinColumns = {@JoinColumn(name = "cod_telefone")},
+//    inverseJoinColumns = {@JoinColumn(name = "cod_cliente")})
+//	private List<Telefone> telefone;
 	
 	
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -98,9 +110,11 @@ public class Cliente implements UserDetails{
 	}
 	
 
-	public Cliente(Integer codCliente, @Size(max = 50) String nomeCliente, @Size(max = 11) String cpf,
-			LocalDate dataNasc, @Size(max = 50) String email, @Size(max = 50) String senha,
-			List<Telefone> telefone, List<Endereco> endereco, Pedido pedido) {
+
+
+	public Cliente(Integer codCliente, @Size(max = 50) String nomeCliente, String cpf,
+			String dataNasc, @Size(max = 50) String email,  String senha, @Size(max = 3) String ddd,
+			@Size(max = 9) String numeroTelefone, List<Endereco> endereco) {
 		super();
 		this.codCliente = codCliente;
 		this.nomeCliente = nomeCliente;
@@ -108,10 +122,13 @@ public class Cliente implements UserDetails{
 		this.dataNasc = dataNasc;
 		this.email = email;
 		this.senha = senha;
-		this.telefone = telefone;
+		this.ddd = ddd;
+		this.numeroTelefone = numeroTelefone;
 		this.endereco = endereco;
-		this.pedidos = pedidos;
 	}
+
+
+
 
 	@Override
 	public int hashCode() {
@@ -138,19 +155,49 @@ public class Cliente implements UserDetails{
 		return true;
 	}
 
-	public List<Telefone> getTelefone() {
-		return telefone;
-	}
+//	public List<Telefone> getTelefone() {
+//		return telefone;
+//	}
+//	
+//
+//	public void setTelefone(List<Telefone> telefone) {
+//		this.telefone = telefone;
+//	}
+
 	
-
-	public void setTelefone(List<Telefone> telefone) {
-		this.telefone = telefone;
-	}
-
+	
 
 	public Integer getCodCliente() {
 		return codCliente;
 	}
+
+	public String getDdd() {
+		return ddd;
+	}
+
+
+
+
+	public void setDdd(String ddd) {
+		this.ddd = ddd;
+	}
+
+
+
+
+	public String getNumeroTelefone() {
+		return numeroTelefone;
+	}
+
+
+
+
+	public void setNumeroTelefone(String numeroTelefone) {
+		this.numeroTelefone = numeroTelefone;
+	}
+
+
+
 
 	public void setCodCliente(Integer codCliente) {
 		this.codCliente = codCliente;
@@ -180,11 +227,11 @@ public class Cliente implements UserDetails{
 		this.cpf = cpf;
 	}
 
-	public LocalDate getDataNasc() {
+	public String getDataNasc() {
 		return dataNasc;
 	}
 
-	public void setDataNasc(LocalDate dataNasc) {
+	public void setDataNasc(String dataNasc) {
 		this.dataNasc = dataNasc;
 	}
 
@@ -265,12 +312,6 @@ public class Cliente implements UserDetails{
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Cliente [codCliente=" + codCliente + ", nomeCliente=" + nomeCliente + ", cpf=" + cpf + ", dataNasc="
-				+ dataNasc + ", email=" + email + ", senha=" + senha + ", telefone=" + telefone + ", endereco="
-				+ endereco + "]";
-	}
 
 
 	

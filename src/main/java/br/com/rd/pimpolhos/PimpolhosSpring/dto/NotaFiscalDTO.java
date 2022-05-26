@@ -32,7 +32,7 @@ public class NotaFiscalDTO implements Serializable{
 	private String naturezaOperacao;
 	//pedido
 	private Integer pedido;
-	private Date dataPedido;
+	private LocalDate dataPedido;
 	private String descricaoFrete;
 	private BigDecimal valorFretePedido;
 	//status pedido
@@ -251,12 +251,12 @@ public class NotaFiscalDTO implements Serializable{
 	}
 
 
-	public Date getDataPedido() {
+	public LocalDate getDataPedido() {
 		return dataPedido;
 	}
 
 
-	public void setDataPedido(Date dataPedido) {
+	public void setDataPedido(LocalDate dataPedido) {
 		this.dataPedido = dataPedido;
 	}
 

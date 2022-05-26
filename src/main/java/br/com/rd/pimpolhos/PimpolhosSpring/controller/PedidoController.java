@@ -1,17 +1,13 @@
 package br.com.rd.pimpolhos.PimpolhosSpring.controller;
 
 import java.net.URI;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.rd.pimpolhos.PimpolhosSpring.dto.ItemPedidoDTO;
 import br.com.rd.pimpolhos.PimpolhosSpring.dto.PedidoDTO;
@@ -35,6 +30,7 @@ import br.com.rd.pimpolhos.PimpolhosSpring.repository.PagamentoRepository;
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.PedidoRepository;
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.StatusPedidoRepository;
 import br.com.rd.pimpolhos.PimpolhosSpring.service.ItemPedidoService;
+import br.com.rd.pimpolhos.PimpolhosSpring.service.PedidoService;
 
 @RestController
 @RequestMapping("/pedido")
@@ -56,7 +52,8 @@ public class PedidoController {
 	private ItemPedidoService itemPedidoService;
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-
+	@Autowired
+	private PedidoService pedidoService;
 
 	//RETORNA PEDIDO POR CLIENTE
 	@GetMapping("/{id}/{idpedido}")
@@ -73,35 +70,57 @@ public class PedidoController {
 		return ResponseEntity.notFound().build(); 
 	}
 	
+	// METODO INSERIR ITEM PEDIDO NO PEDIDO (PEDIDO JA CRIADO)
+//	@PostMapping("/novo")
+//	public ResponseEntity <ItemPedidoDTO> insert (@RequestBody ItemPedidoForm dto){
+//	    try { 
+//	    	ItemPedidoDTO entity = itemPedidoService.insert(dto);
+//	        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(entity.getItemPedidoId()).toUri();
+//	        
+//	        return ResponseEntity.created(uri).body(entity);
+//	     } catch (ServiceException e) {
+//	           return ResponseEntity.unprocessableEntity().build();
+//	     }
+//	}
 	
+	// METODO INSERIR ITEM PEDIDO NO PEDIDO (PEDIDO JA CRIADO)
 	@PostMapping("/novo")
-	public ResponseEntity <ItemPedidoDTO> insert (@RequestBody ItemPedidoForm dto){
+	public ResponseEntity <ItemPedidoDTO> insert (@RequestBody List<ItemPedidoForm> dto){
+		
+		for(int i = 0; i < dto.size(); i++) {	
+			ItemPedidoDTO entity = itemPedidoService.insert(dto.get(i));	
+		}
+		
+		return null;
+	}
+
+
+	@PostMapping("/cadastrar")
+	public ResponseEntity <PedidoDTO> insert (@RequestBody PedidoForm dto){
 	    try { 
-	    	ItemPedidoDTO entity = itemPedidoService.insert(dto);
-	        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(entity.getItemPedidoId()).toUri();
-	        
-	        return ResponseEntity.created(uri).body(entity);
+	    	PedidoDTO obj = pedidoService.cadastrar(dto);
+	        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getCodPedido()).toUri();
+	        return ResponseEntity.created(uri).body(obj);
 	     } catch (ServiceException e) {
 	           return ResponseEntity.unprocessableEntity().build();
 	     }
 	}
 
-	
 //	CADASTRAR ENDEREÇO ASSOCIANDO A UM CLIENTE)
-	@PostMapping("{id}/cadastrar")
-	@Transactional
-	public ResponseEntity<PedidoDTO> cadastrar(@PathVariable("id") Integer id , @RequestBody @Valid PedidoForm pedidoForm , 
-			UriComponentsBuilder uriBuilder) throws ParseException{
-	Optional<Cliente> cliente = clienteRepository.findById(id);
-	Optional<Cliente> endereço = clienteRepository.findById(id);
-	Pedido pedido = pedidoForm.converter(clienteRepository , freteRepository, statusPedidoRepository, pagamentoRepository , enderecoRepository);
-	pedidoRepository.save(pedido);
-	pedidoForm.cadastrar(pedido, cliente.get() , pedidoRepository );
-	
-	URI uri = uriBuilder.path("/pedido/{id}").buildAndExpand(pedido.getCodPedido()).toUri();
-	return ResponseEntity.created(uri).body(new PedidoDTO(pedido));
-
-}
+//	@PostMapping("{id}/cadastrar")
+//	@Transactional
+//	public ResponseEntity<PedidoDTO> cadastrar(@PathVariable("id") Integer id , @RequestBody @Valid PedidoForm pedidoForm , 
+//			UriComponentsBuilder uriBuilder) throws ParseException{
+//	Optional<Cliente> cliente = clienteRepository.findById(id);
+//	Optional<Cliente> endereço = clienteRepository.findById(id);
+//	Pedido pedido = pedidoForm.converter(clienteRepository , freteRepository, statusPedidoRepository, pagamentoRepository , enderecoRepository);
+//	pedidoRepository.save(pedido);
+//	pedidoForm.cadastrar(pedido, cliente.get() , pedidoRepository );
+//	
+//	URI uri = uriBuilder.path("/pedido/{id}").buildAndExpand(pedido.getCodPedido()).toUri();
+//	return ResponseEntity.created(uri).body(new PedidoDTO(pedido));
+//
+//}
 
 //	public ResponseEntity<Pedido> cadastrar(@RequestBody @Valid Pedido pedido, UriComponentsBuilder uriBuilder){
 //	pedidoRepository.save(pedido);

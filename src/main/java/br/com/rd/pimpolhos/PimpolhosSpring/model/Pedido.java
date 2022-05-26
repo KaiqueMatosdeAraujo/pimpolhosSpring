@@ -27,7 +27,7 @@ public class Pedido {
 	private Integer codPedido;
 	
 	@Column(nullable = false)
-	private Date dataPedido;
+	private LocalDate dataPedido;
 //	private SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 	
 
@@ -40,7 +40,7 @@ public class Pedido {
 	private StatusPedido statusPedido; 
 	
 	
-	@OneToMany(mappedBy="codPedido")
+	@OneToMany(mappedBy="codPedido", cascade = CascadeType.ALL)
 	private List<ItemPedido> itemPedido;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -57,9 +57,6 @@ public class Pedido {
 	@JoinColumn(name="codEndereco")
 	private Endereco endereco;
 	
-	@ManyToOne(fetch=FetchType.EAGER )
-	@JoinColumn(name="codTelefone")
-	private Telefone telefone;
 	
 	public Pedido() {}
 	
@@ -73,25 +70,25 @@ public class Pedido {
 //		this.cliente = cliente;
 //	}
 // funcional
-//	public Pedido(Date dataPedido ,Cliente cliente , Frete frete, Pagamento pagamento ,StatusPedido statusPedido) throws ParseException {
-//		this.dataPedido = dataPedido;
-//		this.cliente = cliente;
-//		this.frete = frete;
-//		this.statusPedido = statusPedido;
-//		this.pagamento = pagamento;
-//	}
-	
-	//alteração
-	public Pedido(Date dataPedido, Frete frete, StatusPedido statusPedido, Pagamento pagamento, Cliente cliente,
-			Endereco endereco) {
-		super();
+	public Pedido(LocalDate dataPedido ,Cliente cliente , Frete frete, Pagamento pagamento ,StatusPedido statusPedido) throws ParseException {
 		this.dataPedido = dataPedido;
+		this.cliente = cliente;
 		this.frete = frete;
 		this.statusPedido = statusPedido;
 		this.pagamento = pagamento;
-		this.cliente = cliente;
-		this.endereco = endereco;
 	}
+	
+	//alteração
+//	public Pedido(Date dataPedido, Frete frete, StatusPedido statusPedido, Pagamento pagamento, Cliente cliente,
+//			Endereco endereco) {
+//		super();
+//		this.dataPedido = dataPedido;
+//		this.frete = frete;
+//		this.statusPedido = statusPedido;
+//		this.pagamento = pagamento;
+//		this.cliente = cliente;
+//		this.endereco = endereco;
+//	}
 
 	
 	
@@ -112,11 +109,11 @@ public class Pedido {
 		this.codPedido = codPedido;
 	}
 
-	public Date getDataPedido() {
+	public LocalDate getDataPedido() {
 		return dataPedido;
 	}
 
-	public void setDataPedido(Date dataPedido) {
+	public void setDataPedido(LocalDate dataPedido) {
 		this.dataPedido = dataPedido;
 	}
 

@@ -15,11 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.rd.pimpolhos.PimpolhosSpring.dto.TokenDTO;
 import br.com.rd.pimpolhos.PimpolhosSpring.form.LoginForm;
+import br.com.rd.pimpolhos.PimpolhosSpring.model.Cliente;
+import br.com.rd.pimpolhos.PimpolhosSpring.repository.ClienteRepository;
 import br.com.rd.pimpolhos.PimpolhosSpring.security.TokenService;
 
 @RestController
 @RequestMapping("/auth")
 public class AutenticacaoController {
+
+	
 
 	
 	@Autowired
@@ -28,13 +32,20 @@ public class AutenticacaoController {
 	@Autowired
 	private TokenService tokenService;
 	
+	@Autowired
+	private ClienteRepository clienteRepository;
+	
 	@PostMapping
 	public ResponseEntity<TokenDTO> autenticar(@RequestBody @Valid LoginForm form){
 		UsernamePasswordAuthenticationToken dadosLogin = form.converter();
 		try {
 			Authentication authentication = authManager.authenticate(dadosLogin);
 			String token = tokenService.gerarToken(authentication);
-			return ResponseEntity.ok(new TokenDTO(token , "Bearer"));
+			
+			Cliente usuario = new Cliente();
+			
+			usuario = clienteRepository.getClienteByEmail(form.getEmail());
+			return ResponseEntity.ok(new TokenDTO(  usuario , token , "Bearer"));
 			
 		} catch (AuthenticationException e) {
 			return ResponseEntity.badRequest().build();

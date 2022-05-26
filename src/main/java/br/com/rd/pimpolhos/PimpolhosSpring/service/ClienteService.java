@@ -1,21 +1,13 @@
 package br.com.rd.pimpolhos.PimpolhosSpring.service;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.rd.pimpolhos.PimpolhosSpring.model.Cliente;
-import br.com.rd.pimpolhos.PimpolhosSpring.model.Endereco;
-import br.com.rd.pimpolhos.PimpolhosSpring.model.Estado;
-import br.com.rd.pimpolhos.PimpolhosSpring.model.Telefone;
 //import br.com.rd.pimpolhos.PimpolhosSpring.model.TipoTelefone;
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.ClienteRepository;
 //import br.com.rd.pimpolhos.PimpolhosSpring.repository.EnderecoClienteRepository;
@@ -38,12 +30,15 @@ public class ClienteService {
 	//private final TipoTelefoneRepository tipoTelefoneRepository;
 	private Boolean sistema = true;
 	
-	public ClienteService(ClienteRepository clienteRepository, TelefoneRepository telefoneRepository, EnderecoRepository enderecoRepository, EstadoRepository estadoRepository) {
+	PasswordEncoder passwordEncoder;
+
+	public ClienteService(ClienteRepository clienteRepository, TelefoneRepository telefoneRepository, EnderecoRepository enderecoRepository, EstadoRepository estadoRepository , PasswordEncoder passwordEncoder) {
 		this.clienteRepository = clienteRepository;
 		this.telefoneRepository = telefoneRepository;
 		this.enderecoRepository = enderecoRepository;
 		//this.enderecoClienteRepository = enderecoClienteRepository;
 		this.estadoRepository = estadoRepository;
+		this.passwordEncoder = passwordEncoder;
 		//this.tipoTelefoneRepository = tipoTelefoneRepository;
 	}
 
@@ -77,6 +72,9 @@ public class ClienteService {
 	
 	
 	public void salvar(Cliente cliente) {
+		cliente.setSenha(this.passwordEncoder.encode(cliente.getSenha()));
+		cliente.setCpf(cliente.getCpf().replace(".", "").replace("-", ""));
+
 		clienteRepository.save(cliente);
 	}
 	

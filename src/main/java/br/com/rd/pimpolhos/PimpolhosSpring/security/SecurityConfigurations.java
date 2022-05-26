@@ -12,14 +12,21 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import br.com.rd.pimpolhos.PimpolhosSpring.model.Cliente;
+import br.com.rd.pimpolhos.PimpolhosSpring.model.Cliente;
 import br.com.rd.pimpolhos.PimpolhosSpring.repository.ClienteRepository;
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter{
-	
+	@Bean
+	public PasswordEncoder encoder() {
+	    return new BCryptPasswordEncoder();
+	}
+
 	@Autowired
 	private AutenticacaoService autenticacaoService;
 	
@@ -29,10 +36,10 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
-	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(autenticacaoService).passwordEncoder(new BCryptPasswordEncoder());
+		
 	}
 	
 	@Override
@@ -45,12 +52,13 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers(HttpMethod.GET , "/produto").permitAll()
-//		.antMatchers(HttpMethod.GET , "/produto/*").permitAll()
+		.antMatchers(HttpMethod.GET , "/produto/*").permitAll()
 		.antMatchers(HttpMethod.GET , "/categoria").permitAll()
 		.antMatchers(HttpMethod.GET , "/categoria/*").permitAll()
 		.antMatchers(HttpMethod.POST , "/cliente/cadastrar").permitAll()
 		.antMatchers(HttpMethod.POST , "/auth").permitAll()
 		.anyRequest().authenticated()
+		.and().cors()
 		.and().csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		.and().addFilterBefore(new AutenticacaoViaTokenFilter(tokenService , clienteRepository) , UsernamePasswordAuthenticationFilter.class);

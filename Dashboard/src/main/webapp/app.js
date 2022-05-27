@@ -2,7 +2,7 @@
 $(document).ready(function(){
 	$(".telefone, .celular").mask("0000-0000");
 	$(".cpf").mask("000.000.000-00"); 
-	$(".preco").mask("R$ 0.000,00", {reverse: false}); 
+	$(".preco").mask("0.000,00", {reverse: false}); 
 	$(".preco2").mask(" 000,00");
 	$(".preco3").mask("R$ 00,00");
 	$(".preco4").mask("R$ 000,00");

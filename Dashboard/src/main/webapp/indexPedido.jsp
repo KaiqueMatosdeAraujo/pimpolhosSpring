@@ -128,7 +128,7 @@
 									<td data-label="Nome Cliente"><c:out value="${pedido.nome_cliente}" /></td>
 									<td data-label="Data do Pedido" class="data"><c:out value="${pedido.data_pedido}" /></td>
 									<td data-label="Status pedido"><c:out value="${pedido.descricao_status_pedido}" /></td>
-									<td data-label="Valor total" class="preco4"><c:out value="${pedido.valor_total}" /></td>
+									<td data-label="Valor total" class=""><c:out value="${pedido.valor_total}" /></td>
 									<td data-label="Ações">
 										<button class="btn btn-primary btnPageReload" type="submit" name="optionPedido" value="detalhePedido">Detalhes</button>
 									</td>

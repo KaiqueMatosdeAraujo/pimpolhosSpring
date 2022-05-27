@@ -348,23 +348,21 @@ public class DAO {
 			ArrayList<Pedido> listaItemDetalhePedido = new ArrayList<Pedido>();
 			
 			try {
-				PreparedStatement p = con.prepareStatement("select pedido.cod_pedido,c.cod_cliente,"
-						+ " pedido.data_pedido, "
-						+ "c.nome_cliente,"
-						+ " e.nome_cidade,\r\n"
-						+ "e.cep, e.nome_rua, e.numero_casa, e.complemento, e.bairro, e.ponto_referencia,\r\n"
-						+ "e2.descricao_estado, f.descricao_frete, sp.descricao_status_pedido, fp.descricao_forma_pagamento,\r\n"
-						+ "SUM(ip.quantidade) as quantidade,\r\n"
-						+ "SUM(ip.quantidade * p.preco + f.valor_frete) as valor_total from pedido\r\n"
-						+ "inner join cliente c on c.cod_cliente = pedido.cod_cliente\r\n"
-						+ "inner join endereco e on e.cod_endereco = pedido.cod_endereco\r\n"
-						+ "inner join estado e2 on e2.cod_estado = e.cod_estado\r\n"
-						+ "inner join frete f on f.cod_frete = pedido.cod_frete\r\n"
-						+ "inner join status_pedido sp on sp.cod_status = pedido.cod_status\r\n"
-						+ "inner join forma_pagamento fp on fp.cod_forma_pagamento = pedido.cod_forma_pagamento\r\n"
-						+ "inner join item_pedido ip on ip.cod_item_pedido = pedido.cod_item_pedido \r\n"
-						+ "inner join produto p  on p.cod_produto = ip.cod_produto \r\n"
-						+ "where cod_pedido = ? ");
+				PreparedStatement p = con.prepareStatement("select pedido.cod_pedido, c.cod_cliente, pedido.data_pedido, c.nome_cliente,\n"
+						+ "	   e.nome_cidade, e.cep, e.nome_rua, e.numero_casa, e.complemento, e.bairro, e.ponto_referencia,\n"
+						+ "	   e2.descricao_estado, f.descricao_frete, sp.descricao_status_pedido, fp.descricao ,\n"
+						+ "	   SUM(ip.quantidade) as quantidade,\n"
+						+ "	   SUM(ip.quantidade * p.preco + f.valor_frete) as valor_total from pedido\n"
+						+ "	   inner join cliente c on c.cod_cliente = pedido.cod_cliente\n"
+						+ "	   inner join endereco e on e.cod_endereco = pedido.cod_endereco\n"
+						+ "	   inner join estado e2 on e2.cod_estado = e.cod_estado\n"
+						+ "	   inner join frete f on f.cod_frete = pedido.cod_frete\n"
+						+ "	   inner join status_pedido sp on sp.cod_status = pedido.cod_status\n"
+						+ "	   inner join pagamento p2 on p2.cod_pagamento = pedido.cod_pagamento \n"
+						+ "	   inner join forma_pagamento fp on fp.cod_forma_pagamento = p2.cod_forma_pagamento \n"
+						+ "	   inner join item_pedido ip on ip.cod_pedido = pedido.cod_pedido \n"
+						+ "	   inner join produto p  on p.cod_produto = ip.cod_produto \n"
+						+ "	   where pedido.cod_pedido = ? ");
 				p.setInt(1, id);
 				ResultSet r = p.executeQuery();			
 				
@@ -386,7 +384,7 @@ public class DAO {
 					String descricao_estado = r.getString("descricao_estado");
 					String frete= r.getString("descricao_frete");
 					String status= r.getString("descricao_status_pedido");
-					String descricao_forma_pagamento = r.getString("descricao_forma_pagamento");
+					String descricao_forma_pagamento = r.getString("descricao");
 					Integer quantidadeItens = r.getInt("quantidade");
 					Double valorTotal = r.getDouble("valor_total");
 					
@@ -502,7 +500,7 @@ public class DAO {
 					
 					while (r.next()) {
 						Integer id = r.getInt("cod_pedido");
-						String descricao_forma_pagamento = r.getString("descricao_forma_pagamento");
+						String descricao_forma_pagamento = r.getString("descricao");
 						String status= r.getString("descricao_status_pedido");
 						
 						Pedido pedido = new Pedido(descricao_forma_pagamento, status);

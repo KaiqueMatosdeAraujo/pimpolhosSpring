@@ -85,9 +85,9 @@
 		%>
 
             <div class="user-wrapper">
-                <img src="imgs/carrinho.png" width="40px" height="40px" alt="">
+                <img src="imgs/mateus.png" width="40px" height="40px" alt="">
                 <div>
-                    <h4>Pimpolhos</h4>
+                    <h4>Mateus Reis</h4>
                     <form action="ServletFornecedor" method="post">
                     	<button type="submit" class="logout" name="optionFornecedor" value="sair">Sair</button>
                     </form>

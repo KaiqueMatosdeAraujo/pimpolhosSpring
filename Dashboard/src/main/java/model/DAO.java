@@ -21,7 +21,7 @@ public class DAO {
 		Connection con = c.getConnection();
 		ArrayList<Usuario> lista = new ArrayList<Usuario>();
 		try {
-			PreparedStatement p = con.prepareStatement("select cliente.cod_cliente ,cliente.nome_cliente, cliente.cpf,cliente.data_nasc ,cliente.email from cliente");
+			PreparedStatement p = con.prepareStatement("select clientes.cod_cliente ,clientes.nome_cliente, clientes.cpf,clientes.data_nasc ,clientes.email from clientes");
 			ResultSet r = p.executeQuery();			
 			
 			while (r.next()) {
@@ -51,7 +51,7 @@ public class DAO {
 		ArrayList<Usuario> listDetalhesCartao = new ArrayList<Usuario>();
 		try {
 			PreparedStatement p = con.prepareStatement("select c2.cod_cliente,c.nome_titular,c.numero_cartao ,c.validade,b.descricao_bandeira from cartao c \r\n"
-					+ "inner join cliente c2 on c2.cod_cliente = c.cod_cliente \r\n"
+					+ "inner join clientes c2 on c2.cod_cliente = c.cod_cliente \r\n"
 					+ "inner join bandeira b on b.cod_bandeira = c.cod_bandeira \r\n"
 					+ "where c2.cod_cliente = ? ");
 			p.setInt(1, id);
@@ -87,7 +87,7 @@ public class DAO {
 		try {
 			PreparedStatement p = con.prepareStatement("select c.cod_cliente,t.ddd ,t.numero_telefone ,t.descricao_telefone from telefone t \r\n"
 					+ "inner join cliente_telefone ct on ct.cod_telefone = t.cod_telefone \r\n"
-					+ "inner join cliente c on c.cod_cliente = ct.cod_cliente \r\n"
+					+ "inner join clientes c on c.cod_cliente = ct.cod_cliente \r\n"
 					+ "where c.cod_cliente = ?");
 			p.setInt(1, id);
 			ResultSet r = p.executeQuery();			
@@ -122,7 +122,7 @@ public class DAO {
 		try {
 			PreparedStatement p = con.prepareStatement("select c.cod_cliente,e.nome_rua ,e.numero_casa,e.complemento ,e.ponto_referencia ,e.bairro,e.cep,e.nome_cidade,e2.descricao_estado from endereco e \r\n"
 					+ "inner join endereco_cliente ec on ec.cod_endereco = e.cod_endereco \r\n"
-					+ "inner join cliente c ON c.cod_cliente = ec.cod_cliente \r\n"
+					+ "inner join clientes c ON c.cod_cliente = ec.cod_cliente \r\n"
 					+ "inner join estado e2 on e2.cod_estado = e.cod_estado \r\n"
 					+ "where c.cod_cliente = ?\r\n"
 					+ ";");
@@ -161,8 +161,8 @@ public class DAO {
 		Usuario info = null;
 		ArrayList<Usuario> infoCliente = new ArrayList<Usuario>();
 		try {
-			PreparedStatement p = con.prepareStatement("select cliente.cod_cliente,cliente.nome_cliente,cliente.cpf,cliente.data_nasc,cliente.email from cliente \r\n"
-					+ "where cliente.cod_cliente = ?");
+			PreparedStatement p = con.prepareStatement("select clientes.cod_cliente,clientes.nome_cliente,clientes.cpf,clientes.data_nasc,clientes.email from clientes \r\n"
+					+ "where clientes.cod_cliente = ?");
 			p.setInt(1, id);
 			ResultSet r = p.executeQuery();			
 			
@@ -197,7 +197,7 @@ public class DAO {
 		
 		
 			try {
-				PreparedStatement p = con.prepareStatement("select count(cod_cliente) as total from cliente;");
+				PreparedStatement p = con.prepareStatement("select count(cod_cliente) as total from clientes;");
 				ResultSet r = p.executeQuery();			
 				 r.next();
 				
@@ -268,7 +268,7 @@ public class DAO {
 			try {
 				PreparedStatement p = con.prepareStatement("select pedido.cod_pedido, c2.nome_cliente, pedido.data_pedido, sp.descricao_status_pedido,\n"
 						+ "		sum(ip.quantidade * p.preco + f.valor_frete) as valor_total from pedido \n"
-						+ "		inner join cliente c2 on c2.cod_cliente = pedido.cod_cliente \n"
+						+ "		inner join clientes c2 on c2.cod_cliente = pedido.cod_cliente \n"
 						+ "		inner join item_pedido ip on ip.cod_pedido  = pedido.cod_pedido \n"
 						+ "		inner join frete f on f.cod_frete = pedido.cod_frete \n"
 						+ "		inner join status_pedido sp on sp.cod_status = pedido.cod_status \n"
@@ -353,7 +353,7 @@ public class DAO {
 						+ "	   e2.descricao_estado, f.descricao_frete, sp.descricao_status_pedido, fp.descricao ,\n"
 						+ "	   SUM(ip.quantidade) as quantidade,\n"
 						+ "	   SUM(ip.quantidade * p.preco + f.valor_frete) as valor_total from pedido\n"
-						+ "	   inner join cliente c on c.cod_cliente = pedido.cod_cliente\n"
+						+ "	   inner join clientes c on c.cod_cliente = pedido.cod_cliente\n"
 						+ "	   inner join endereco e on e.cod_endereco = pedido.cod_endereco\n"
 						+ "	   inner join estado e2 on e2.cod_estado = e.cod_estado\n"
 						+ "	   inner join frete f on f.cod_frete = pedido.cod_frete\n"

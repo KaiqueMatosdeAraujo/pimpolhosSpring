@@ -83,10 +83,10 @@
 			}
 		%>
 
-            <div class="user-wrapper">
-                <img src="imgs/carrinho.png" width="40px" height="40px" alt="">
+           <div class="user-wrapper">
+                <img src="imgs/mateus.png" width="40px" height="40px" alt="">
                 <div>
-                    <h4>Pimpolhos</h4>
+                    <h4>Mateus Reis</h4>
                     <form action="ServletMarca" method="post">
                     	<button type="submit" class="logout" name="optionMarca" value="sair">Sair</button>
                     </form>
@@ -158,42 +158,6 @@
 	  	<!-- FINAL ACCORDION ITEM ENDERECO -->
 
 
-	  	<!-- INICIO ACCORDION ITEM Telefones -->
-	  		<div class="accordion-item">
-				    <h2 class="accordion-header" id="headingTelefone">
-				      <button class="accordion-button custom-accordion" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTelefone" aria-expanded="true" aria-controls="collapseTelefone">
-				       	 Telefones
-				      </button>
-				    </h2>
-
-			<input type="hidden" name="cod_cliente" value="${cliente.cod_cliente}"/>
-
-		    <div id="collapseTelefone" class="accordion-collapse collapse " aria-labelledby="headingTelefone" data-bs-parent="#accordionExample">
-		      <div class="accordion-body">
-
-		      		<div>
-		      		 <form action="ServletPimpolhos" method="post">
-		      		   <div class="row accordionContentSpace">
-		      		<c:forEach var="cliente" items="${listaTelefone}">  
-
-		                <div class="col-11 col-lg-5  clientDetails">
-				        <p><span class="accordionInfoTitle">Informações do Telefone</span></p>
-				        <p><span class="accordionInfoTitle">DDD:</span> <span class="accordionInfoText"><c:out value="${cliente.dddtelefone}"/></span></p>
-				        <p><span class="accordionInfoTitle">Número:</span><span class="accordionInfoText celular"> <c:out value="${cliente.telefoneCliente}"/></span></p>
-				        <p><span class="accordionInfoTitle">Tipo:</span> <span class="accordionInfoText"><c:out value="${cliente.tipoTelefone}"/></span></p>
-
-				        </div>
-
-				          </c:forEach>
-				           </div>
-				         	</form>
-
-			        </div>
-
-		      </div>
-		    </div>
-	  	</div>
-	  	<!-- FINAL ACCORDION ITEM TELEFONE -->
 
 
 

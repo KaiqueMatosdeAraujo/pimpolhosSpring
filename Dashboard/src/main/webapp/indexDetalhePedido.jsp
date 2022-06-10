@@ -126,7 +126,7 @@
 			<div class= "col-11 pedidoInfo"> <span class="accordionInfoTitle">UF:</span><span class="accordionInfoText"> <c:out value="${pedido.descricao_estado}"/></span> </div>
 		    <div class= "col-11 pedidoInfo"> <span class="accordionInfoTitle">Status:</span><span class="accordionInfoText"> <c:out value="${pedido.descricao_status_pedido}"/></span> </div>
 			<div class= "col-11 pedidoInfo"> <span class="accordionInfoTitle">Tipo de Frete:</span><span class="accordionInfoText"> <c:out value="${pedido.descricao_frete}"/></span> </div>
-			<div class= "col-11 pedidoInfo"> <span class="accordionInfoTitle">Valor total:</span><span class="accordionInfoText"> <c:out value="${pedido.valor_total}"/></span> </div>
+			<div class= "col-11 pedidoInfo"> <span class="accordionInfoTitle">Valor total:</span> R$ <span class="accordionInfoText preco"> <c:out value="${pedido.valor_total}"/>0</span> </div>
 	     	</div>
 	     	
 	     	
@@ -156,10 +156,10 @@
 		      		<c:forEach var="pedido" items="${listaItemDetalhePedido}">
 				<div class="col-11 col-lg-5  clientDetails">
 				        <p><span class="accordionInfoTitle">Produto:</span> <span class="accordionInfoText"><c:out value="${pedido.nome}"/></span></p>
-				        <p><span class="accordionInfoTitle">Preço unitario:</span> <span class="accordionInfoText preco4 "><c:out value="${pedido.preco}"/></span></p>
+				        <p><span class="accordionInfoTitle">Preço unitario:</span> <span class="accordionInfoText preco4"><c:out value="${pedido.preco}"/>0</span></p>
 				        <p><span class="accordionInfoTitle">Marca:</span> <span class="accordionInfoText"><c:out value="${pedido.nome_marca}"/></span></p>
 				        <p><span class="accordionInfoTitle">Quantidade:</span> <span class="accordionInfoText"><c:out value="${pedido.quantidade}"/></span></p>
-				          <p><span class="accordionInfoTitle">Valor Total:</span> <span class="accordionInfoText"><c:out value="${pedido.valor_total}"/></span></p>
+				          <p><span class="accordionInfoTitle">Valor Total:</span>  <span class="accordionInfoText preco"><c:out value="${pedido.valor_total}"/>0</span></p>
 				        
 				        </div>
 	  	  </c:forEach>

@@ -17,7 +17,7 @@ public class DAOProduto {
 		
 		try {
 			PreparedStatement p = con.prepareStatement
-					("insert into produto (nome, preco, dimensao, material, peso, conteudo_produto, cod_fornecedor, cod_categoria, img_produto, cod_marca) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+					("insert into produto (nome, preco, dimensao, material, peso, conteudo_produto, cod_fornecedor, cod_categoria, img_produto, cod_marca, qtd_estoque) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			
 			p.setString(1, produto.getNome());
 		    p.setDouble(2, produto.getPreco());
@@ -29,6 +29,7 @@ public class DAOProduto {
 			p.setInt(8, produto.getCod_categoria());
 			p.setString(9, produto.getImg_produto());
 			p.setInt(10, produto.getCod_marca());
+			p.setInt(11, produto.getQtd_estoque());
 			System.out.println(p);
 			p.executeUpdate();
 			System.out.println("Comando executado");
@@ -46,7 +47,7 @@ public class DAOProduto {
 		Connection con = c.getConnection();
 		ArrayList<Produto> lista = new ArrayList<Produto>();
 		try {
-			PreparedStatement p = con.prepareStatement("select produto.cod_produto, produto.nome, produto.preco, produto.dimensao, produto.material, produto.peso, produto.conteudo_produto , f.nome_fornecedor, c.nome_categoria, produto.img_produto, m.nome_marca from produto\r\n"
+			PreparedStatement p = con.prepareStatement("select produto.cod_produto, produto.nome, produto.preco, produto.dimensao, produto.material, produto.peso, produto.conteudo_produto , f.nome_fornecedor, c.nome_categoria, produto.img_produto, m.nome_marca, produto.qtd_estoque from produto\r\n"
 					+ "inner join fornecedor f on f.cod_fornecedor = produto.cod_fornecedor \r\n"
 					+ "inner join categoria c on c.cod_categoria = produto.cod_categoria \r\n"
 					+ "inner join marca m on m.cod_marca = produto.cod_marca ORDER BY cod_produto ASC;");
@@ -64,7 +65,8 @@ public class DAOProduto {
 				String categoria = r.getString("nome_categoria");
 				String img_produto = r.getString("img_produto");
 				String cod_marca = r.getString("nome_marca");
-				Produto produto = new Produto(nome, preco, dimensao, material, peso, conteudo, fornecedor, categoria, img_produto, cod_marca);
+				Integer qtd_estoque = r.getInt("qtd_estoque");
+				Produto produto = new Produto(nome, preco, dimensao, material, peso, conteudo, fornecedor, categoria, img_produto, cod_marca, qtd_estoque);
 				produto.setCod_produto(id);
 				lista.add(produto);
 			}
@@ -102,7 +104,7 @@ public class DAOProduto {
 		Connection con = c.getConnection();
 		
 		try {
-			PreparedStatement p = con.prepareStatement("update produto set nome = ? , preco = ?, dimensao = ?, material = ?, peso = ?, conteudo_produto = ?, cod_fornecedor = ?, cod_categoria = ?, img_produto = ?, cod_marca = ?  where cod_produto = ? ");
+			PreparedStatement p = con.prepareStatement("update produto set nome = ? , preco = ?, dimensao = ?, material = ?, peso = ?, conteudo_produto = ?, cod_fornecedor = ?, cod_categoria = ?, img_produto = ?, cod_marca = ?, qtd_estoque = ?  where cod_produto = ? ");
 			p.setString(1, produto.getNome());
 			p.setDouble(2, produto.getPreco());
 			p.setString(3, produto.getDimensao());
@@ -114,7 +116,9 @@ public class DAOProduto {
 			p.setString(9, produto.getImg_produto());
 			p.setInt(10, produto.getCod_marca());
 			
-			p.setInt(11, produto.getCod_produto());
+			p.setInt(11, produto.getQtd_estoque());
+			
+			p.setInt(12, produto.getCod_produto());
 			
 			
 			
@@ -152,7 +156,10 @@ public class DAOProduto {
 				Integer categoria = r.getInt("cod_categoria");
 				String img_produto = r.getString ("img_produto");
 				Integer cod_marca = r.getInt("cod_marca");
-				u = new Produto(nome, preco, dimensao, material, peso, conteudo, fornecedor, categoria, img_produto, cod_marca);
+				
+				Integer qtd_estoque = r.getInt("qtd_estoque");
+				
+				u = new Produto(nome, preco, dimensao, material, peso, conteudo, fornecedor, categoria, img_produto, cod_marca, qtd_estoque);
 				u.setCod_produto(cod_produto);
 			}
 			r.close();

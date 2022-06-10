@@ -116,13 +116,13 @@ public class ServletProduto extends HttpServlet {
 		String img_produtoBack = request.getParameter("img_produto").trim();
 		Integer cod_marcaBack = Integer.parseInt(request.getParameter("cod_marca").trim());
 		
-
+		Integer qtdEstoqueBack = Integer.parseInt(request.getParameter("qtd_estoque").trim());
 		
-		if ((nomeBack != null) && (precoBack != null) && (dimensaoBack != null) && (materialBack != null) && (pesoBack != null) && (conteudoBack != null) && (cod_fornecedorBack != null) && (cod_categoriaBack != null) && (img_produtoBack != null) && (cod_marcaBack != null)) {
+		if ((nomeBack != null) && (precoBack != null) && (dimensaoBack != null) && (materialBack != null) && (pesoBack != null) && (conteudoBack != null) && (cod_fornecedorBack != null) && (cod_categoriaBack != null) && (img_produtoBack != null) && (cod_marcaBack != null) && (qtdEstoqueBack != null)) {
 			if (!nomeBack.equals("")){
 				Double preco2 = Double.parseDouble(precoBack.replace(",", "."));
 				Double peso2 = Double.parseDouble(pesoBack.replace(",", "."));
-				Produto produto = new Produto (nomeBack, preco2, dimensaoBack, materialBack, peso2, conteudoBack, cod_fornecedorBack, cod_categoriaBack, img_produtoBack, cod_marcaBack);
+				Produto produto = new Produto (nomeBack, preco2, dimensaoBack, materialBack, peso2, conteudoBack, cod_fornecedorBack, cod_categoriaBack, img_produtoBack, cod_marcaBack, qtdEstoqueBack);
 				this.daoproduto.inserirProduto(produto);
 	 }
 		}
@@ -174,14 +174,16 @@ public class ServletProduto extends HttpServlet {
 		String img_produtoBack = request.getParameter("img_produto");
 		Integer cod_marcaBack = Integer.parseInt(request.getParameter("cod_marca"));
 		
+		Integer qtdEstoqueBack = Integer.parseInt(request.getParameter("qtd_estoque"));
+		
 		if ((nomeBack != null) && (precoBack != null) && (dimensaoBack != null)
-		&& (materialBack != null) && (pesoBack != null) && (conteudoBack != null) && (fornecedorBack != null) && (categoriaBack != null) && (img_produtoBack != null) && (cod_marcaBack != null)) {
+		&& (materialBack != null) && (pesoBack != null) && (conteudoBack != null) && (fornecedorBack != null) && (categoriaBack != null) && (img_produtoBack != null) && (cod_marcaBack != null) && (qtdEstoqueBack != null)) {
 			if (!nomeBack.equals("")){
 				
 				Double preco2 = Double.parseDouble(precoBack.replace(",", "."));
 				Double peso2 = Double.parseDouble(pesoBack.replace(",", "."));
 				Integer id = (cod_produtoBack);
-				Produto produto = new Produto (nomeBack, preco2, dimensaoBack, materialBack, peso2, conteudoBack, fornecedorBack, categoriaBack, img_produtoBack, cod_marcaBack);
+				Produto produto = new Produto (nomeBack, preco2, dimensaoBack, materialBack, peso2, conteudoBack, fornecedorBack, categoriaBack, img_produtoBack, cod_marcaBack, qtdEstoqueBack);
 				produto.setCod_produto(id);
 				this.daoproduto.atualizarProduto(produto);
 			}

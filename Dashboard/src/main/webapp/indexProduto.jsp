@@ -126,11 +126,10 @@
 				        
 				        <p><strong>Código pedido:</strong> <c:out value="${produto.cod_produto}"/></p>
 				        <p><strong>Nome:</strong> <c:out  value="${produto.nome}"/></p>
-				        <p><strong>Preço:</strong><span class="preco4"> <c:out value="${produto.preco}"/></span></p>
-				        <p><strong>Dimensão:</strong> <c:out value="${produto.dimensao}"/></p>
+						<p><strong>Preço:</strong> <span class="preco4"> <c:out value="${produto.preco}"/>0</span></p>				        <p><strong>Dimensão:</strong> <c:out value="${produto.dimensao}"/></p>
 				        <p><strong>Material:</strong> <c:out value="${produto.material}"/></p>
-				        <p><strong>Peso:</strong> <span class="pesoForm"><c:out value="${produto.peso}"/></span></p>
-				        
+				        <p><strong>Peso:</strong> <span class="pesoForm"><c:out value="${produto.peso}"/> </span> kg</p>
+				        <p><strong>Estoque:</strong> <c:out value="${produto.qtd_estoque}"/></p>
 				        
 				     </div>
 				     	
@@ -140,6 +139,7 @@
 				        <p><strong>Categoria:</strong> <c:out value="${produto.nome_categoria}"/></p>
 				        <p><strong>Imagem:</strong> <c:out value="${produto.img_produto}"/></p>
 				        <p><strong>Marca:</strong> <c:out value="${produto.nome_marca}"/></p>
+				        
 				     </div> 
 				         
 		        </div>

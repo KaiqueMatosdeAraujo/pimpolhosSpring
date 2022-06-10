@@ -165,7 +165,8 @@
                                   </c:forEach>							
                                  </select>
 							<!-- Marca ^ -->
-							
+							<label class="form-label" style="margin-right: 32px;">Quantidade em estoque:</label>
+							<input class="form-control qtdEstoque" type="text" name="qtd_estoque"required/><br>
 							
 							    
 								<button class="btn btn-primary btnPage" type="submit" name="optionProduto" value="insertProduto">Salvar</button>

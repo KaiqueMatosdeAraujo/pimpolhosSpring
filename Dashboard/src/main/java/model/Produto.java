@@ -21,9 +21,10 @@ public class Produto {
 	private String nome_marca;
 	private Integer qtdProduto;
 	
+	private Integer qtd_estoque;
 	
 	public Produto(String nome, Double preco, String dimensao, 
-			String material, Double peso, String conteudo_produto, Integer cod_fornecedor, Integer cod_categoria, String img_produto, Integer cod_marca) {
+			String material, Double peso, String conteudo_produto, Integer cod_fornecedor, Integer cod_categoria, String img_produto, Integer cod_marca, Integer qtd_estoque) {
 		super();
 		this.nome = nome;
 		this.preco = preco;
@@ -38,7 +39,7 @@ public class Produto {
 		this.img_produto = img_produto;
 		this.cod_marca = cod_marca;
 		
-		
+		this.qtd_estoque = qtd_estoque;
 	}
 
 
@@ -48,7 +49,7 @@ public class Produto {
 	
 	public Produto(String nome, double preco, String dimensao, String material, double peso,
 			String conteudo_produto, String nome_fornecedor, String nome_categoria, String img_produto,
-			String nome_marca) {
+			String nome_marca, Integer qtd_estoque) {
 		super();
 		this.nome = nome;
 		this.preco = preco;
@@ -60,6 +61,8 @@ public class Produto {
 		this.nome_categoria = nome_categoria;
 		this.img_produto = img_produto;
 		this.nome_marca = nome_marca;
+		
+		this.qtd_estoque = qtd_estoque;
 	}
 
 
@@ -306,6 +309,24 @@ public class Produto {
 
 
 
+	public Integer getQtd_estoque() {
+		return qtd_estoque;
+	}
+
+
+
+
+
+
+	public void setQtd_estoque(Integer qtd_estoque) {
+		this.qtd_estoque = qtd_estoque;
+	}
+
+
+
+
+
+
 	@Override
 	public String toString() {
 		return "" + qtdProduto;
@@ -335,4 +356,3 @@ public class Produto {
 
 
 }
-
